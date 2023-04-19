@@ -13,6 +13,7 @@ specifiers:
   '@types/three': ^0.149.0
   '@typescript-eslint/eslint-plugin': ^5.50.0
   '@typescript-eslint/parser': ^5.50.0
+  '@use-gesture/react': ^10.2.26
   '@web3-react/core': ^6.1.9
   '@web3-react/injected-connector': ^6.0.7
   autoprefixer: ^10.4.14
@@ -44,6 +45,7 @@ dependencies:
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@types/three': 0.149.0
+  '@use-gesture/react': 10.2.26_react@18.2.0
   '@web3-react/core': 6.1.9_react@18.2.0
   '@web3-react/injected-connector': 6.0.7
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
@@ -592,7 +594,7 @@ packages:
       '@babel/runtime': 7.21.0
       '@react-spring/three': 9.6.1_lfvpzd3m5escehi2gx2mx2fjgy
       '@react-three/fiber': 8.12.0_73epb4osyabtjyiaeamriercbi
-      '@use-gesture/react': 10.2.24_react@18.2.0
+      '@use-gesture/react': 10.2.26_react@18.2.0
       camera-controls: 2.3.3_three@0.150.1
       detect-gpu: 5.0.16
       glsl-noise: 0.0.0
@@ -902,16 +904,16 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@use-gesture/core/10.2.24:
-    resolution: {integrity: sha512-ZL7F9mgOn3Qlnp6QLI9jaOfcvqrx6JPE/BkdVSd8imveaFTm/a3udoO6f5Us/1XtqnL4347PsIiK6AtCvMHk2Q==}
+  /@use-gesture/core/10.2.26:
+    resolution: {integrity: sha512-NyFpQ3iID9iFBROXyyvU1D0NK+t+dP+WAVByhCvqHUenpxLD2NlRLVRpoK3XGGwksr6mU3PvZ2Nm4q0q+gLJPA==}
     dev: false
 
-  /@use-gesture/react/10.2.24_react@18.2.0:
-    resolution: {integrity: sha512-rAZ8Nnpu1g4eFzqCPlaq+TppJpMy0dTpYOQx5KpfoBF4P3aWnCqwj7eKxcmdIb1NJKpIJj50DPugUH4mq5cpBg==}
+  /@use-gesture/react/10.2.26_react@18.2.0:
+    resolution: {integrity: sha512-0QhaE5mhaQbFlip4MX7n1nwCX8gax6Da1LsP2fZ/BU6xW9zyEmV6NX7DPelDxq1rr2NiBJh30vx9RIp80YeA/A==}
     peerDependencies:
       react: '>= 16.8.0'
     dependencies:
-      '@use-gesture/core': 10.2.24
+      '@use-gesture/core': 10.2.26
       react: 18.2.0
     dev: false
 

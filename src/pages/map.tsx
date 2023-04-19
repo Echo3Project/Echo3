@@ -1,7 +1,9 @@
-import { MapControls, OrthographicCamera } from '@react-three/drei';
+import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
+import { Vector2 } from 'three';
 
-import { Svg } from '@/components/canvas/map/Svg';
+import MapControls from '@/components/canvas/controls/MapControls';
+import { Svg } from '@/components/canvas/map/MapSvg';
 
 export default function Page() {
     return (
@@ -20,24 +22,35 @@ export default function Page() {
 }
 
 Page.canvas = () => {
+    const startingCoords = new Vector2(0, 0);
+    const startingDistance = 500;
+
     return (
         <>
-            <OrthographicCamera
-                position={[0, 0, 50]}
-                zoom={5}
-                up={[0, 0, 1]}
-                far={10000}
-                makeDefault
-            />
+            <MapControls
+                startingCoords={startingCoords}
+                startingDistance={startingDistance}>
+                <PerspectiveCamera
+                    rotation-x={-Math.PI / 2}
+                    position-y={0}
+                    fov={75}
+                    near={0.1}
+                    far={1000}
+                    makeDefault
+                />
+            </MapControls>
             <color attach="background" args={[243, 243, 243]} />
             <Svg />
-            <MapControls
+            {/* <MapControls
                 enableRotate={false}
                 minDistance={500}
                 maxDistance={5000}
                 enableDamping
+                minZoom={1}
+                maxZoom={50}
+                zoomSpeed={0.5}
                 dampingFactor={0.03}
-            />
+            /> */}
         </>
     );
 };

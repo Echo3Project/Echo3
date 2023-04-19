@@ -1,81 +1,91 @@
-import { useWeb3React } from "@web3-react/core";
-import { UserRejectedRequestError } from "@web3-react/injected-connector";
-import { useEffect, useState } from "react";
-import { injected } from "@/lib";
-import { useENSName, useMetaMaskOnboarding } from "@/hooks";
-import { ETHERSCAN_PREFIXES, formatEtherscanLink, shortenHex } from "@/utils";
+import { useWeb3React } from '@web3-react/core';
+import { UserRejectedRequestError } from '@web3-react/injected-connector';
+import { useEffect, useState } from 'react';
+
+import { useENSName, useMetaMaskOnboarding } from '@/hooks';
+import { injected } from '@/lib';
+import { ETHERSCAN_PREFIXES, formatEtherscanLink, shortenHex } from '@/utils';
 
 type AccountProps = {
-  triedToEagerConnect: boolean;
+    triedToEagerConnect: boolean;
 };
 
 export function Account({ triedToEagerConnect }: AccountProps) {
-  const { active, error, activate, chainId, account, setError } =
-    useWeb3React();
+    const { active, error, activate, chainId, account, setError } =
+        useWeb3React();
 
-  const {
-    isMetaMaskInstalled,
-    isWeb3Available,
-    startOnboarding,
-    stopOnboarding,
-  } = useMetaMaskOnboarding();
+    const {
+        isMetaMaskInstalled,
+        isWeb3Available,
+        startOnboarding,
+        stopOnboarding,
+    } = useMetaMaskOnboarding();
 
-  // manage connecting state for injected connector
-  const [connecting, setConnecting] = useState(false);
-  useEffect(() => {
-    if (active || error) {
-      setConnecting(false);
-      stopOnboarding();
+    // manage connecting state for injected connector
+    const [connecting, setConnecting] = useState(false);
+    useEffect(() => {
+        if (active || error) {
+            setConnecting(false);
+            stopOnboarding();
+        }
+    }, [active, error, stopOnboarding]);
+
+    const ENSName = useENSName(account || '');
+
+    if (error) {
+        return null;
     }
-  }, [active, error, stopOnboarding]);
 
-  const ENSName = useENSName(account || '');
+    if (!triedToEagerConnect) {
+        return null;
+    }
 
-  if (error) {
-    return null;
-  }
+    if (typeof account !== 'string') {
+        return (
+            <div>
+                {isWeb3Available ? (
+                    <button
+                        disabled={connecting}
+                        onClick={() => {
+                            setConnecting(true);
 
-  if (!triedToEagerConnect) {
-    return null;
-  }
+                            activate(injected, undefined, true).catch(
+                                (error: Error) => {
+                                    // ignore the error if it's a user rejected request
+                                    if (
+                                        error instanceof
+                                        UserRejectedRequestError
+                                    ) {
+                                        setConnecting(false);
+                                    } else {
+                                        setError(error);
+                                    }
+                                },
+                            );
+                        }}>
+                        {isMetaMaskInstalled
+                            ? 'Connect to MetaMask'
+                            : 'Connect to Wallet'}
+                    </button>
+                ) : (
+                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                    <button onClick={startOnboarding}>Install Metamask</button>
+                )}
+            </div>
+        );
+    }
 
-  if (typeof account !== "string") {
     return (
-      <div>
-        {isWeb3Available ? (
-          <button
-            disabled={connecting}
-            onClick={() => {
-              setConnecting(true);
-
-              activate(injected, undefined, true).catch((error) => {
-                // ignore the error if it's a user rejected request
-                if (error instanceof UserRejectedRequestError) {
-                  setConnecting(false);
-                } else {
-                  setError(error);
-                }
-              });
-            }}
-          >
-            {isMetaMaskInstalled ? "Connect to MetaMask" : "Connect to Wallet"}
-          </button>
-        ) : (
-          <button onClick={startOnboarding}>Install Metamask</button>
-        )}
-      </div>
+        <a
+            {...{
+                href: formatEtherscanLink('Account', [
+                    chainId as keyof typeof ETHERSCAN_PREFIXES,
+                    account,
+                ]),
+                target: '_blank',
+                rel: 'noopener noreferrer',
+            }}>
+            {ENSName || `${shortenHex(account, 4)}`}
+        </a>
     );
-  }
-
-  return (
-    <a
-      {...{
-        href: formatEtherscanLink("Account", [chainId as keyof typeof ETHERSCAN_PREFIXES, account]),
-        target: "_blank",
-        rel: "noopener noreferrer",
-      }}
-    >
-      {ENSName || `${shortenHex(account, 4)}`}
-    </a>
-  );
-};
+}
