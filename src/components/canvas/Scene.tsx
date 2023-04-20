@@ -1,12 +1,21 @@
 import { Canvas } from '@react-three/fiber';
-import { MutableRefObject, PropsWithChildren, Suspense } from 'react';
+import {
+    MutableRefObject,
+    PropsWithChildren,
+    ReactElement,
+    Suspense,
+} from 'react';
 
 type Props = PropsWithChildren & {
     eventSource: MutableRefObject<HTMLDivElement>;
     eventPrefix: 'offset' | 'client' | 'page' | 'layer' | 'screen' | undefined;
 };
 
-export default function Scene({ children, eventSource, eventPrefix }: Props) {
+export default function Scene({
+    children,
+    eventSource,
+    eventPrefix,
+}: Props): ReactElement {
     return (
         <div
             className={

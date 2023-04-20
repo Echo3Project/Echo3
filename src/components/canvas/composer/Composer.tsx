@@ -1,6 +1,6 @@
 import { Effects } from '@react-three/drei';
 import { extend, Object3DNode, useThree } from '@react-three/fiber';
-import { useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 
@@ -15,7 +15,7 @@ declare module '@react-three/fiber' {
 
 extend({ BokehPass, ShaderPass });
 
-export function Composer() {
+export function Composer(): ReactElement {
     const { scene, camera } = useThree();
     const params = useMemo(
         () => ({ focus: 20, aperture: 0.0002, maxblur: 0.005 }),

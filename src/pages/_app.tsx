@@ -4,7 +4,7 @@ import { Web3ReactProvider } from '@web3-react/core';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { MutableRefObject, useRef } from 'react';
+import { MutableRefObject, ReactElement, useRef } from 'react';
 
 import { Account } from '@/components/dom/Account';
 import { useEagerConnect } from '@/hooks';
@@ -18,7 +18,7 @@ type Props = AppProps & {
     };
 };
 
-export default function App({ Component, pageProps }: Props) {
+export default function App({ Component, pageProps }: Props): ReactElement {
     const eventsOriginElement = useRef<HTMLDivElement>(
         null,
     ) as MutableRefObject<HTMLDivElement>;

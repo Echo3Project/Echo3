@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber';
 import { useGesture } from '@use-gesture/react';
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren, ReactElement, useRef } from 'react';
 import { Group, Vector2, Vector3 } from 'three';
 import { clamp } from 'three/src/math/MathUtils';
 
@@ -15,7 +15,7 @@ export default function MapControls({
     children,
     startingCoords = new Vector2(0, 0),
     startingDistance = 0,
-}: Props) {
+}: Props): ReactElement {
     const container = useRef<Group>(null);
     const position = useRef<Vector3>(new Vector3(0, 100, 0));
     const rotation = useRef<Vector3>(new Vector3(Math.PI / 4, 0, 0));
@@ -23,7 +23,7 @@ export default function MapControls({
     const isTouchDevice = useIsTouchDevice();
     const strength = isTouchDevice ? 3 : 1;
 
-    const handleMove = (offset: [number, number]) => {
+    const handleMove = (offset: [number, number]): void => {
         if (!container.current) return;
         position.current.x = clamp(
             position.current.x -
@@ -39,7 +39,7 @@ export default function MapControls({
         );
     };
 
-    const handleZoom = (y: number) => {
+    const handleZoom = (y: number): void => {
         if (!container.current) return;
         position.current.y = clamp(position.current.y + y / 10, 100, 1000);
         rotation.current.x = (Math.PI / 4) * (1 - position.current.y / 1000);

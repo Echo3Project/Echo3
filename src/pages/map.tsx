@@ -1,11 +1,12 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
+import { ReactElement } from 'react';
 import { Vector2 } from 'three';
 
 import MapControls from '@/components/canvas/controls/MapControls';
 import { Svg } from '@/components/canvas/map/MapSvg';
 
-export default function Page() {
+export default function Page(): ReactElement {
     return (
         <>
             <Head>
@@ -21,7 +22,7 @@ export default function Page() {
     );
 }
 
-Page.canvas = () => {
+Page.canvas = (): ReactElement => {
     const startingCoords = new Vector2(0, 0);
     const startingDistance = 500;
 

@@ -1,5 +1,5 @@
 import { useLoader } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { ReactElement, useMemo, useRef } from 'react';
 import { Group } from 'three';
 import { SVGLoader, SVGResultPaths } from 'three-stdlib';
 
@@ -12,7 +12,7 @@ type CustomSVGResultPaths = SVGResultPaths & {
 };
 type Paths = { paths: CustomSVGResultPaths[] };
 
-export function Svg() {
+export function Svg(): ReactElement {
     const ref = useRef<Group>(null);
     const { paths }: Paths = useLoader(SVGLoader, '/map.svg');
 

@@ -3,7 +3,7 @@ import { ETHERSCAN_PREFIXES } from './etherscanPrefixes';
 export function formatEtherscanLink(
     type: 'Account' | 'Transaction',
     data: [keyof typeof ETHERSCAN_PREFIXES, string],
-) {
+): string {
     switch (type) {
         case 'Account': {
             const [chainId, address] = data;

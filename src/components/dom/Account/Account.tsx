@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import { UserRejectedRequestError } from '@web3-react/injected-connector';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import { useENSName, useMetaMaskOnboarding } from '@/hooks';
 import { injected } from '@/lib';
@@ -10,7 +10,9 @@ type AccountProps = {
     triedToEagerConnect: boolean;
 };
 
-export function Account({ triedToEagerConnect }: AccountProps) {
+export function Account({
+    triedToEagerConnect,
+}: AccountProps): ReactElement | null {
     const { active, error, activate, chainId, account, setError } =
         useWeb3React();
 
@@ -46,7 +48,7 @@ export function Account({ triedToEagerConnect }: AccountProps) {
                 {isWeb3Available ? (
                     <button
                         disabled={connecting}
-                        onClick={() => {
+                        onClick={(): void => {
                             setConnecting(true);
 
                             activate(injected, undefined, true).catch(

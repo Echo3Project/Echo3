@@ -6,10 +6,11 @@ import {
     Preload,
 } from '@react-three/drei';
 import Head from 'next/head';
+import { ReactElement } from 'react';
 
 import { Composer } from '@/components/canvas/composer';
 
-export default function Page() {
+export default function Page(): ReactElement {
     return (
         <>
             <Head>
@@ -25,7 +26,7 @@ export default function Page() {
     );
 }
 
-Page.canvas = () => {
+Page.canvas = (): ReactElement => {
     return (
         <>
             <PerspectiveCamera makeDefault position={[0, 1, 20]} fov={75} />

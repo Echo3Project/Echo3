@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { injected } from '@/lib';
 
-export function useEagerConnect() {
+export function useEagerConnect(): boolean {
     const { activate, active } = useWeb3React();
 
     const [tried, setTried] = useState(false);

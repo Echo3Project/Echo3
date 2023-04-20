@@ -3,10 +3,17 @@ import type MetaMaskOnboarding from '@metamask/onboarding';
 import { useEffect, useRef, useState } from 'react';
 
 type superchargedWindow = typeof window & {
-    ethereum: Boolean;
+    ethereum: boolean;
 };
 
-export function useMetaMaskOnboarding() {
+type MetaMaskOnboardingHook = {
+    startOnboarding: () => Promise<void>;
+    stopOnboarding: () => void;
+    isMetaMaskInstalled: boolean | undefined;
+    isWeb3Available: boolean;
+};
+
+export function useMetaMaskOnboarding(): MetaMaskOnboardingHook {
     const onboarding = useRef<MetaMaskOnboarding>();
 
     const [isMetaMaskInstalled, isMetaMaskInstalledSet] = useState<boolean>();
@@ -16,7 +23,7 @@ export function useMetaMaskOnboarding() {
             return;
         }
 
-        async function checkForMetaMask() {
+        async function checkForMetaMask(): Promise<void> {
             const provider = await detectEthereumProvider({
                 timeout: 1000,
                 mustBeMetaMask: true,
@@ -34,7 +41,7 @@ export function useMetaMaskOnboarding() {
         });
     }, []);
 
-    async function startOnboarding() {
+    async function startOnboarding(): Promise<void> {
         const MetaMaskOnboarding = await import('@metamask/onboarding').then(
             (m) => m.default,
         );
@@ -44,13 +51,13 @@ export function useMetaMaskOnboarding() {
         onboarding.current?.startOnboarding();
     }
 
-    function stopOnboarding() {
+    function stopOnboarding(): void {
         if (onboarding?.current) {
             onboarding.current.stopOnboarding();
         }
     }
 
-    const isWeb3Available: Boolean =
+    const isWeb3Available: boolean =
         typeof window !== 'undefined' &&
         (window as superchargedWindow)?.ethereum;
 

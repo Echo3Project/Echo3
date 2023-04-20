@@ -3,7 +3,7 @@
 // 3 - enjoy
 import { addEffect, useFrame } from '@react-three/fiber';
 import Lenis from '@studio-freight/lenis';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactElement, ReactNode, useEffect, useRef } from 'react';
 import { MathUtils } from 'three';
 
 type Props = {
@@ -20,7 +20,7 @@ const state = {
 };
 const { damp } = MathUtils;
 
-export default function Scroll({ children }: Props) {
+export default function Scroll({ children }: Props): ReactElement {
     const content = useRef<HTMLDivElement>(null);
     const wrapper = useRef<HTMLDivElement>(null);
 
@@ -38,7 +38,7 @@ export default function Scroll({ children }: Props) {
             infinite: false,
         });
 
-        lenis.on('scroll', ({ scroll, progress }: StateType) => {
+        lenis.on('scroll', ({ scroll, progress }: StateType): void => {
             state.top = scroll;
             state.progress = progress;
         });
@@ -71,7 +71,7 @@ export default function Scroll({ children }: Props) {
     );
 }
 
-export const ScrollTicker = ({ smooth = 9999999 }) => {
+export const ScrollTicker = ({ smooth = 9999999 }): null => {
     useFrame(({ viewport, camera }, delta) => {
         camera.position.y = damp(
             camera.position.y,
