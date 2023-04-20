@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ReactElement } from 'react';
 
 import MapControls from '@/components/canvas/controls/MapControls';
-import { Svg } from '@/components/canvas/map/MapSvg';
+import ObjectChunk from '@/components/canvas/map/ObjectChunk';
 import { Three } from '@/components/helpers/R3f';
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
@@ -31,7 +31,7 @@ export default function Page(): ReactElement {
                 />
                 <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
-                <Svg />
+                <ObjectChunk />
             </Three>
         </>
     );
