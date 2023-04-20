@@ -29,9 +29,9 @@ export function Svg() {
     );
 
     return (
-        <group position={[-400, -400, 0]} ref={ref}>
+        <group position={[-400, 0, 400]} ref={ref}>
             {shapes.map((props) => (
-                <mesh key={props.shape.uuid}>
+                <mesh key={props.shape.uuid} rotation-x={-Math.PI / 2}>
                     <meshBasicMaterial
                         color={props.color}
                         opacity={props.fillOpacity}

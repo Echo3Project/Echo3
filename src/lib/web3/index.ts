@@ -1,2 +1,2 @@
-export { injected } from './connectors'
-export { getLibrary } from './getLibrary'
+export { injected } from './connectors';
+export { getLibrary } from './getLibrary';

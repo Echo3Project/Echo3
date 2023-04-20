@@ -1,13 +1,14 @@
 import '@/styles/globals.css';
 
-import { Web3ReactProvider } from "@web3-react/core";
-import { getLibrary } from "@/lib";
-import { useEagerConnect } from "@/hooks";
+import { Web3ReactProvider } from '@web3-react/core';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { MutableRefObject, useRef } from 'react';
+
 import { Account } from '@/components/dom/Account';
+import { useEagerConnect } from '@/hooks';
+import { getLibrary } from '@/lib';
 
 const Scene = dynamic(() => import('@canvas/Scene'), { ssr: false });
 
@@ -27,7 +28,7 @@ export default function App({ Component, pageProps }: Props) {
         <Web3ReactProvider getLibrary={getLibrary}>
             <div
                 ref={eventsOriginElement}
-                className="absolute h-screen w-full overflow-hidden">
+                className="absolute h-[100dvh] w-full overflow-hidden">
                 <header className="flex justify-between">
                     <div className="ml-8 py-4 px-8 bg-black inline-block rounded-b-lg text-white">
                         <Link href="/" className="mr-4">
@@ -36,12 +37,15 @@ export default function App({ Component, pageProps }: Props) {
                         <Link href="/map">Map</Link>
                     </div>
                     <div className="mr-8 py-4 px-8 bg-black rounded-b-lg text-white">
-                        <Account triedToEagerConnect={triedToEagerConnect}></Account>
+                        <Account
+                            triedToEagerConnect={triedToEagerConnect}></Account>
                     </div>
                 </header>
                 <Component {...pageProps} />
                 {Component?.canvas && (
-                    <Scene eventSource={eventsOriginElement} eventPrefix="client">
+                    <Scene
+                        eventSource={eventsOriginElement}
+                        eventPrefix="client">
                         {Component.canvas(pageProps)}
                     </Scene>
                 )}
