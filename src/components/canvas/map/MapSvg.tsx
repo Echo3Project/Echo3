@@ -1,7 +1,10 @@
+import { Sphere } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { ReactElement, useMemo, useRef } from 'react';
 import { Group } from 'three';
 import { SVGLoader, SVGResultPaths } from 'three-stdlib';
+
+import { useZoom } from '@/hooks';
 
 type CustomSVGResultPaths = SVGResultPaths & {
     userData: {
@@ -29,18 +32,23 @@ export function Svg(): ReactElement {
     );
 
     return (
-        <group position={[-400, 0, 400]} ref={ref}>
-            {shapes.map((props) => (
-                <mesh key={props.shape.uuid} rotation-x={-Math.PI / 2}>
-                    <meshBasicMaterial
-                        color={props.color}
-                        opacity={props.fillOpacity}
-                        depthWrite={false}
-                        transparent
-                    />
-                    <shapeGeometry args={[props.shape]} />
-                </mesh>
-            ))}
+        <group>
+            <Sphere args={[100]} visible={useZoom() >= 2}>
+                <meshBasicMaterial color="hotpink" />
+            </Sphere>
+            <group position={[-400, 0, 400]} ref={ref}>
+                {shapes.map((props) => (
+                    <mesh key={props.shape.uuid} rotation-x={-Math.PI / 2}>
+                        <meshBasicMaterial
+                            color={props.color}
+                            opacity={props.fillOpacity}
+                            depthWrite={false}
+                            transparent
+                        />
+                        <shapeGeometry args={[props.shape]} />
+                    </mesh>
+                ))}
+            </group>
         </group>
     );
 }

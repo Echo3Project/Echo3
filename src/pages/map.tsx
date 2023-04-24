@@ -1,15 +1,14 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
-import { Vector2 } from 'three';
 
 import MapControls from '@/components/canvas/controls/MapControls';
 import { Svg } from '@/components/canvas/map/MapSvg';
 import { Three } from '@/components/helpers/R3f';
 
+const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
+
 export default function Page(): ReactElement {
-    const startingCoords = new Vector2(0, 0);
-    const startingDistance = 500;
     return (
         <>
             <Head>
@@ -22,18 +21,15 @@ export default function Page(): ReactElement {
                 </h1>
             </main>
             <Three>
-                <MapControls
-                    startingCoords={startingCoords}
-                    startingDistance={startingDistance}>
-                    <PerspectiveCamera
-                        rotation-x={-Math.PI / 2}
-                        position-y={0}
-                        fov={75}
-                        near={0.1}
-                        far={1000}
-                        makeDefault
-                    />
-                </MapControls>
+                <PerspectiveCamera
+                    rotation={[initialRotation, 0, 0]}
+                    position={[0, 100, 0]}
+                    fov={75}
+                    near={0.1}
+                    far={1000}
+                    makeDefault
+                />
+                <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
                 <Svg />
             </Three>
