@@ -1,18 +1,15 @@
+import { Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import {
-    MutableRefObject,
-    PropsWithChildren,
-    ReactElement,
-    Suspense,
-} from 'react';
+import { MutableRefObject, ReactElement } from 'react';
 
-type Props = PropsWithChildren & {
+import { r3f } from '@/components/helpers/R3f';
+
+type Props = {
     eventSource: MutableRefObject<HTMLDivElement>;
     eventPrefix: 'offset' | 'client' | 'page' | 'layer' | 'screen' | undefined;
 };
 
 export default function Scene({
-    children,
     eventSource,
     eventPrefix,
 }: Props): ReactElement {
@@ -24,7 +21,8 @@ export default function Scene({
             <Canvas eventSource={eventSource} eventPrefix={eventPrefix} shadows>
                 <directionalLight intensity={0.75} />
                 <ambientLight intensity={0.75} />
-                <Suspense>{children}</Suspense>
+                <r3f.Out />
+                <Preload all />
             </Canvas>
         </div>
     );
