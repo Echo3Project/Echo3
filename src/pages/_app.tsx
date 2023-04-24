@@ -42,13 +42,7 @@ export default function App({ Component, pageProps }: Props): ReactElement {
                     </div>
                 </header>
                 <Component {...pageProps} />
-                {Component?.canvas && (
-                    <Scene
-                        eventSource={eventsOriginElement}
-                        eventPrefix="client">
-                        {Component.canvas(pageProps)}
-                    </Scene>
-                )}
+                <Scene eventSource={eventsOriginElement} eventPrefix="client" />
             </div>
         </Web3ReactProvider>
     );

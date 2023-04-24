@@ -3,12 +3,12 @@ import {
     Environment,
     OrbitControls,
     PerspectiveCamera,
-    Preload,
 } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
 import { Composer } from '@/components/canvas/composer';
+import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
     return (
@@ -22,19 +22,13 @@ export default function Page(): ReactElement {
                     _Echo3
                 </h1>
             </main>
+            <Three>
+                <PerspectiveCamera makeDefault position={[0, 1, 20]} fov={75} />
+                <EthereumModel />
+                <OrbitControls target={[0, 1, 0]} />
+                <Environment preset="studio" background={true} blur={1} />
+                <Composer />
+            </Three>
         </>
     );
 }
-
-Page.canvas = (): ReactElement => {
-    return (
-        <>
-            <PerspectiveCamera makeDefault position={[0, 1, 20]} fov={75} />
-            <EthereumModel />
-            <OrbitControls target={[0, 1, 0]} />
-            <Composer />
-            <Preload all />
-            <Environment preset="studio" background={true} blur={1} />
-        </>
-    );
-};

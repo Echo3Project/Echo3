@@ -5,8 +5,11 @@ import { Vector2 } from 'three';
 
 import MapControls from '@/components/canvas/controls/MapControls';
 import { Svg } from '@/components/canvas/map/MapSvg';
+import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
+    const startingCoords = new Vector2(0, 0);
+    const startingDistance = 500;
     return (
         <>
             <Head>
@@ -18,40 +21,22 @@ export default function Page(): ReactElement {
                     _Map
                 </h1>
             </main>
+            <Three>
+                <MapControls
+                    startingCoords={startingCoords}
+                    startingDistance={startingDistance}>
+                    <PerspectiveCamera
+                        rotation-x={-Math.PI / 2}
+                        position-y={0}
+                        fov={75}
+                        near={0.1}
+                        far={1000}
+                        makeDefault
+                    />
+                </MapControls>
+                <color attach="background" args={[243, 243, 243]} />
+                <Svg />
+            </Three>
         </>
     );
 }
-
-Page.canvas = (): ReactElement => {
-    const startingCoords = new Vector2(0, 0);
-    const startingDistance = 500;
-
-    return (
-        <>
-            <MapControls
-                startingCoords={startingCoords}
-                startingDistance={startingDistance}>
-                <PerspectiveCamera
-                    rotation-x={-Math.PI / 2}
-                    position-y={0}
-                    fov={75}
-                    near={0.1}
-                    far={1000}
-                    makeDefault
-                />
-            </MapControls>
-            <color attach="background" args={[243, 243, 243]} />
-            <Svg />
-            {/* <MapControls
-                enableRotate={false}
-                minDistance={500}
-                maxDistance={5000}
-                enableDamping
-                minZoom={1}
-                maxZoom={50}
-                zoomSpeed={0.5}
-                dampingFactor={0.03}
-            /> */}
-        </>
-    );
-};
