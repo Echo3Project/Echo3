@@ -7,7 +7,6 @@ import {
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
-import { Composer } from '@/components/canvas/composer';
 import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
@@ -27,7 +26,7 @@ export default function Page(): ReactElement {
                 <EthereumModel />
                 <OrbitControls target={[0, 1, 0]} />
                 <Environment preset="studio" background={true} blur={1} />
-                <Composer />
+                {/* <Composer /> */}
             </Three>
         </>
     );
