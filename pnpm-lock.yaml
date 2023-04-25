@@ -43,10 +43,6 @@ dependencies:
   '@react-three/drei': 9.57.3_u3iila23zl7kxrjj2wxuc6ojr4
   '@react-three/fiber': 8.12.0_73epb4osyabtjyiaeamriercbi
   '@studio-freight/lenis': 1.0.1
-  '@types/node': 18.15.3
-  '@types/react': 18.0.28
-  '@types/react-dom': 18.0.11
-  '@types/three': 0.149.0
   '@use-gesture/react': 10.2.26_react@18.2.0
   '@web3-react/core': 6.1.9_react@18.2.0
   '@web3-react/injected-connector': 6.0.7
@@ -56,9 +52,12 @@ dependencies:
   three: 0.150.1
   three-stdlib: 2.21.8_three@0.150.1
   tunnel-rat: 0.1.2_react@18.2.0
-  typescript: 5.0.2
 
 devDependencies:
+  '@types/node': 18.15.3
+  '@types/react': 18.0.28
+  '@types/react-dom': 18.0.11
+  '@types/three': 0.149.0
   '@typescript-eslint/eslint-plugin': 5.56.0_qsnvknysi52qtaxqdyqyohkcku
   '@typescript-eslint/parser': 5.55.0_j4766f7ecgqbon3u7zlxn5zszu
   autoprefixer: 10.4.14_postcss@8.4.21
@@ -73,6 +72,7 @@ devDependencies:
   prettier: 2.8.6
   r3f-perf: 7.1.2_u3iila23zl7kxrjj2wxuc6ojr4
   tailwindcss: 3.2.7_postcss@8.4.21
+  typescript: 5.0.2
 
 packages:
 
@@ -686,7 +686,7 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
-    dev: false
+    dev: true
 
   /@types/offscreencanvas/2019.7.0:
     resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
@@ -698,7 +698,7 @@ packages:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
       '@types/react': 18.0.28
-    dev: false
+    dev: true
 
   /@types/react-reconciler/0.26.7:
     resolution: {integrity: sha512-mBDYl8x+oyPX/VBb3E638N0B7xG+SPk/EAMcVPeexqus/5aTpTphQi0curhhshOqRrc9t6OPoJfEUkbymse/lQ==}
@@ -3447,6 +3447,7 @@ packages:
     resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
     engines: {node: '>=12.20'}
     hasBin: true
+    dev: true
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
