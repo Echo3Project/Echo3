@@ -1,7 +1,17 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from 'react';
 
-import { apiResponse } from './*';
 import SearchResultsList from './SearchResultsList';
+
+export type dataFormat = {
+    name: string;
+    author: string;
+    description: string;
+    tags: string[];
+};
+export type apiResponse = dataFormat & {
+    item: dataFormat;
+    refIndex: number;
+};
 
 export default function SearchBar(): ReactElement {
     const [searchData, setSearchData] = useState<string>('');

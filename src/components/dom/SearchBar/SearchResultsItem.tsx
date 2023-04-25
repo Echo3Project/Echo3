@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { apiResponse } from './*';
+import { apiResponse } from './SearchBar';
 
 type Props = {
     result: apiResponse;

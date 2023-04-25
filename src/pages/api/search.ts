@@ -1,4 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { dataFormat } from '@dom/SearchBar';
 import Fuse from 'fuse.js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -9,15 +9,7 @@ type RequestData = {
 };
 
 type ResponseData = {
-    data:
-        | Fuse.FuseResult<{
-              name: string;
-              author: string;
-              description: string;
-              tags: string[];
-          }>[]
-        | string
-        | null;
+    data: Fuse.FuseResult<dataFormat>[] | string | null;
 };
 
 const options = {
