@@ -17,7 +17,7 @@ export function EthereumModel(
 ): ReactElement {
     const { nodes, materials } = useGLTF('/models/ethereum.glb') as GLTFResult;
     return (
-        <group {...props} dispose={null} scale={[0.02, 0.02, 0.02]}>
+        <group {...props} dispose={null} scale={0.1} position-y={100}>
             <mesh
                 geometry={nodes.Object_2.geometry}
                 material={materials['default']}

@@ -19,7 +19,17 @@ export default function Scene({
             className={
                 'pointer-events-none absolute top-0 w-full h-screen -z-10'
             }>
-            <Canvas eventSource={eventSource} eventPrefix={eventPrefix} shadows>
+            <Canvas
+                eventSource={eventSource}
+                eventPrefix={eventPrefix}
+                gl={{
+                    powerPreference: 'high-performance',
+                    alpha: true,
+                    antialias: false,
+                    stencil: false,
+                    depth: true,
+                }}
+                shadows>
                 <Perf position="bottom-right" />
                 <directionalLight intensity={0.75} />
                 <ambientLight intensity={0.75} />
