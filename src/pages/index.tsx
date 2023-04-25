@@ -1,12 +1,10 @@
 import { EthereumModel } from '@canvas/models/EthereumModel';
-import {
-    Environment,
-    OrbitControls,
-    PerspectiveCamera,
-} from '@react-three/drei';
+import { ForestModel } from '@canvas/models/ForestModel';
+import { Bvh, Environment, PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
+import { Composer } from '@/components/canvas/composer';
 import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
@@ -22,11 +20,18 @@ export default function Page(): ReactElement {
                 </h1>
             </main>
             <Three>
-                <PerspectiveCamera makeDefault position={[0, 1, 20]} fov={75} />
-                <EthereumModel />
-                <OrbitControls target={[0, 1, 0]} />
-                <Environment preset="studio" background={true} blur={1} />
-                {/* <Composer /> */}
+                <PerspectiveCamera
+                    makeDefault
+                    position={[0, 100, 300]}
+                    fov={75}
+                    rotation-x={-Math.PI / 15}
+                />
+                <Bvh>
+                    <ForestModel />
+                    <EthereumModel />
+                </Bvh>
+                <Environment preset="studio" background={true} blur={1.5} />
+                <Composer />
             </Three>
         </>
     );

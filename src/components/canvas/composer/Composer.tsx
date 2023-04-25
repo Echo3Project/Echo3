@@ -1,36 +1,26 @@
-import { Effects } from '@react-three/drei';
-import { extend, Object3DNode, useThree } from '@react-three/fiber';
-import { ReactElement, useMemo } from 'react';
-import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import {
+    EffectComposer,
+    HueSaturation,
+    SMAA,
+    Vignette,
+} from '@react-three/postprocessing';
+import { ReactElement } from 'react';
 
-import VignetteShader from './Shaders/VignetteShader';
-
-declare module '@react-three/fiber' {
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
-    interface ThreeElements {
-        bokehPass: Object3DNode<BokehPass, typeof BokehPass>;
-    }
-}
-
-extend({ BokehPass, ShaderPass });
+import AutoFocusDOF from './Effects/AutoFocusDOF';
 
 export function Composer(): ReactElement {
-    const { scene, camera } = useThree();
-    const params = useMemo(
-        () => ({ focus: 20, aperture: 0.0002, maxblur: 0.005 }),
-        [],
-    );
-
     return (
-        <Effects
-            multisamping={8}
-            renderIndex={1}
-            disableGamma={false}
-            disableRenderPass={false}
-            disableRender={false}>
-            <shaderPass args={[VignetteShader]} />
-            <bokehPass args={[scene, camera, params]} />
-        </Effects>
+        <EffectComposer disableNormalPass multisampling={0}>
+            <AutoFocusDOF
+                bokehScale={5}
+                resolution={1024}
+                mouseFocus={true}
+                focusSpeed={0.03}
+                focalLength={0.1}
+            />
+            <Vignette offset={0.4} darkness={0.55} eskil={false} />
+            <HueSaturation hue={0.1} saturation={0.2} />
+            <SMAA />
+        </EffectComposer>
     );
 }
