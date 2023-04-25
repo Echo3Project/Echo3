@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { ReactElement } from 'react';
 
 import { Composer } from '@/components/canvas/composer';
+import SearchBar from '@/components/dom/SearchBar';
 import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
@@ -14,10 +15,8 @@ export default function Page(): ReactElement {
                 <title>Echo 3 - Home</title>
                 <meta name="description" content="Echo 3 Home" />
             </Head>
-            <main className="h-screen w-full flex justify-center items-center">
-                <h1 className="font-bold text-2xl text-white select-none">
-                    _Echo3
-                </h1>
+            <main className="h-screen w-full flex justify-center">
+                <SearchBar />
             </main>
             <Three>
                 <PerspectiveCamera
