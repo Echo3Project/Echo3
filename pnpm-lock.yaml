@@ -25,6 +25,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-simple-import-sort: ^10.0.0
   eslint-plugin-unused-imports: ^2.0.0
+  fuse.js: ^6.6.2
   next: 13.2.4
   postcss: ^8.4.21
   postprocessing: ^6.30.2
@@ -49,6 +50,7 @@ dependencies:
   '@use-gesture/react': 10.2.26_react@18.2.0
   '@web3-react/core': 6.1.9_react@18.2.0
   '@web3-react/injected-connector': 6.0.7
+  fuse.js: 6.6.2
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   postprocessing: 6.30.2_three@0.150.1
   react: 18.2.0
@@ -2051,6 +2053,11 @@ packages:
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /get-intrinsic/1.2.0:
     resolution: {integrity: sha512-L049y6nFOuom5wGyRc3/gdTLO94dySVKRACj1RmJZBQXlbTMhtNIgkWkUHq+jYmZvKf14EW1EoJnnjbmoHij0Q==}
