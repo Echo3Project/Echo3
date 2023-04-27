@@ -1,6 +1,13 @@
+import { Merged } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { ReactElement, useMemo } from 'react';
-import { BufferAttribute, BufferGeometry } from 'three';
+import { ElementType, ReactElement, useMemo } from 'react';
+import {
+    BufferAttribute,
+    BufferGeometry,
+    Mesh,
+    MeshStandardMaterial,
+    SphereGeometry,
+} from 'three';
 
 export default function ObjectChunk({
     count = 10000,
@@ -64,6 +71,16 @@ export default function ObjectChunk({
         });
     });
 
+    const sphereMesh = useMemo(
+        () =>
+            new Mesh(
+                new SphereGeometry(radius, 16, 16),
+                new MeshStandardMaterial({ color: 'blue' }),
+            ),
+        [radius],
+    );
+    const meshes = useMemo(() => ({ Sphere: sphereMesh }), [sphereMesh]);
+
     return (
         <group>
             {chunks.map((chunk, index) => {
@@ -71,18 +88,23 @@ export default function ObjectChunk({
 
                 return (
                     <group key={index}>
-                        {Array.from({ length: count }, (_, i) => (
-                            <mesh
-                                key={i}
-                                position={[
-                                    positions[(start + i) * 3 + 0],
-                                    positions[(start + i) * 3 + 1],
-                                    positions[(start + i) * 3 + 2],
-                                ]}>
-                                <sphereGeometry args={[radius, 16, 16]} />
-                                <meshStandardMaterial color="blue" />
-                            </mesh>
-                        ))}
+                        <Merged castShadow receiveShadow meshes={meshes}>
+                            {({
+                                Sphere,
+                            }: {
+                                Sphere: ElementType;
+                            }): ReactElement[] =>
+                                Array.from({ length: count }, (_, i) => (
+                                    <Sphere
+                                        key={i}
+                                        position={[
+                                            positions[(start + i) * 3 + 0],
+                                            positions[(start + i) * 3 + 1],
+                                            positions[(start + i) * 3 + 2],
+                                        ]}></Sphere>
+                                ))
+                            }
+                        </Merged>
                     </group>
                 );
             })}
