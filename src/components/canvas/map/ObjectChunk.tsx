@@ -1,6 +1,6 @@
 import { Merged } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { ElementType, ReactElement, useMemo } from 'react';
+import { ElementType, memo, ReactElement, useMemo } from 'react';
 import {
     BufferAttribute,
     BufferGeometry,
@@ -9,11 +9,21 @@ import {
     SphereGeometry,
 } from 'three';
 
-export default function ObjectChunk({
-    count = 10000,
-    radius = 1,
-    chunkSize = 100,
-}): ReactElement {
+import type { dataFormat } from '@/pages/map';
+
+type Props = {
+    projects: dataFormat[];
+    filters: string[];
+};
+
+export const ObjectChunk = memo(function ObjectChunk({
+    projects,
+    filters,
+}: Props): ReactElement {
+    const count = projects.length;
+    const radius = 3;
+    const chunkSize = 100;
+
     const positions = useMemo(() => {
         const positions = new Float32Array(count * 3);
         for (let i = 0; i < count; i++) {
@@ -75,7 +85,11 @@ export default function ObjectChunk({
         () =>
             new Mesh(
                 new SphereGeometry(radius, 16, 16),
-                new MeshStandardMaterial({ color: 'blue' }),
+                new MeshStandardMaterial({
+                    color: 'blue',
+                    visible: true,
+                    transparent: true,
+                }),
             ),
         [radius],
     );
@@ -94,15 +108,36 @@ export default function ObjectChunk({
                             }: {
                                 Sphere: ElementType;
                             }): ReactElement[] =>
-                                Array.from({ length: count }, (_, i) => (
-                                    <Sphere
-                                        key={i}
-                                        position={[
-                                            positions[(start + i) * 3 + 0],
-                                            positions[(start + i) * 3 + 1],
-                                            positions[(start + i) * 3 + 2],
-                                        ]}></Sphere>
-                                ))
+                                Array.from({ length: count }, (_, i) => {
+                                    return (
+                                        <>
+                                            {(filters.length === 0 ||
+                                                (
+                                                    projects[i].tags as string[]
+                                                ).some((r) =>
+                                                    filters.includes(r),
+                                                )) && (
+                                                <Sphere
+                                                    key={i}
+                                                    userData={{
+                                                        name: projects[i].name,
+                                                        tags: projects[i].tags,
+                                                    }}
+                                                    position={[
+                                                        positions[
+                                                            (start + i) * 3 + 0
+                                                        ],
+                                                        positions[
+                                                            (start + i) * 3 + 1
+                                                        ],
+                                                        positions[
+                                                            (start + i) * 3 + 2
+                                                        ],
+                                                    ]}></Sphere>
+                                            )}
+                                        </>
+                                    );
+                                })
                             }
                         </Merged>
                     </group>
@@ -110,4 +145,4 @@ export default function ObjectChunk({
             })}
         </group>
     );
-}
+});

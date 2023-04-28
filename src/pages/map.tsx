@@ -1,24 +1,81 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import MapControls from '@/components/canvas/controls/MapControls';
-import ObjectChunk from '@/components/canvas/map/ObjectChunk';
+import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
 import { Three } from '@/components/helpers/R3f';
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
-export default function Page(): ReactElement {
+export type dataFormat = {
+    name?: string;
+    author?: string;
+    description?: string;
+    tags?: string[];
+};
+
+type Props = {
+    projects: dataFormat[];
+};
+
+export default function Page({ projects }: Props): ReactElement {
+    const [filters, setFilters] = useState<string[]>([]);
+    const filtersList = [
+        'NFT',
+        'Token',
+        'PFP',
+        'Shitcoin',
+        'Chain',
+        'DAO',
+        'DeFi',
+        'DEX',
+        'Lending',
+        'Staking',
+        'Yield',
+        'Farm',
+        'Liquidity',
+        'Mining',
+        'Governance',
+        'Oracles',
+        'Cross-chain',
+        'Wallet',
+    ];
+
     return (
         <>
             <Head>
                 <title>Echo 3 - Map</title>
                 <meta name="description" content="Echo 3 Map" />
             </Head>
-            <main className="h-screen w-full flex justify-center items-center">
-                <h1 className="font-bold text-2xl text-white select-none">
-                    _Map
-                </h1>
+            <main className="h-screen w-full flex justify-center">
+                <div className="font-bold text-2xl text-white select-none">
+                    {filtersList.map(
+                        (filter: string, index: number): ReactElement => (
+                            <button
+                                key={index}
+                                className={`px-2 py-1 rounded-lg ${
+                                    filters.includes(filter)
+                                        ? 'bg-blue-500'
+                                        : 'bg-gray-500'
+                                } mr-2 text-sm`}
+                                onClick={(): void => {
+                                    if (filters.includes(filter)) {
+                                        setFilters(
+                                            filters.filter(
+                                                (item: string): boolean =>
+                                                    item !== filter,
+                                            ),
+                                        );
+                                    } else {
+                                        setFilters([...filters, filter]);
+                                    }
+                                }}>
+                                {filter}
+                            </button>
+                        ),
+                    )}
+                </div>
             </main>
             <Three>
                 <PerspectiveCamera
@@ -31,8 +88,37 @@ export default function Page(): ReactElement {
                 />
                 <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
-                <ObjectChunk />
+                <ObjectChunk projects={projects} filters={filters} />
             </Three>
         </>
     );
+}
+
+type ServerProps = {
+    props: Props;
+};
+
+export function getServerSideProps(): ServerProps {
+    const fakeData: dataFormat[] =
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require('@/pages/api/data/fake.json') as dataFormat[];
+    const projects: dataFormat[] = [];
+    fakeData.forEach((item: dataFormat): void => {
+        const project: dataFormat = {};
+        ['name', 'tags'].forEach((key: string): void => {
+            // eslint-disable-next-line no-prototype-builtins
+            item.hasOwnProperty(key) &&
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                (project[key] = item[key as keyof ItemType]);
+        });
+        projects.push(project);
+    });
+
+    return {
+        props: {
+            projects: projects,
+        },
+    };
 }
