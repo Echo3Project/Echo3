@@ -1,4 +1,4 @@
-import { dataFormat } from '@dom/SearchBar';
+import type { dataFormat } from '@dom/SearchBar';
 import Fuse from 'fuse.js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -9,7 +9,7 @@ type RequestData = {
 };
 
 type ResponseData = {
-    data: Fuse.FuseResult<dataFormat>[] | string | null;
+    data: Fuse.FuseResult<dataFormat>[] | string;
 };
 
 const options = {
@@ -53,12 +53,13 @@ export default function handler(
 // import { faker as faker2 } from '@faker-js/faker/locale/fr';
 // const fs = require('fs');
 
+// const tagsList = ['NFT', 'Token', 'PFP', 'Shitcoin', 'Chain', 'DAO', 'DeFi', 'DEX', 'Lending', 'Staking', 'Yield', 'Farm', 'Liquidity', 'Mining', 'Governance', 'Oracles', 'Cross-chain', 'Wallet'];
 // const projects = [
 //     ...Array(1000).fill(null).map(() => ({
 //         name: faker2.name.firstName(),
 //         author: faker2.name.firstName(),
 //         description: faker2.lorem.paragraph(),
-//         tags: Array(5).fill(null).map(() => faker2.lorem.word()),
+//         tags: [tagsList[Math.floor(Math.random() * tagsList.length)]],
 //     })),
 // ]
 // fs.writeFileSync('fake.json', JSON.stringify(projects, null, 4));

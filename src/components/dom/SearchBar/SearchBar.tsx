@@ -8,7 +8,7 @@ export type dataFormat = {
     description: string;
     tags: string[];
 };
-export type apiResponse = dataFormat & {
+export type apiResponse = {
     item: dataFormat;
     refIndex: number;
 };

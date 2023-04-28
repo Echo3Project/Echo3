@@ -9,9 +9,10 @@
     "lint": "next lint --fix"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.7.2",
+    "@faker-js/faker": "^7.6.0",
     "@firebase/analytics": "^0.9.5",
     "@firebase/firestore": "^3.10.1",
-    "@ethersproject/providers": "^5.7.2",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/onboarding": "^1.0.1",
     "@react-three/drei": "^9.57.3",
