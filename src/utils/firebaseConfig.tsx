@@ -1,6 +1,6 @@
 import { getAnalytics } from '@firebase/analytics';
+import { initializeApp } from '@firebase/app';
 import { getFirestore } from '@firebase/firestore';
-import { initializeApp } from 'firebase/app';
 
 // import reportWebVitals from './reportWebVitals';
 
