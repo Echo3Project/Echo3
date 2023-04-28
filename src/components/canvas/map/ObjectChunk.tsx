@@ -29,10 +29,8 @@ export const ObjectChunk = memo(function ObjectChunk({
         for (let i = 0; i < count; i++) {
             const i3 = i * 3;
             const x = Math.random() * 1000 - 500;
-            const y = Math.random() * 1000 - 500;
             const z = Math.random() * 1000 - 500;
             positions[i3 + 0] = x;
-            positions[i3 + 1] = y;
             positions[i3 + 2] = z;
         }
         return positions;
@@ -85,13 +83,9 @@ export const ObjectChunk = memo(function ObjectChunk({
         () =>
             new Mesh(
                 new SphereGeometry(radius, 16, 16),
-                new MeshStandardMaterial({
-                    color: 'blue',
-                    visible: true,
-                    transparent: true,
-                }),
+                new MeshStandardMaterial({ color: 'blue' })
             ),
-        [radius],
+        [radius]
     );
     const meshes = useMemo(() => ({ Sphere: sphereMesh }), [sphereMesh]);
 
@@ -124,15 +118,9 @@ export const ObjectChunk = memo(function ObjectChunk({
                                                         tags: projects[i].tags,
                                                     }}
                                                     position={[
-                                                        positions[
-                                                            (start + i) * 3 + 0
-                                                        ],
-                                                        positions[
-                                                            (start + i) * 3 + 1
-                                                        ],
-                                                        positions[
-                                                            (start + i) * 3 + 2
-                                                        ],
+                                                        positions[(start + i) * 3 + 0],
+                                                        0,
+                                                        positions[(start + i) * 3 + 2],
                                                     ]}></Sphere>
                                             )}
                                         </>
