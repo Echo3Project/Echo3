@@ -1,9 +1,10 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 
 import MapControls from '@/components/canvas/controls/MapControls';
 import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
+import DragUpPanel from '@/components/dom/DragUpPanel';
 import { Three } from '@/components/helpers/R3f';
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
@@ -20,28 +21,6 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
-    const [filters, setFilters] = useState<string[]>([]);
-    const filtersList = [
-        'NFT',
-        'Token',
-        'PFP',
-        'Shitcoin',
-        'Chain',
-        'DAO',
-        'DeFi',
-        'DEX',
-        'Lending',
-        'Staking',
-        'Yield',
-        'Farm',
-        'Liquidity',
-        'Mining',
-        'Governance',
-        'Oracles',
-        'Cross-chain',
-        'Wallet',
-    ];
-
     return (
         <>
             <Head>
@@ -49,33 +28,7 @@ export default function Page({ projects }: Props): ReactElement {
                 <meta name="description" content="Echo 3 Map" />
             </Head>
             <main className="h-screen w-full flex justify-center">
-                <div className="font-bold text-2xl text-white select-none">
-                    {filtersList.map(
-                        (filter: string, index: number): ReactElement => (
-                            <button
-                                key={index}
-                                className={`px-2 py-1 rounded-lg ${
-                                    filters.includes(filter)
-                                        ? 'bg-blue-500'
-                                        : 'bg-gray-500'
-                                } mr-2 text-sm`}
-                                onClick={(): void => {
-                                    if (filters.includes(filter)) {
-                                        setFilters(
-                                            filters.filter(
-                                                (item: string): boolean =>
-                                                    item !== filter,
-                                            ),
-                                        );
-                                    } else {
-                                        setFilters([...filters, filter]);
-                                    }
-                                }}>
-                                {filter}
-                            </button>
-                        ),
-                    )}
-                </div>
+                <DragUpPanel></DragUpPanel>
             </main>
             <Three>
                 <PerspectiveCamera
@@ -88,7 +41,7 @@ export default function Page({ projects }: Props): ReactElement {
                 />
                 <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
-                <ObjectChunk projects={projects} filters={filters} />
+                <ObjectChunk projects={projects} />
             </Three>
         </>
     );

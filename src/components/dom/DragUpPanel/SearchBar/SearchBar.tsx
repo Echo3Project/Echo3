@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, ReactElement, useState } from 'react';
+import {
+    ChangeEvent,
+    FormEvent,
+    KeyboardEvent,
+    ReactElement,
+    useState,
+} from 'react';
 
 import SearchResultsList from './SearchResultsList';
 
@@ -16,6 +22,12 @@ export type apiResponse = {
 export default function SearchBar(): ReactElement {
     const [searchData, setSearchData] = useState<string>('');
     const [searchResults, setSearchResults] = useState<apiResponse[]>([]);
+
+    function handleEnter(e: KeyboardEvent<HTMLInputElement>): void {
+        if (e.key === 'Enter') {
+            (e.target as HTMLInputElement).blur();
+        }
+    }
 
     function handleSubmit(e: FormEvent<HTMLFormElement>): void {
         e.preventDefault();
@@ -46,9 +58,9 @@ export default function SearchBar(): ReactElement {
     }
 
     return (
-        <div className="flex flex-col w-full items-center">
-            <form className="w-full max-w-sm mb-2" onSubmit={handleSubmit}>
-                <div className="bg-white rounded-lg px-4 py-1">
+        <div className="flex flex-col w-full items-center bg-white max-h-full h-full">
+            <form className="w-full max-w-sm my-4 px-4" onSubmit={handleSubmit}>
+                <div className="bg-white border border-gray-400 rounded-full px-4">
                     <div className="flex items-center py-2">
                         <input
                             className="appearance-none bg-transparent border-none w-full text-black-800 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -56,8 +68,10 @@ export default function SearchBar(): ReactElement {
                             placeholder="Echo 3"
                             aria-label="Search"
                             value={searchData}
+                            onKeyUp={handleEnter}
                             onChange={handleChange}
                         />
+                        <input type="submit" hidden />
                     </div>
                 </div>
             </form>
