@@ -1,6 +1,6 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGesture } from '@use-gesture/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import { clamp } from 'three/src/math/MathUtils';
 
@@ -9,7 +9,7 @@ import { useIsTouchDevice, useZoom } from '@/hooks';
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
 export default function MapControls(): null {
-    const { camera } = useThree();
+    const { camera, events } = useThree();
     const position = useRef<Vector3>(new Vector3(0, 100, 0));
     const rotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
     const tempRotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
@@ -67,12 +67,24 @@ export default function MapControls(): null {
             },
         },
         {
-            target: document,
+            target: events.connected as HTMLElement,
             drag: { eventOptions: { passive: false } },
             wheel: { eventOptions: { passive: false } },
             pinch: { eventOptions: { passive: false } },
         },
     );
+
+    useEffect(() => {
+        const handler = (e: Event): void => e.preventDefault();
+        document.addEventListener('gesturestart', handler);
+        document.addEventListener('gesturechange', handler);
+        document.addEventListener('gestureend', handler);
+        return () => {
+            document.removeEventListener('gesturestart', handler);
+            document.removeEventListener('gesturechange', handler);
+            document.removeEventListener('gestureend', handler);
+        };
+    }, []);
 
     return null;
 }

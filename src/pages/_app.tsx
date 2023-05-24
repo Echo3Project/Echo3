@@ -3,10 +3,11 @@ import '@/styles/globals.css';
 import { Web3ReactProvider } from '@web3-react/core';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { MutableRefObject, ReactElement, useRef } from 'react';
+import { ReactElement } from 'react';
 
 import { Account } from '@/components/dom/Account';
+import Menu from '@/components/dom/Menu';
+import FiltersProvider from '@/components/helpers/FiltersContext';
 import { useEagerConnect } from '@/hooks';
 import { getLibrary } from '@/lib';
 
@@ -19,30 +20,25 @@ type Props = AppProps & {
 };
 
 export default function App({ Component, pageProps }: Props): ReactElement {
-    const eventsOriginElement = useRef<HTMLDivElement>(
-        null,
-    ) as MutableRefObject<HTMLDivElement>;
     const triedToEagerConnect = useEagerConnect();
 
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
-            <div
-                ref={eventsOriginElement}
-                className="absolute h-[100dvh] w-full overflow-hidden">
-                <header className="flex justify-between">
-                    <div className="ml-8 py-4 px-8 bg-black inline-block rounded-b-lg text-white">
-                        <Link href="/" className="mr-4">
-                            Home
-                        </Link>
-                        <Link href="/map">Map</Link>
-                    </div>
-                    <div className="mr-8 py-4 px-8 bg-black rounded-b-lg text-white">
+            <div className="absolute h-[100dvh] w-full overflow-hidden">
+                <header className="fixed w-full flex justify-between z-50">
+                    <Menu />
+                    <div className="mr-8 py-4 px-8 bg-black rounded-b-lg text-white hidden">
                         <Account
                             triedToEagerConnect={triedToEagerConnect}></Account>
                     </div>
                 </header>
-                <Component {...pageProps} />
-                <Scene eventSource={eventsOriginElement} eventPrefix="client" />
+                <FiltersProvider>
+                    <div className="absolute top-0 w-full h-screen z-10 pointer-events-none">
+                        <Component {...pageProps} />
+                        {/* <DragUpPanel></DragUpPanel> */}
+                    </div>
+                    <Scene eventPrefix="client" />
+                </FiltersProvider>
             </div>
         </Web3ReactProvider>
     );

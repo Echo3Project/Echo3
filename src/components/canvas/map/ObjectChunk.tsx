@@ -1,6 +1,13 @@
 import { Merged } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { ElementType, memo, ReactElement, useMemo } from 'react';
+import {
+    ElementType,
+    Fragment,
+    memo,
+    ReactElement,
+    useContext,
+    useMemo,
+} from 'react';
 import {
     BufferAttribute,
     BufferGeometry,
@@ -9,17 +16,17 @@ import {
     SphereGeometry,
 } from 'three';
 
+import { Filters } from '@/components/helpers/FiltersContext';
 import type { dataFormat } from '@/pages/map';
 
 type Props = {
     projects: dataFormat[];
-    filters: string[];
 };
 
 export const ObjectChunk = memo(function ObjectChunk({
     projects,
-    filters,
 }: Props): ReactElement {
+    const { active } = useContext(Filters);
     const count = projects.length;
     const radius = 3;
     const chunkSize = 100;
@@ -104,15 +111,14 @@ export const ObjectChunk = memo(function ObjectChunk({
                             }): ReactElement[] =>
                                 Array.from({ length: count }, (_, i) => {
                                     return (
-                                        <>
-                                            {(filters.length === 0 ||
+                                        <Fragment key={i}>
+                                            {(active.length === 0 ||
                                                 (
                                                     projects[i].tags as string[]
                                                 ).some((r) =>
-                                                    filters.includes(r),
+                                                    active.includes(r),
                                                 )) && (
                                                 <Sphere
-                                                    key={i}
                                                     userData={{
                                                         name: projects[i].name,
                                                         tags: projects[i].tags,
@@ -125,9 +131,10 @@ export const ObjectChunk = memo(function ObjectChunk({
                                                         positions[
                                                             (start + i) * 3 + 2
                                                         ],
-                                                    ]}></Sphere>
+                                                    ]}
+                                                />
                                             )}
-                                        </>
+                                        </Fragment>
                                     );
                                 })
                             }
