@@ -16,7 +16,7 @@ import {
     SphereGeometry,
 } from 'three';
 
-import { Filters } from '@/components/helpers/FiltersContext';
+import { Filters } from '@/components/helpers/context/FiltersContext';
 import type { dataFormat } from '@/pages/map';
 
 type Props = {

@@ -1,93 +1,34 @@
-import { useWeb3React } from '@web3-react/core';
-import { UserRejectedRequestError } from '@web3-react/injected-connector';
+import Image from 'next/image';
+import Link from 'next/link';
 import { ReactElement, useEffect, useState } from 'react';
 
-import { useENSName, useMetaMaskOnboarding } from '@/hooks';
-import { injected } from '@/lib';
-import { ETHERSCAN_PREFIXES, formatEtherscanLink, shortenHex } from '@/utils';
+import { getUser } from '@/utils/discord/getUser';
 
-type AccountProps = {
-    triedToEagerConnect: boolean;
-};
+export default function Account(): ReactElement {
+    const user = getUser();
+    const [avatar, setAvatar] = useState<string>('/user.svg');
+    const [direction, setDirection] = useState<string>('/api/auth');
 
-export function Account({
-    triedToEagerConnect,
-}: AccountProps): ReactElement | null {
-    const { active, error, activate, chainId, account, setError } =
-        useWeb3React();
-
-    const {
-        isMetaMaskInstalled,
-        isWeb3Available,
-        startOnboarding,
-        stopOnboarding,
-    } = useMetaMaskOnboarding();
-
-    // manage connecting state for injected connector
-    const [connecting, setConnecting] = useState(false);
     useEffect(() => {
-        if (active || error) {
-            setConnecting(false);
-            stopOnboarding();
+        if (user) {
+            setAvatar(
+                `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
+            );
+            setDirection('/');
         }
-    }, [active, error, stopOnboarding]);
-
-    const ENSName = useENSName(account || '');
-
-    if (error) {
-        return null;
-    }
-
-    if (!triedToEagerConnect) {
-        return null;
-    }
-
-    if (typeof account !== 'string') {
-        return (
-            <div>
-                {isWeb3Available ? (
-                    <button
-                        disabled={connecting}
-                        onClick={(): void => {
-                            setConnecting(true);
-
-                            activate(injected, undefined, true).catch(
-                                (error: Error) => {
-                                    // ignore the error if it's a user rejected request
-                                    if (
-                                        error instanceof
-                                        UserRejectedRequestError
-                                    ) {
-                                        setConnecting(false);
-                                    } else {
-                                        setError(error);
-                                    }
-                                },
-                            );
-                        }}>
-                        {isMetaMaskInstalled
-                            ? 'Connect to MetaMask'
-                            : 'Connect to Wallet'}
-                    </button>
-                ) : (
-                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                    <button onClick={startOnboarding}>Install Metamask</button>
-                )}
-            </div>
-        );
-    }
+    }, [user]);
 
     return (
-        <a
-            {...{
-                href: formatEtherscanLink('Account', [
-                    chainId as keyof typeof ETHERSCAN_PREFIXES,
-                    account,
-                ]),
-                target: '_blank',
-                rel: 'noopener noreferrer',
-            }}>
-            {ENSName || `${shortenHex(account, 4)}`}
-        </a>
+        <Link
+            href={direction}
+            className="fixed left-0 ml-4 mt-4 h-12 w-12 bg-black rounded-lg flex justify-center items-center cursor-pointer overflow-hidden">
+            <Image
+                src={avatar}
+                alt="Account icon"
+                width={20}
+                height={20}
+                className="w-5/6 h-5/6 object-cover object-center rounded-md"
+            />
+        </Link>
     );
 }

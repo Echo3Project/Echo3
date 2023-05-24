@@ -2,8 +2,8 @@ import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { ReactElement, useContext, useEffect, useMemo, useRef } from 'react';
 
-import { Filters } from '@/components/helpers/FiltersContext';
-import { Clamp } from '@/components/helpers/Maths';
+import { Filters } from '@/components/helpers/context/FiltersContext';
+import { Clamp } from '@/components/helpers/maths';
 
 import Header from './Header';
 import SearchBar from './SearchBar';

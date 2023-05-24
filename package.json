@@ -2,6 +2,10 @@
   "name": "echo3",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.11.0",
+    "pnpm": "8.5.1"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -24,17 +28,25 @@
     "@use-gesture/react": "^10.2.26",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
+    "axios": "^1.4.0",
+    "cookie": "^0.5.0",
+    "cookies-next": "^2.1.1",
+    "dayjs": "^1.11.7",
     "firebase": "^9.20.0",
     "fuse.js": "^6.6.2",
+    "jsonwebtoken": "^9.0.0",
     "next": "13.2.4",
     "postprocessing": "^6.31.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "^0.150.1",
     "three-stdlib": "^2.21.8",
-    "tunnel-rat": "^0.1.2"
+    "tunnel-rat": "^0.1.2",
+    "urlcat": "^3.1.0"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
