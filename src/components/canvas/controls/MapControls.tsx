@@ -47,10 +47,10 @@ export default function MapControls(): null {
 
     useGesture(
         {
-            onPinch: ({ event, delta: [, y] }) => {
+            onPinch: ({ event, velocity: [x, y], delta: [dx] }) => {
                 event.preventDefault();
                 if (!isTouchDevice) return;
-                handleZoom(-y * 400);
+                handleZoom(-Math.sign(dx) * (x + y) * 1000);
             },
             onDrag: ({ pinching, cancel, event, delta }) => {
                 event.preventDefault();
