@@ -17,7 +17,7 @@ export default function Menu(): ReactElement {
                 className="fixed right-0 mr-4 mt-4 h-12 w-12 bg-black rounded-lg flex justify-center items-center cursor-pointer"
                 onClick={(): void => setOpen(true)}>
                 <Image
-                    src="/menu_open.svg"
+                    src="/icons/menu_open.svg"
                     alt="Menu icon open"
                     width={20}
                     height={20}
@@ -31,7 +31,7 @@ export default function Menu(): ReactElement {
                     className="fixed top-0 right-0 mr-4 mt-4 h-12 w-12 flex justify-center items-center cursor-pointer"
                     onClick={(): void => setOpen(false)}>
                     <Image
-                        src="/menu_open.svg"
+                        src="/icons/menu_open.svg"
                         alt="Menu icon close"
                         width={20}
                         height={20}
@@ -39,6 +39,7 @@ export default function Menu(): ReactElement {
                 </button>
                 <Link href="/">Home</Link>
                 <Link href="/map">Map</Link>
+                <Link href="/profil">Profil</Link>
             </div>
         </>
     );

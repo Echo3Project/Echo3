@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 
-import { getUser } from '@/utils/discord/getUser';
+import { User } from '@/components/helpers/context/UserContext';
 
 export default function Account(): ReactElement {
-    const user = getUser();
-    const [avatar, setAvatar] = useState<string>('/user.svg');
+    const user = useContext(User);
+    const [avatar, setAvatar] = useState<string>('/icons/user.svg');
     const [direction, setDirection] = useState<string>('/api/auth');
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default function Account(): ReactElement {
             setAvatar(
                 `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
             );
-            setDirection('/');
+            setDirection('/profil');
         }
     }, [user]);
 

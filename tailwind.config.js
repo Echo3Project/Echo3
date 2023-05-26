@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'filters': "url('/filter.svg')",
+        'filters': "url('/icons/filter.svg')",
       },
       height: {
         'screen': '100dvh',

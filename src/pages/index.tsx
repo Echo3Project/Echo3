@@ -1,10 +1,10 @@
-import { EthereumModel } from '@canvas/models/EthereumModel';
-import { ForestModel } from '@canvas/models/ForestModel';
 import { Bvh, Environment, PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
-import { Composer } from '@/components/canvas/composer';
+import { Composer } from '@/components/canvas/Composer';
+import { EthereumModel } from '@/components/canvas/Models/EthereumModel';
+import { ForestModel } from '@/components/canvas/Models/ForestModel';
 import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
