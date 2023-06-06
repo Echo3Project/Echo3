@@ -24,6 +24,7 @@ export default function Scene({
                     antialias: false,
                     stencil: false,
                     depth: false,
+                    autoClear: true,
                 }}
                 shadows>
                 {/* <Perf position="top-right" /> */}
