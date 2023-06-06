@@ -14,6 +14,9 @@ export default function Page(): ReactElement {
                 <title>Echo 3 - Home</title>
                 <meta name="description" content="Echo 3 Home" />
             </Head>
+            <main className="h-screen w-full flex justify-center">
+                <h1>ok</h1>
+            </main>
             <Three>
                 <PerspectiveCamera
                     makeDefault
