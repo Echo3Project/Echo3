@@ -1,0 +1,20 @@
+{
+    "bracketSameLine": true,
+    "bracketSpacing": true,
+    "endOfLine": "auto",
+    "printWidth": 80,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "all",
+    "useTabs": false,
+    "plugins": ["prettier-plugin-import-sort"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "options": {
+                "parser": "typescript",
+                "plugins": [["prettier-plugin-import-sort", { "sortImports": true }]]
+            }
+        }
+    ]
+}
