@@ -15,8 +15,10 @@ module.exports = {
       },
       colors: {
         'opacifier': 'rgba(0,0,0,0.8)',
+        'lighter': 'rgba(255, 255, 255, 0.20)',
       },
       height: {
+        18: '4.25rem',
         'screen': '100dvh',
       },
       maxHeight: {
