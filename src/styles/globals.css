@@ -14,3 +14,9 @@ html, body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+@keyframes loading {
+  75%, 100% {
+    transform: rotate(-90deg);
+  }
+}
