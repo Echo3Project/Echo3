@@ -7,7 +7,6 @@ import { ReactElement } from 'react';
 import { modal } from '@/components/dom/Elements/Modal';
 import Loader from '@/components/dom/Loader';
 import Menu from '@/components/dom/Menu';
-import Account from '@/components/dom/Menu/Account';
 import FiltersProvider from '@/components/helpers/context/FiltersContext';
 import UserProvider from '@/components/helpers/context/UserContext';
 
@@ -19,7 +18,6 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
             <div className="absolute h-screen w-full overflow-hidden">
                 <header className="fixed w-full flex justify-between z-50">
                     <Menu />
-                    <Account />
                 </header>
                 <FiltersProvider>
                     <div className="absolute top-0 w-full h-screen z-10 pointer-events-none">

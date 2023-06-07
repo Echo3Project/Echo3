@@ -5,9 +5,12 @@ type Props = {
 };
 
 export default function Notifications({ count }: Props): ReactElement {
+    function fixedCount(count: number): string {
+        return count > 99 ? '99+' : count.toString();
+    }
     return (
-        <div className="rounded-full bg-red-500 text-white text-xs flex justify-center items-center px-2 py-1 min-w-fit scale-90">
-            <span>{count}</span>
+        <div className="rounded-full bg-neutral-300 text-black text-xs flex justify-center items-center px-1 min-w-fit">
+            <span>{fixedCount(count)}</span>
         </div>
     );
 }

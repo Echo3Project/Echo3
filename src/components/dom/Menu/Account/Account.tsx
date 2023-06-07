@@ -4,7 +4,11 @@ import { ReactElement, useContext, useEffect, useState } from 'react';
 
 import { User } from '@/components/helpers/context/UserContext';
 
-export default function Account(): ReactElement {
+type Props = {
+    active: boolean;
+};
+
+export default function Account({ active }: Props): ReactElement {
     const user = useContext(User);
     const [avatar, setAvatar] = useState<string>('/icons/user.svg');
     const [direction, setDirection] = useState<string>('/api/auth');
@@ -18,16 +22,18 @@ export default function Account(): ReactElement {
         }
     }, [user]);
 
+    const accountClsx = `rounded-full overflow-hidden border ${
+        active ? 'border-white' : 'border-transparent'
+    }`;
+
     return (
-        <Link
-            href={direction}
-            className="fixed left-0 ml-4 mt-4 h-12 w-12 bg-black rounded-lg flex justify-center items-center cursor-pointer overflow-hidden">
+        <Link href={direction} className={accountClsx}>
             <Image
                 src={avatar}
                 alt="Account icon"
-                width={20}
-                height={20}
-                className="w-5/6 h-5/6 object-cover object-center rounded-md"
+                width={68}
+                height={68}
+                className="h-18 w-18 object-cover object-center"
             />
         </Link>
     );
