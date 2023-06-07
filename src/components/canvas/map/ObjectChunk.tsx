@@ -117,11 +117,19 @@ export const ObjectChunk = memo(function ObjectChunk({
                                                     projects[i].tags as string[]
                                                 ).some((r) =>
                                                     active.includes(r),
+                                                ) ||
+                                                (
+                                                    projects[i]
+                                                        .fields as string[]
+                                                ).some((r) =>
+                                                    active.includes(r),
                                                 )) && (
                                                 <Sphere
                                                     userData={{
                                                         name: projects[i].name,
                                                         tags: projects[i].tags,
+                                                        fields: projects[i]
+                                                            .fields,
                                                     }}
                                                     position={[
                                                         positions[

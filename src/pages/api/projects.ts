@@ -11,6 +11,7 @@ type ItemType = {
     author?: string;
     description?: string;
     tags?: string[];
+    fields?: string[];
 };
 
 type ResponseData = {
