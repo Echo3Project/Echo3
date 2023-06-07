@@ -55,12 +55,14 @@ export default function handler(
 // const fs = require('fs');
 
 // const tagsList = ['NFT', 'Token', 'PFP', 'Shitcoin', 'Chain', 'DAO', 'DeFi', 'DEX', 'Lending', 'Staking', 'Yield', 'Farm', 'Liquidity', 'Mining', 'Governance', 'Oracles', 'Cross-chain', 'Wallet'];
+// const fieldsList = ['Entertainment', 'Art'];
 // const projects = [
 //     ...Array(1000).fill(null).map(() => ({
 //         name: faker2.name.firstName(),
 //         author: faker2.name.firstName(),
 //         description: faker2.lorem.paragraph(),
 //         tags: [tagsList[Math.floor(Math.random() * tagsList.length)]],
+//         fields: [fieldsList[Math.floor(Math.random() * fieldsList.length)]],
 //     })),
 // ]
 // fs.writeFileSync('fake.json', JSON.stringify(projects, null, 4));
