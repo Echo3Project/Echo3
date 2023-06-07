@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'loading': '1.3s cubic-bezier(.55,0,.45,1) infinite loading',
+      },
       backgroundImage: {
         'filters': "url('/icons/filter.svg')",
       },

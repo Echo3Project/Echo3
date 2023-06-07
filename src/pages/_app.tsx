@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 
+import Loader from '@/components/dom/Loader';
 import Menu from '@/components/dom/Menu';
 import Account from '@/components/dom/Menu/Account';
 import FiltersProvider from '@/components/helpers/context/FiltersContext';
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                         <Component {...pageProps} />
                     </div>
                     <Scene eventPrefix="client" />
+                    <Loader />
                 </FiltersProvider>
             </div>
         </UserProvider>
