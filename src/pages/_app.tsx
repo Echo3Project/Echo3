@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 
+import { modal } from '@/components/dom/Elements/Modal';
 import Loader from '@/components/dom/Loader';
 import Menu from '@/components/dom/Menu';
 import Account from '@/components/dom/Menu/Account';
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                     <Scene eventPrefix="client" />
                     <Loader />
                 </FiltersProvider>
+                <modal.Out />
             </div>
         </UserProvider>
     );
