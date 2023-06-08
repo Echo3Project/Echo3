@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/functions/node_modules
 /.pnp
 .pnp.js
 
@@ -41,3 +40,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Compiled JavaScript files for functions folder
+/functions/lib/**/*.js
+/functions/lib/**/*.js.map
+
+# TypeScript v1 declaration files for functions folder
+/functions/typings/
+
+# Node.js dependency directory for functions folder
+/functions/node_modules
+/functions/package-lock.json
