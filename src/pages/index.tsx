@@ -1,6 +1,6 @@
 import { EthereumModel } from '@canvas/models/EthereumModel';
 import { ForestModel } from '@canvas/models/ForestModel';
-import { Bvh, Environment, PerspectiveCamera } from '@react-three/drei';
+import { Bvh, PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
@@ -25,7 +25,6 @@ export default function Page(): ReactElement {
                     <ForestModel />
                     <EthereumModel />
                 </Bvh>
-                <Environment preset="studio" background={true} blur={1.5} />
                 <Composer />
             </Three>
         </>
