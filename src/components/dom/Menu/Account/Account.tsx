@@ -1,33 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ReactElement, useContext, useEffect, useState } from 'react';
-
-import { User } from '@/components/helpers/context/UserContext';
+import { ReactElement } from 'react';
 
 type Props = {
     active: boolean;
+    avatar: string;
 };
 
-export default function Account({ active }: Props): ReactElement {
-    const user = useContext(User);
-    const [avatar, setAvatar] = useState<string>('/icons/user.svg');
-    const [direction, setDirection] = useState<string>('/api/auth');
-
-    useEffect(() => {
-        if (user) {
-            setAvatar(
-                `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
-            );
-            setDirection('/profil');
-        }
-    }, [user]);
-
+export default function Account({ active, avatar }: Props): ReactElement {
     const accountClsx = `rounded-full overflow-hidden border ${
         active ? 'border-white' : 'border-transparent'
     }`;
 
     return (
-        <Link href={direction} className={accountClsx}>
+        <Link href={'/profil'} className={accountClsx}>
             <Image
                 src={avatar}
                 alt="Account icon"
