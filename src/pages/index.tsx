@@ -1,6 +1,6 @@
 import { Bvh, Environment, PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import { Composer } from '@/components/canvas/Composer';
 import { EthereumModel } from '@/components/canvas/Models/EthereumModel';
@@ -9,14 +9,19 @@ import { Modal } from '@/components/dom/Elements';
 import { Three } from '@/components/helpers/R3f';
 
 export default function Page(): ReactElement {
+    const [active, setActive] = useState(false);
+
     return (
         <>
             <Head>
                 <title>Echo 3 - Home</title>
                 <meta name="description" content="Echo 3 Home" />
             </Head>
-            <main className="h-screen w-full flex justify-center">
-                <Modal>
+            <main className="h-screen w-full">
+                <button className="block bg-white text-black border border-black rounded-md mx-auto mt-24 p-2 pointer-events-auto" onClick={(): void => { setActive(true) }}>
+                    Open Modal
+                </button>
+                <Modal active={active}>
                     <div className="p-4 flex flex-col items-center max-w-sm">
                         <span className="text-lg mb-1">
                             Supprimer le filtre
@@ -28,10 +33,10 @@ export default function Page(): ReactElement {
                         </p>
                     </div>
                     <div className="mt-4 flex justify-between gap-2">
-                        <button className="py-2 w-1/2 bg-white text-black border border-black rounded-md">
+                        <button className="py-2 w-1/2 bg-white text-black border border-black rounded-md" onClick={():void => {setActive(false)}}>
                             Annuler
                         </button>
-                        <button className="py-2 w-1/2 bg-black text-white border border-white rounded-md">
+                        <button className="py-2 w-1/2 bg-black text-white border border-white rounded-md" onClick={(): void => { setActive(false) }}>
                             Confirmer
                         </button>
                     </div>
