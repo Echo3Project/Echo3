@@ -11,7 +11,9 @@ module.exports = {
         'loading': '1.3s cubic-bezier(.55,0,.45,1) infinite loading',
       },
       backgroundImage: {
+        'contributions': "url('/backgrounds/contribution.png')",
         'filters': "url('/icons/filter.svg')",
+        'filters': "url('/backgrounds/filters.png')",
       },
       colors: {
         'opacifier': 'rgba(0,0,0,0.8)',

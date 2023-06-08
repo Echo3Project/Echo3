@@ -4,7 +4,11 @@ type Props = PropsWithChildren & {
     color: string;
 };
 
-export function SVG({ color, children }: Props): ReactElement {
+export function SVG({
+    color,
+    children,
+    ...props
+}: Props & JSX.IntrinsicElements['svg']): ReactElement {
     return (
         <svg
             width="24"
@@ -13,7 +17,8 @@ export function SVG({ color, children }: Props): ReactElement {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             style={{ color: color }}
-            className="w-6 h-6">
+            className="w-6 h-6"
+            {...props}>
             <mask
                 id="mask"
                 style={{ maskType: 'alpha' }}

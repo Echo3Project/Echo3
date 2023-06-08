@@ -15,6 +15,10 @@ html, body {
   scrollbar-width: none;  /* Firefox */
 }
 
+.scrollable {
+  @apply pb-16 overflow-y-auto pointer-events-auto
+}
+
 @keyframes loading {
   75%, 100% {
     transform: rotate(-90deg);

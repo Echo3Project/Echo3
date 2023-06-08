@@ -1,21 +1,27 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { ReactElement } from 'react';
-
-import { Notifications } from '@/components/dom/Elements';
 
 import Layout from '../../Layout';
 
 export default function Collections(): ReactElement {
     return (
         <Layout row={1} style="plain">
-            <div className="relative w-full h-full flex flex-col justify-center items-center p-2">
-                <div className="absolute top-0 mt-1">
-                    <Notifications count={2} />
+            <Link
+                href={'/profil/collections'}
+                className="relative w-full h-full flex flex-col justify-center items-center">
+                <div className="absolute w-full h-full pointer-events-none blur-sm">
+                    <Image
+                        src="/backgrounds/followed.jpg"
+                        alt="Mes projets suivis"
+                        height={100}
+                        width={300}
+                        className="w-screen object-cover object-center"></Image>
                 </div>
-                <h2 className="text-sm mb-1">Mes Collections</h2>
-                <p className="text-center text-xs">
-                    Retrouves les projets que tu as sauvegardés ici
-                </p>
-            </div>
+                <div className="absolute w-full h-full flex justify-center items-center bg-opacif p-2">
+                    <h2 className="text-lg">Projets suivis</h2>
+                </div>
+            </Link>
         </Layout>
     );
 }
