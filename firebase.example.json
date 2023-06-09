@@ -1,0 +1,26 @@
+{
+    "hosting": {
+        "source": "CHANGE_THIS_TO_YOUR_SOURCE",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "frameworksBackend": {
+            "region": "CHANGE_THIS_TO_YOUR_REGION"
+        }
+    },
+    "functions": [
+        {
+            "source": "functions",
+            "runtime": "nodejs18",
+            "codebase": "default",
+            "ignore": [
+                "node_modules",
+                ".git",
+                "firebase-debug.log",
+                "firebase-debug.*.log"
+            ],
+            "predeploy": [
+                "npm --prefix \"$RESOURCE_DIR\" run lint",
+                "npm --prefix \"$RESOURCE_DIR\" run build"
+            ]
+        }
+    ]
+}

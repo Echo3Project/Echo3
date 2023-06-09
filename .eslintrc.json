@@ -6,10 +6,9 @@
   "extends": [
     "eslint:recommended",
     "next/core-web-vitals",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "plugins": [
-    "prettier",
     "simple-import-sort",
     "unused-imports"
   ],
@@ -20,19 +19,6 @@
     "import/no-duplicates": "error",
     "simple-import-sort/imports": "error",
     "no-unused-vars": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "bracketSameLine": true,
-        "bracketSpacing": true,
-        "endOfLine": "auto",
-        "printWidth": 80,
-        "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "all",
-        "useTabs": false
-      }
-    ],
     "unused-imports/no-unused-imports": "error"
   },
   "overrides": [
@@ -46,7 +32,7 @@
           "jsx": true
         }
       },
-      "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin"],
+      "plugins": ["@typescript-eslint"],
       "extends": [
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"

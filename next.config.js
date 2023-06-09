@@ -4,7 +4,11 @@ const nextConfig = {
   transpilePackages: ['@react-three/postprocessing'],
   images: {
     domains: ['cdn.discordapp.com'],
+    unoptimized: true,
   },
+  // server: {
+  //   port: 8080,
+  // }
 }
 
 module.exports = nextConfig

@@ -6,9 +6,9 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
+# OR
 yarn dev
-# or
+# OR
 pnpm dev
 ```
 
@@ -21,6 +21,60 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Deploy set-up
+
+First of all, you must use firebase-tools command and login your account to setup project in firebase
+Either install it locally firebase-tools globally and login your account:
+
+```bash
+npm install -g firebase-tools
+# Then login your account with firebase-tools globally commands
+firebase login
+```
+
+Or use dependencies of project :
+
+```bash
+npm install
+# OR
+yarn
+# OR
+pnpm install
+# Then login your account with npx
+npx firebase login
+```
+
+## Deploy
+
+First, install dependencies and build the application :
+
+```bash
+npm install
+npm run build
+# or
+yarn
+yarn build
+# or
+pnpm install
+pnpm build
+```
+
+Then, install and build functions in folder `./functions` :
+
+```bash
+npm install
+npm run build
+```
+
+Then, run :
+
+```bash
+# if you have firebase-tools install globally
+firebase deploy
+# else use
+npx firebase deploy
+```
 
 ## Learn More
 
