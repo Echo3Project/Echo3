@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ReactElement } from 'react';
 
 import MapControls from '@/components/canvas/controls/MapControls';
-import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
+import { CloudPoints } from '@/components/canvas/map/CloudPoints';
 import DragUpPanel from '@/components/dom/DragUpPanel';
 import { Three } from '@/components/helpers/R3f';
 
@@ -42,7 +42,11 @@ export default function Page({ projects }: Props): ReactElement {
                 />
                 <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
-                <ObjectChunk projects={projects} />
+                {/* <ObjectChunk projects={projects} /> */}
+                <CloudPoints
+                    plyPath={'/models/flower/flower.ply'}
+                    texturePath={'/models/flower/flower.jpg'}
+                />
             </Three>
         </>
     );
