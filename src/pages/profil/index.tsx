@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { ReactElement, useContext } from 'react';
 
-import ProfileCTA from '@/components/dom/Profile/CTA';
 import ProfileHeader from '@/components/dom/Profile/Header';
 import WidgetsView from '@/components/dom/Profile/WidgetsView';
 import { User } from '@/components/helpers/context/UserContext';
@@ -17,10 +16,9 @@ export default function Page(): ReactElement {
                 <title>Echo 3 - Profil</title>
                 <meta name="description" content="Echo 3 Profil" />
             </Head>
-            <main className="h-screen overflow-y-auto pointer-events-auto">
+            <main className="h-screen bg-neutral-800 text-white scrollable">
                 <NoSSR>
                     <ProfileHeader user={user as DiscordUser} />
-                    <ProfileCTA />
                     <WidgetsView />
                 </NoSSR>
             </main>

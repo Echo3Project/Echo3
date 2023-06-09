@@ -7,7 +7,7 @@ type Props = PropsWithChildren & {
     col?: number;
     row?: number;
     direction?: 'row' | 'column';
-    style?: 'default' | 'plain' | 'empty';
+    style?: 'default' | 'plain' | 'light' | 'empty';
 };
 
 export default function Layout({
@@ -19,6 +19,7 @@ export default function Layout({
 }: Props): ReactElement {
     const defaultStyle = 'flex gap-2';
     const plainStyle = 'bg-gray-300';
+    const lightStyle = 'bg-lighter';
     const emptyStyle = 'border border border-gray-300 border-dashed';
 
     const colSize = (col: number): string => {
@@ -29,8 +30,11 @@ export default function Layout({
         }
     };
     const rowSize = (row: number): string => {
-        if (Clamp(row, 1, 2) === 1) {
+        const clamped = Clamp(row, 1, 2);
+        if (clamped === 1) {
             return 'h-28';
+        } else if (clamped === 1.5) {
+            return 'h-40';
         } else {
             return 'h-56';
         }
@@ -42,6 +46,7 @@ export default function Layout({
         rowSize(row),
         direction === 'row' ? 'flex flex-row' : 'flex flex-col',
         style === 'plain' && plainStyle,
+        style === 'light' && lightStyle,
         style === 'empty' && emptyStyle,
         style === 'default' && defaultStyle,
     );

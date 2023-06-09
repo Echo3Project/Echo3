@@ -6,9 +6,9 @@ import { User } from '@/components/helpers/context/UserContext';
 import { DiscordUser } from '@/utils/discord/types';
 
 import {
+    BellIcon,
     ConnexionIcon,
     ContribIcon,
-    FeedIcon,
     ListIcon,
     MapIcon,
 } from '../Elements/Icons';
@@ -57,7 +57,7 @@ export default function Menu(): ReactElement {
                             notifications={
                                 notifications > 0 ? notifications : undefined
                             }>
-                            <FeedIcon color="#ffffff" />
+                            <BellIcon color="#ffffff" />
                         </Item>
                         <Item
                             route="/contribution"
