@@ -18,7 +18,6 @@ type ReturnType = {
     setActive: Dispatch<SetStateAction<string[]>>;
     addFilter: (filter: { title: string; fields: string[] }) => void;
 };
-
 export type Filter = { title: string; fields: string[] };
 
 const listTags = [
@@ -42,7 +41,6 @@ const listTags = [
     'Wallet',
 ];
 const listFields = ['Entertainment', 'Art'];
-
 export const Filters = createContext({
     list: {
         fields: [] as string[],
