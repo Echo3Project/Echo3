@@ -41,10 +41,20 @@ export default function Menu(): ReactElement {
                 <Item route="/liste" title="Liste" active={isActive('/liste')}>
                     <ListIcon color="#ffffff" />
                 </Item>
+                {!user && (
+                    <Item
+                        route="/api/auth"
+                        title="Login"
+                        active={isActive('/api/auth')}>
+                        <span className="scale-125">
+                            <ConnexionIcon color="#ffffff" />
+                        </span>
+                    </Item>
+                )}
                 <Item route="/carte" title="Carte" active={isActive('/carte')}>
                     <MapIcon color="#ffffff" />
                 </Item>
-                {user ? (
+                {user && (
                     <>
                         <Account
                             active={isActive('/profil')}
@@ -66,13 +76,6 @@ export default function Menu(): ReactElement {
                             <ContribIcon color="#ffffff" />
                         </Item>
                     </>
-                ) : (
-                    <Item
-                        route="/api/auth"
-                        title="Login"
-                        active={isActive('/api/auth')}>
-                        <ConnexionIcon color="#ffffff" />
-                    </Item>
                 )}
             </nav>
         </div>

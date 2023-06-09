@@ -15,7 +15,7 @@ export default function Page(): ReactElement {
                 <title>Echo 3 - Profil</title>
                 <meta name="description" content="Echo 3 Profil" />
             </Head>
-            <main className="h-screen scrollable">
+            <main className="h-screen bg-neutral-800 text-white scrollable">
                 <NoSSR>
                     <ProfileHeader user={user as DiscordUser} />
                 </NoSSR>
