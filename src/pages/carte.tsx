@@ -2,8 +2,8 @@ import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
-import MapControls from '@/components/canvas/Controls/MapControls';
-import { ObjectChunk } from '@/components/canvas/Map/ObjectChunk';
+import MapControls from '@/components/canvas/controls/MapControls';
+import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
 import DragUpPanel from '@/components/dom/DragUpPanel';
 import { Three } from '@/components/helpers/R3f';
 
