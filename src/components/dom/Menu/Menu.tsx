@@ -13,7 +13,7 @@ import {
     MapIcon,
 } from '../Elements/Icons';
 import Account from './Account';
-import Item from './Item';
+import Item from './MenuItem';
 
 export default function Menu(): ReactElement {
     const notifications = 0;

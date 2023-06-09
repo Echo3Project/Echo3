@@ -14,21 +14,15 @@
     "generateFakeData": "node generateFakeData.js"
   },
   "dependencies": {
-    "@ethersproject/providers": "^5.7.2",
-    "@faker-js/faker": "^7.6.0",
     "@firebase/analytics": "^0.9.5",
     "@firebase/app": "^0.9.9",
     "@firebase/firestore": "^3.10.1",
-    "@metamask/detect-provider": "^2.0.0",
-    "@metamask/onboarding": "^1.0.1",
     "@react-spring/web": "^9.7.2",
     "@react-three/drei": "^9.73.4",
     "@react-three/fiber": "^8.13.0",
     "@react-three/postprocessing": "^2.14.9",
     "@studio-freight/lenis": "^1.0.1",
     "@use-gesture/react": "^10.2.26",
-    "@web3-react/core": "^6.1.9",
-    "@web3-react/injected-connector": "^6.0.7",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "cookie": "^0.5.0",
@@ -48,6 +42,7 @@
     "urlcat": "^3.1.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/cookie": "^0.5.1",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "18.15.3",
@@ -64,7 +59,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "firebase": "^9.21.0",
     "firebase-tools": "^12.3.1",
     "postcss": "^8.4.21",
     "prettier": "^2.8.6",

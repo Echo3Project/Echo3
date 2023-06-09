@@ -1,2 +1,2 @@
-export * from './web3';
 export * from './firebaseConfig';
+export { getUser } from './discord/getUser';
