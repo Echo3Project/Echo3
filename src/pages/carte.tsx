@@ -14,6 +14,7 @@ export type dataFormat = {
     author?: string;
     description?: string;
     tags?: string[];
+    fields?: string[];
 };
 
 type Props = {
@@ -58,7 +59,7 @@ export function getServerSideProps(): ServerProps {
     const projects: dataFormat[] = [];
     fakeData.forEach((item: dataFormat): void => {
         const project: dataFormat = {};
-        ['name', 'tags'].forEach((key: string): void => {
+        ['name', 'tags', 'fields'].forEach((key: string): void => {
             // eslint-disable-next-line no-prototype-builtins
             item.hasOwnProperty(key) &&
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

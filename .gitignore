@@ -26,7 +26,13 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+/.env
+/.env*.local
+
+# firebase
+/.firebase/
+/firebase.json
+/.firebaserc
 
 # vercel
 .vercel
@@ -34,3 +40,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Compiled JavaScript files for functions folder
+/functions/lib/**/*.js
+/functions/lib/**/*.js.map
+
+# TypeScript v1 declaration files for functions folder
+/functions/typings/
+
+# Node.js dependency directory for functions folder
+/functions/node_modules
+/functions/package-lock.json
