@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { Mesh, MeshStandardMaterial } from 'three';
 import { GLTF } from 'three-stdlib';
 
-type GLTFResult = GLTF & {
+export type GLTFResult = GLTF & {
     nodes: {
         Object_2: Mesh;
     };

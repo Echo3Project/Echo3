@@ -41,12 +41,14 @@ export default function Page({ projects }: Props): ReactElement {
                     makeDefault
                 />
                 <MapControls />
-                <color attach="background" args={[243, 243, 243]} />
+                {/* <color attach="background" args={[243, 243, 243]} /> */}
+                <color attach="background" args={[0, 0, 0]} />
                 {/* <ObjectChunk projects={projects} /> */}
-                <CloudPoints
+                {/* <CloudPoints
                     plyPath={'/models/flower/flower.ply'}
                     texturePath={'/models/flower/flower.jpg'}
-                />
+                /> */}
+                <CloudPoints glbPath={'/models/peony_point_cloud.glb'} />
             </Three>
         </>
     );
