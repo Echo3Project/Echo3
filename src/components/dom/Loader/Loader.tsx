@@ -1,6 +1,6 @@
 import { useProgress } from '@react-three/drei';
 import clsx from 'clsx';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 
 import NoSSR from '@/components/helpers/NoSSR';
 
@@ -20,10 +20,25 @@ export default function Load({
     const { active, progress, total } = useProgress();
     const [shown, setShown] = useState<boolean>(initialState(total > 0));
     const [progressState, setProgressState] = useState<number>(0);
+    const currentProgress = useRef<number>(0);
+
+    function animateProgress(progress: number): void {
+        const diff = progress - currentProgress.current;
+        const step = diff / 100;
+        const interval = setInterval((): void => {
+            currentProgress.current += step;
+            if (currentProgress.current >= progress) {
+                clearInterval(interval);
+                currentProgress.current = progress;
+            }
+            setProgressState(currentProgress.current);
+        }, 120);
+    }
 
     useEffect((): void => {
         if (progressState === progress) return;
-        setProgressState(progress);
+        animateProgress(progress);
+        // setProgressState(progress);
     }, [progress, progressState]);
 
     useEffect((): (() => void) => {
