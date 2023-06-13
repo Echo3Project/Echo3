@@ -4,12 +4,19 @@ import { ReactElement, useEffect, useState } from 'react';
 
 import NoSSR from '@/components/helpers/NoSSR';
 
-const defaultDataInterpolation = (p: number): string => `${p.toFixed(0)}%`;
+type Props = {
+    totalProjects: number;
+    initialState?: (active: boolean) => boolean;
+};
+
+const pad = (s: string, t: string): string => s.padStart(t.length, '0');
+const dataInterpolation = (p: number, total: number): string =>
+    `${pad(((p * total) / 100).toFixed(0), total.toString())}`;
 
 export default function Load({
-    dataInterpolation = defaultDataInterpolation,
+    totalProjects,
     initialState = (active: boolean): boolean => active,
-}): ReactElement {
+}: Props): ReactElement {
     const { active, progress, total } = useProgress();
     const [shown, setShown] = useState<boolean>(initialState(total > 0));
     const [progressState, setProgressState] = useState<number>(0);
@@ -22,12 +29,12 @@ export default function Load({
     useEffect((): (() => void) => {
         let timeout: NodeJS.Timeout;
         if (active !== shown)
-            timeout = setTimeout((): void => setShown(active), 1200);
+            timeout = setTimeout((): void => setShown(active), 2000);
         return (): void => clearTimeout(timeout);
     }, [shown, active]);
 
     const loaderClsx = clsx(
-        'fixed h-screen w-full top-0 z-50 bg-white flex justify-center items-center transition-opacity duration-700 ease-out',
+        'fixed h-screen w-full top-0 p-4 z-50 bg-white flex items-end transition-opacity duration-700 ease-out bg-loader bg-center bg-repeat-space',
         shown ? 'opacity-100' : 'pointer-events-none opacity-0',
     );
     const loadAnimationClsx = clsx(
@@ -38,14 +45,21 @@ export default function Load({
     return (
         <NoSSR>
             <div className={loaderClsx}>
-                <div className={loadAnimationClsx}>
-                    <div className="w-1/2 aspect-square rounded-full bg-black" />
-                    <div className="w-1/2 aspect-square rounded-full bg-black" />
-                    <div className="w-1/2 aspect-square rounded-full bg-black" />
-                    <div className="w-1/2 aspect-square rounded-full bg-black" />
-                </div>
-                <div className="absolute mt-36">
-                    <span>{dataInterpolation(progressState)}</span>
+                <div className="w-full h-20 pt-2 flex justify-between items-end">
+                    <p className="text-8xl font-dot">
+                        <span className="leading-50 align-bottom">
+                            {dataInterpolation(progressState, totalProjects)}
+                        </span>
+                    </p>
+                    <div className="h-full flex flex-col justify-between self-stretch items-end">
+                        <span className="block">/ {totalProjects} projets</span>
+                        <div className={loadAnimationClsx}>
+                            <div className="w-1/2 aspect-square rounded-full bg-black" />
+                            <div className="w-1/2 aspect-square rounded-full bg-black" />
+                            <div className="w-1/2 aspect-square rounded-full bg-black" />
+                            <div className="w-1/2 aspect-square rounded-full bg-black" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </NoSSR>

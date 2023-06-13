@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'offbit';
+  font-style: bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/OffBit-DotBold.ttf') format('truetype');
+}
+
 html, body {
    @apply overflow-hidden bg-neutral-800;
 }

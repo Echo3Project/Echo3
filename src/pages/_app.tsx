@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                         <Component {...pageProps} />
                     </div>
                     <Scene eventPrefix="client" />
-                    <Loader />
+                    <Loader totalProjects={125} />
                 </FiltersProvider>
                 <modal.Out />
             </div>
