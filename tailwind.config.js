@@ -12,16 +12,22 @@ module.exports = {
       },
       backgroundImage: {
         'contributions': "url('/backgrounds/contribution.png')",
-        'filters': "url('/icons/filter.svg')",
         'filters': "url('/backgrounds/filters.png')",
+        'loader': "linear-gradient(to bottom, rgba(242, 242, 242, 0.50) 25%, rgba(242, 242, 242, 0.95) 85%), url('/backgrounds/points.svg')",
       },
       colors: {
         'opacifier': 'rgba(0,0,0,0.8)',
         'lighter': 'rgba(255, 255, 255, 0.20)',
       },
+      fontFamily: {
+        'dot': ['offbit', 'sans-serif'],
+      },
       height: {
         18: '4.25rem',
         'screen': '100dvh',
+      },
+      lineHeight: {
+        50: '0.5',
       },
       maxHeight: {
         'screen': '100dvh',
