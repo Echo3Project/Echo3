@@ -31,28 +31,31 @@ export default function Menu(): ReactElement {
     }
 
     const navClsx = clsx(
-        'backdrop-blur-lg backdrop-brightness-90 bg-lighter rounded-lg p-4 flex max-w-sm justify-between items-center text-white h-16',
+        'p-4 flex justify-between items-end text-white',
         user ? 'w-full' : 'gap-6 w-fit',
     );
 
     return (
-        <div className="fixed bottom-0 w-full flex justify-center p-8">
+        <div className="fixed bottom-0 w-full flex justify-center after:fixed after:bottom-0 after:left-0 after:w-full after:h-40 after:bg-gradient-to-b after:from-transparent after:to-black after:opacity-80 after:-z-10 after:pointer-events-none">
             <nav className={navClsx}>
                 <Item route="/liste" title="Liste" active={isActive('/liste')}>
-                    <ListIcon color="#ffffff" />
+                    <ListIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {!user && (
                     <Item
                         route="/api/auth"
                         title="Login"
                         active={isActive('/api/auth')}>
-                        <span className="scale-125">
-                            <ConnexionIcon color="#ffffff" />
+                        <span className="scale-125 mx-4">
+                            <ConnexionIcon
+                                color="#ffffff"
+                                className="w-10 h-10"
+                            />
                         </span>
                     </Item>
                 )}
                 <Item route="/carte" title="Carte" active={isActive('/carte')}>
-                    <MapIcon color="#ffffff" />
+                    <MapIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {user && (
                     <>
@@ -67,13 +70,13 @@ export default function Menu(): ReactElement {
                             notifications={
                                 notifications > 0 ? notifications : undefined
                             }>
-                            <BellIcon color="#ffffff" />
+                            <BellIcon color="#ffffff" className="w-8 h-8" />
                         </Item>
                         <Item
                             route="/contribution"
                             title="Contrib"
                             active={isActive('/contribution')}>
-                            <ContribIcon color="#ffffff" />
+                            <ContribIcon color="#ffffff" className="w-8 h-8" />
                         </Item>
                     </>
                 )}

@@ -25,12 +25,12 @@ export default function Item({
             className="flex flex-col items-center justify-center relative">
             <div
                 className={`flex flex-col justify-center items-center ${
-                    active ? 'opacity-100' : 'opacity-25'
+                    active ? 'opacity-100' : 'opacity-50'
                 }`}>
-                <div className="relative w-6 h-6 flex justify-center items-center">
+                <div className="relative flex justify-center items-center mb-1 w-14">
                     {children}
                 </div>
-                <span className="text-xs text-center">{title}</span>
+                <span className="text-xs text-center uppercase">{title}</span>
             </div>
             {notifications && (
                 <div className="absolute -top-1 right-0 translate-x-1/3">
