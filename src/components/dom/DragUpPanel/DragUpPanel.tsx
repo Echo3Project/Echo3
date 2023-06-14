@@ -1,24 +1,37 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import {
-    ReactElement,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Filters } from '@/components/helpers/context/FiltersContext';
+import { Filter } from '@/components/helpers/context/FiltersContext';
 import { Clamp } from '@/components/helpers/maths';
 
 import Header from './Header';
 import FiltersList from './Header/FiltersList';
 import SearchBar from './SearchBar';
 
-export default function DragUpPanel(): ReactElement {
-    const [showFilterInterface, setShowFilterInterface] = useState(() => false);
-    const [newFilterInterface, setNewFilterInterface] = useState(() => false);
+type Props = {
+    filtersContext: {
+        list: {
+            fields: string[];
+            tags: string[];
+            customFilters: Filter[];
+        };
+        active: string[];
+        setActive: (value: string[]) => void;
+    };
+    showFilterInterface: boolean;
+    newFilterInterface: boolean;
+    toggleShowFilterInterface: () => void;
+    toggleNewFilterInterface: () => void;
+};
+
+export default function DragUpPanel({
+    filtersContext,
+    showFilterInterface,
+    newFilterInterface,
+    toggleShowFilterInterface,
+    toggleNewFilterInterface,
+}: Props): ReactElement {
     const [newFilterTitle, setNewFilterTitle] = useState(() => '');
 
     const steps = useMemo(
@@ -29,21 +42,12 @@ export default function DragUpPanel(): ReactElement {
         ],
         [],
     );
-    const filtersContext = useContext(Filters);
     const { list, active, setActive, addFilter } = filtersContext;
     const [{ y }, api] = useSpring(() => ({
         y: steps[0],
         config: { tension: 230, friction: 20 },
     }));
     const panelHeader = useRef<HTMLDivElement>(null);
-
-    const toggleShowFilterInterface = (): void => {
-        setShowFilterInterface((prev) => !prev);
-    };
-
-    const toggleNewFilterInterface = (): void => {
-        setNewFilterInterface((prev) => !prev);
-    };
 
     const handleGrab = (
         y: number,

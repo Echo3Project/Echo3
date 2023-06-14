@@ -16,9 +16,6 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
     return (
         <UserProvider>
             <div className="absolute h-screen w-full overflow-hidden">
-                <header className="fixed w-full flex justify-between z-50">
-                    <Menu />
-                </header>
                 <FiltersProvider>
                     <div className="absolute top-0 w-full h-screen z-10 pointer-events-none">
                         <Component {...pageProps} />
@@ -27,6 +24,9 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                     <Loader />
                 </FiltersProvider>
                 <modal.Out />
+                <footer className="fixed w-full flex justify-between z-50">
+                    <Menu />
+                </footer>
             </div>
         </UserProvider>
     );

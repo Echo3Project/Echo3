@@ -1,10 +1,12 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
-import { ReactElement } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 
 import MapControls from '@/components/canvas/controls/MapControls';
 import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
 import DragUpPanel from '@/components/dom/DragUpPanel';
+import MapHeader from '@/components/dom/MapHeader/MapHeader';
+import { Filters } from '@/components/helpers/context/FiltersContext';
 import { Three } from '@/components/helpers/R3f';
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
@@ -22,14 +24,42 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
+    const [showFilterInterface, setShowFilterInterface] = useState(() => false);
+    const [newFilterInterface, setNewFilterInterface] = useState(() => false);
+
+    const filtersContext = useContext(Filters);
+
+    const toggleShowFilterInterface = (): void => {
+        setShowFilterInterface((prev) => !prev);
+    };
+
+    const toggleNewFilterInterface = (): void => {
+        setNewFilterInterface((prev) => !prev);
+    };
+
     return (
         <>
             <Head>
                 <title>Echo 3 - Map</title>
                 <meta name="description" content="Echo 3 Map" />
             </Head>
+            <header className="h-screen w-full flex justify-center">
+                <MapHeader
+                    filtersContext={filtersContext}
+                    showFilterInterface={showFilterInterface}
+                    newFilterInterface={newFilterInterface}
+                    toggleShowFilterInterface={toggleShowFilterInterface}
+                    toggleNewFilterInterface={toggleNewFilterInterface}
+                />
+            </header>
             <main className="h-screen w-full flex justify-center">
-                <DragUpPanel></DragUpPanel>
+                <DragUpPanel
+                    filtersContext={filtersContext}
+                    showFilterInterface={showFilterInterface}
+                    newFilterInterface={newFilterInterface}
+                    toggleShowFilterInterface={toggleShowFilterInterface}
+                    toggleNewFilterInterface={toggleNewFilterInterface}
+                />
             </main>
             <Three>
                 <PerspectiveCamera

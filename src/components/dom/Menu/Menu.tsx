@@ -39,7 +39,7 @@ export default function Menu(): ReactElement {
         <div className="fixed bottom-0 w-full flex justify-center after:fixed after:bottom-0 after:left-0 after:w-full after:h-40 after:bg-gradient-to-b after:from-transparent after:to-black after:opacity-80 after:-z-10 after:pointer-events-none">
             <nav className={navClsx}>
                 <Item route="/liste" title="Liste" active={isActive('/liste')}>
-                    <ListIcon color="#ffffff" className="w-8 h-8" />
+                    <ListIcon color="#ffffff" className="w-8 h-1000" />
                 </Item>
                 {!user && (
                     <Item
