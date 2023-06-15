@@ -10,7 +10,7 @@ type Props = {
 
 export default function Account({ avatar }: Props): ReactElement {
     return (
-        <Link href={'/profil'} className="overflow-hidden">
+        <Link href={'/profil'} className="overflow-hidden h-16 w-16">
             <AccountMask link={avatar} />
         </Link>
     );

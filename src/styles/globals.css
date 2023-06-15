@@ -24,7 +24,7 @@ html, body {
 }
 
 .scrollable {
-  @apply pb-16 overflow-y-auto pointer-events-auto
+  @apply pb-20 overflow-y-auto pointer-events-auto
 }
 
 @keyframes loading {
