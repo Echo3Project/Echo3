@@ -16,8 +16,9 @@ module.exports = {
         'loader': "linear-gradient(to bottom, rgba(242, 242, 242, 0.50) 25%, rgba(242, 242, 242, 0.95) 85%), url('/backgrounds/points.svg')",
       },
       colors: {
-        'opacifier': 'rgba(0,0,0,0.8)',
+        'darker': 'rgba(45, 45, 45, 0.15)',
         'lighter': 'rgba(255, 255, 255, 0.20)',
+        'opacifier': 'rgba(0,0,0,0.8)',
       },
       fontFamily: {
         'dot': ['offbit', 'sans-serif'],

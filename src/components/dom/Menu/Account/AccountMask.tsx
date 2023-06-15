@@ -7,6 +7,7 @@ type Props = {
 export default function AccountMask({ link }: Props): ReactElement {
     return (
         <svg
+            className="h-full w-full"
             width="88"
             height="84"
             viewBox="0 0 88 84"
