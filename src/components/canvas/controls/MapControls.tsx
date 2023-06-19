@@ -75,6 +75,8 @@ export default function MapControls(): null {
     );
 
     useEffect(() => {
+        camera.rotation.x = initialRotation;
+        camera.position.set(0, 100, 0);
         const handler = (e: Event): void => e.preventDefault();
         document.addEventListener('gesturestart', handler);
         document.addEventListener('gesturechange', handler);
@@ -84,7 +86,7 @@ export default function MapControls(): null {
             document.removeEventListener('gesturechange', handler);
             document.removeEventListener('gestureend', handler);
         };
-    }, []);
+    }, [camera.position, camera.rotation]);
 
     return null;
 }

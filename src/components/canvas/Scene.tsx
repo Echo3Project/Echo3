@@ -1,6 +1,6 @@
 import { Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { ReactElement, Suspense } from 'react';
+import { ReactElement } from 'react';
 
 import { r3f } from '@/components/helpers/R3f';
 
@@ -23,16 +23,12 @@ export default function Scene({
                     alpha: true,
                     antialias: false,
                     stencil: false,
-                    depth: false,
+                    depth: true,
                     autoClear: true,
                 }}
                 shadows>
                 {/* <Perf position="top-right" /> */}
-                <directionalLight intensity={0.75} />
-                <ambientLight intensity={0.75} />
-                <Suspense fallback={null}>
-                    <r3f.Out />
-                </Suspense>
+                <r3f.Out />
                 <Preload all />
             </Canvas>
         </div>

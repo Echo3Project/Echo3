@@ -11,7 +11,7 @@
 }
 
 html, body {
-   @apply overflow-hidden bg-neutral-800;
+   @apply overflow-x-hidden bg-light;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
@@ -24,7 +24,12 @@ html, body {
 }
 
 .scrollable {
-  @apply pb-20 overflow-y-auto pointer-events-auto
+  @apply pb-20 overflow-y-auto pointer-events-auto;
+}
+
+.mask-project {
+  mask: url('/masks/mask1.svg');
+  mask-size: cover;
 }
 
 @keyframes loading {

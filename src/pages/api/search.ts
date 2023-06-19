@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import type { dataFormat } from '@/components/dom/DragUpPanel/SearchBar';
+import { dataFormat } from '@/utils/types';
 
 import fakeData from './data/fake.json';
 

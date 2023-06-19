@@ -1,12 +1,23 @@
-import { Bvh, Environment, PerspectiveCamera } from '@react-three/drei';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, useState } from 'react';
 
-import { Composer } from '@/components/canvas/composer';
-import { EthereumModel } from '@/components/canvas/models/EthereumModel';
-import { ForestModel } from '@/components/canvas/models/ForestModel';
 import { Modal } from '@/components/dom/Elements';
-import { Three } from '@/components/helpers/R3f';
+const Three = dynamic(
+    () => import('@/components/helpers/R3f').then((mod) => mod.Three),
+    {
+        ssr: false,
+    },
+);
+const ForestModel = dynamic(
+    () =>
+        import('@/components/canvas/models/ForestModel').then(
+            (mod) => mod.ForestModel,
+        ),
+    {
+        ssr: false,
+    },
+);
 
 export default function Page(): ReactElement {
     const [active, setActive] = useState(false);
@@ -55,18 +66,7 @@ export default function Page(): ReactElement {
                 </Modal>
             </main>
             <Three>
-                <PerspectiveCamera
-                    makeDefault
-                    position={[0, 100, 300]}
-                    fov={75}
-                    rotation-x={-Math.PI / 15}
-                />
-                <Bvh>
-                    <ForestModel />
-                    <EthereumModel />
-                </Bvh>
-                <Environment preset="studio" background={true} blur={1.5} />
-                <Composer />
+                <ForestModel />
             </Three>
         </>
     );

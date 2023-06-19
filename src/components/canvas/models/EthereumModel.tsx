@@ -15,7 +15,9 @@ type GLTFResult = GLTF & {
 export function EthereumModel(
     props: JSX.IntrinsicElements['group'],
 ): ReactElement {
-    const { nodes, materials } = useGLTF('/models/ethereum.glb') as GLTFResult;
+    const { nodes, materials } = useGLTF(
+        '/models/ethereum.glb',
+    ) as unknown as GLTFResult;
     return (
         <group {...props} dispose={null} scale={0.1} position-y={100}>
             <mesh

@@ -13,12 +13,13 @@ export default function SearchResultsItem({ result }: Props): ReactElement {
             className="w-full h-fit rounded-3xl bg-cover bg-center text-white"
             style={{
                 backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 40%, rgba(0,0,0,0.5) 70%), url(https://picsum.photos/seed/${
-                    result.item.name + result.item.author
+                    (result.item.name as string) +
+                    (result.item.author as string)
                 }600/600.webp)`,
             }}>
             <div className="px-6 py-7">
                 <div className="flex justify-between text-sm">
-                    <span>Discover by @{result.item.author}</span>
+                    <span>Discover by @{result.item.author as string}</span>
                     <span>
                         {Math.round(Math.random() * 1761)} Contributions
                     </span>
@@ -26,7 +27,7 @@ export default function SearchResultsItem({ result }: Props): ReactElement {
                 <div className="mt-44">
                     <div className="flex justify-between items-center mb-2">
                         <h4 className="text-xl font-semibold">
-                            {result.item.name}
+                            {result.item.name as string}
                         </h4>
                         <div className="flex text-sm gap-2">
                             <span
@@ -34,12 +35,12 @@ export default function SearchResultsItem({ result }: Props): ReactElement {
                                 style={{
                                     backgroundColor: 'rgba(165, 255, 174, 0.7)',
                                 }}>
-                                {result.item.tags[0]}
+                                {(result.item.tags as string[])[0]}
                             </span>
                         </div>
                     </div>
                     <p className="text-ellipsis line-clamp-3 opacity-50">
-                        {result.item.description}
+                        {result.item.description as string}
                     </p>
                 </div>
             </div>

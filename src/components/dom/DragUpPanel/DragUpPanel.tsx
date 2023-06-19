@@ -128,7 +128,7 @@ export default function DragUpPanel(): ReactElement {
     );
 
     return (
-        <div className="fixed inset-0 flex">
+        <div className="fixed inset-0 flex z-50">
             {!showFilterInterface ? (
                 <animated.div
                     className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"

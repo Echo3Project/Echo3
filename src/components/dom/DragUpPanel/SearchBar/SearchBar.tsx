@@ -6,14 +6,10 @@ import {
     useState,
 } from 'react';
 
+import { dataFormat } from '@/utils/types';
+
 import SearchResultsList from './SearchResultsList';
 
-export type dataFormat = {
-    name: string;
-    author: string;
-    description: string;
-    tags: string[];
-};
 export type apiResponse = {
     item: dataFormat;
     refIndex: number;

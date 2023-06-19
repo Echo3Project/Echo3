@@ -2,14 +2,13 @@ import { useProgress } from '@react-three/drei';
 import clsx from 'clsx';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 
-import NoSSR from '@/components/helpers/NoSSR';
+import { pad } from '@/components/helpers/formatters';
 
 type Props = {
     totalProjects: number;
     initialState?: (active: boolean) => boolean;
 };
 
-const pad = (s: string, t: string): string => s.padStart(t.length, '0');
 const dataInterpolation = (p: number, total: number): string =>
     `${pad(((p * total) / 100).toFixed(0), total.toString())}`;
 
@@ -43,14 +42,17 @@ export default function Load({
 
     useEffect((): (() => void) => {
         let timeout: NodeJS.Timeout;
-        if (active !== shown)
+        if (active !== shown && shown === true)
             timeout = setTimeout((): void => setShown(active), 2000);
+        else if (active !== shown && shown === false) setShown(active);
         return (): void => clearTimeout(timeout);
     }, [shown, active]);
 
     const loaderClsx = clsx(
-        'fixed h-screen w-full top-0 p-4 z-50 bg-white flex items-end transition-opacity duration-700 ease-out bg-loader bg-center bg-repeat-space',
-        shown ? 'opacity-100' : 'pointer-events-none opacity-0',
+        'fixed h-screen w-full top-0 p-4 z-50 bg-white flex items-end bg-loader bg-center bg-repeat-space',
+        shown
+            ? 'opacity-100'
+            : '-z-1 pointer-events-none opacity-0 transition-opacity duration-700 ease-out',
     );
     const loadAnimationClsx = clsx(
         'w-1/6 flex flex-wrap',
@@ -58,25 +60,23 @@ export default function Load({
     );
 
     return (
-        <NoSSR>
-            <div className={loaderClsx}>
-                <div className="w-full h-20 pt-2 flex justify-between items-end">
-                    <p className="text-8xl font-dot">
-                        <span className="leading-50 align-bottom">
-                            {dataInterpolation(progressState, totalProjects)}
-                        </span>
-                    </p>
-                    <div className="h-full flex flex-col justify-between self-stretch items-end">
-                        <span className="block">/ {totalProjects} projets</span>
-                        <div className={loadAnimationClsx}>
-                            <div className="w-1/2 aspect-square rounded-full bg-black" />
-                            <div className="w-1/2 aspect-square rounded-full bg-black" />
-                            <div className="w-1/2 aspect-square rounded-full bg-black" />
-                            <div className="w-1/2 aspect-square rounded-full bg-black" />
-                        </div>
+        <div className={loaderClsx}>
+            <div className="w-full h-20 pt-2 flex justify-between items-end">
+                <p className="text-8xl font-dot">
+                    <span className="leading-50 align-bottom">
+                        {dataInterpolation(progressState, totalProjects)}
+                    </span>
+                </p>
+                <div className="h-full flex flex-col justify-between self-stretch items-end">
+                    <span className="block">/ {totalProjects} projets</span>
+                    <div className={loadAnimationClsx}>
+                        <div className="w-1/2 aspect-square rounded-full bg-black" />
+                        <div className="w-1/2 aspect-square rounded-full bg-black" />
+                        <div className="w-1/2 aspect-square rounded-full bg-black" />
+                        <div className="w-1/2 aspect-square rounded-full bg-black" />
                     </div>
                 </div>
             </div>
-        </NoSSR>
+        </div>
     );
 }
