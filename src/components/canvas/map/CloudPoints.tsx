@@ -90,9 +90,6 @@ export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
             new PointsMaterial({
                 size: 5,
                 vertexColors: true,
-                transparent: false,
-                depthTest: false,
-                depthWrite: false,
             }),
         [],
     );

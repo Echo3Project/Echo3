@@ -23,7 +23,7 @@ export default function Scene({
                     alpha: true,
                     antialias: false,
                     stencil: false,
-                    depth: false,
+                    depth: true,
                     autoClear: true,
                 }}
                 shadows>

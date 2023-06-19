@@ -49,7 +49,7 @@ export default function Page({ projects }: Props): ReactElement {
                     texturePath={'/models/flower/flower.jpg'}
                 /> */}
                 {/* <CloudPoints glbPath={'/models/peony_point_cloud.glb'} /> */}
-                <CloudPoints glbPath={'/models/test5.glb'} />
+                <CloudPoints glbPath={'/models/test7.glb'} />
             </Three>
         </>
     );
