@@ -7,10 +7,9 @@ import { DiscordUser } from '@/utils/discord/types';
 
 import {
     BellIcon,
-    ConnexionIcon,
-    ContribIcon,
-    ListIcon,
-    MapIcon,
+    ConnectionIcon,
+    ContributionIcon,
+    ProjectIcon,
 } from '../Elements/Icons';
 import Account from './Account';
 import Item from './MenuItem';
@@ -32,55 +31,68 @@ export default function Menu(): ReactElement {
 
     const navClsx = clsx(
         'p-4 flex justify-between items-end text-white',
-        user ? 'w-full' : 'gap-6 w-fit',
+        user ? 'w-full' : 'gap-4 w-fit',
     );
 
     return (
-        <div className="fixed bottom-0 w-full flex justify-center after:fixed after:bottom-0 after:left-0 after:w-full after:h-40 after:bg-gradient-to-b after:from-transparent after:to-black after:opacity-80 after:-z-10 after:pointer-events-none">
-            <nav className={navClsx}>
-                <Item route="/liste" title="Liste" active={isActive('/liste')}>
-                    <ListIcon color="#ffffff" className="w-8 h-1000" />
-                </Item>
-                {!user && (
+        <div className="w-full flex justify-center">
+            <div
+                className="fixed bottom-4 w-64 flex justify-center items-center"
+                style={{
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    backdropFilter: 'blur(16px)',
+                    borderRadius: '8px',
+                }}>
+                <nav className={navClsx}>
                     <Item
-                        route="/api/auth"
-                        title="Login"
-                        active={isActive('/api/auth')}>
-                        <span className="scale-125 mx-4">
-                            <ConnexionIcon
-                                color="#ffffff"
-                                className="w-10 h-10"
-                            />
-                        </span>
+                        route="/projets"
+                        title="projets"
+                        active={isActive('/projets')}>
+                        <ProjectIcon color="#ffffff" className="w-8 h-8" />
                     </Item>
-                )}
-                <Item route="/carte" title="Carte" active={isActive('/carte')}>
-                    <MapIcon color="#ffffff" className="w-8 h-8" />
-                </Item>
-                {user && (
-                    <>
-                        <Account
-                            active={isActive('/profil')}
-                            avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-                        />
-                        <Item
-                            route="/feed"
-                            title="Feed"
-                            active={isActive('/feed')}
-                            notifications={
-                                notifications > 0 ? notifications : undefined
-                            }>
-                            <BellIcon color="#ffffff" className="w-8 h-8" />
+                    {!user && (
+                        <Item route="/api/auth" active={isActive('/api/auth')}>
+                            <span className="scale-125 mx-4">
+                                <ConnectionIcon
+                                    color="#ffffff"
+                                    className="w-10 h-10"
+                                />
+                            </span>
                         </Item>
-                        <Item
-                            route="/contribution"
-                            title="Contrib"
-                            active={isActive('/contribution')}>
-                            <ContribIcon color="#ffffff" className="w-8 h-8" />
-                        </Item>
-                    </>
-                )}
-            </nav>
+                    )}
+                    <Item route="/feed" title="Feed" active={isActive('/feed')}>
+                        <BellIcon color="#ffffff" className="w-8 h-1000" />
+                    </Item>
+                    {user && (
+                        <>
+                            <Account
+                                active={isActive('/profil')}
+                                avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                            />
+                            <Item
+                                route="/feed"
+                                title="Feed"
+                                active={isActive('/feed')}
+                                notifications={
+                                    notifications > 0
+                                        ? notifications
+                                        : undefined
+                                }>
+                                <BellIcon color="#ffffff" className="w-8 h-8" />
+                            </Item>
+                            <Item
+                                route="/contribution"
+                                title="Contrib"
+                                active={isActive('/contribution')}>
+                                <ContributionIcon
+                                    color="#ffffff"
+                                    className="w-8 h-8"
+                                />
+                            </Item>
+                        </>
+                    )}
+                </nav>
+            </div>
         </div>
     );
 }

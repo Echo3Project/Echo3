@@ -6,7 +6,7 @@ type Props = JSX.IntrinsicElements['svg'] & {
     color: string;
 };
 
-export function ConnexionIcon({ color, ...props }: Props): ReactElement {
+export function ConnectionIcon({ color, ...props }: Props): ReactElement {
     return (
         <SVG color={color} {...props}>
             <ellipse
@@ -241,7 +241,7 @@ export function ConnexionIcon({ color, ...props }: Props): ReactElement {
     );
 }
 
-export function ContribIcon({ color, ...props }: Props): ReactElement {
+export function ContributionIcon({ color, ...props }: Props): ReactElement {
     return (
         <SVG color={color} {...props}>
             <circle cx="18" cy="30" r="2" fill="currentColor" />
@@ -355,7 +355,7 @@ export function BellIcon({ color, ...props }: Props): ReactElement {
     );
 }
 
-export function MapIcon({ color, ...props }: Props): ReactElement {
+export function ProjectIcon({ color, ...props }: Props): ReactElement {
     return (
         <SVG color={color} {...props}>
             <circle cx="14" cy="16" r="2" fill="currentColor" />

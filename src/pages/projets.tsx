@@ -37,6 +37,14 @@ export default function Page({ projects }: Props): ReactElement {
         setNewFilterInterface((prev) => !prev);
     };
 
+    const handleGoBack = (): void => {
+        if (newFilterInterface) {
+            toggleNewFilterInterface(); // Fermer l'interface de création de nouveau filtre
+        } else {
+            toggleShowFilterInterface(); // Fermer l'interface de filtres
+        }
+    };
+
     return (
         <>
             <Head>
@@ -50,6 +58,7 @@ export default function Page({ projects }: Props): ReactElement {
                     newFilterInterface={newFilterInterface}
                     toggleShowFilterInterface={toggleShowFilterInterface}
                     toggleNewFilterInterface={toggleNewFilterInterface}
+                    handleGoBack={handleGoBack}
                 />
             </header>
             <main className="h-screen w-full flex justify-center">
