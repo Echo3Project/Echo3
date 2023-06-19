@@ -1,72 +1,12 @@
-// import { useLoader } from '@react-three/fiber';
-// import { memo, useMemo } from 'react';
-// import { PointsMaterial, TextureLoader } from 'three';
-// import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
-
-// type Props = {
-//     plyPath: string;
-//     texturePath: string;
-// };
-
-// export const CloudPoints = memo(function CloudPoints({
-//     plyPath,
-//     texturePath,
-// }: Props) {
-//     const plyData = useLoader(PLYLoader, plyPath);
-//     const texture = useLoader(TextureLoader, texturePath);
-//     const geometry = useMemo(() => plyData, [plyData]);
-
-//     // const colors = useMemo(() => {
-//     //     const colorsArray: number[] = [];
-//     //     console.log('geometry.attributes.color', geometry.attributes.color);
-//     //     console.log('geometry.attributes', geometry.attributes);
-
-//     //     const positionAttribute = geometry.attributes
-//     //         .position as Float32BufferAttribute;
-//     //     const uvAttribute = geometry.attributes.color as Float32BufferAttribute;
-//     //     console.log('positionAttribute', positionAttribute);
-
-//     //     if (!positionAttribute || !uvAttribute) {
-//     //         return colorsArray;
-//     //     }
-
-//     //     console.log('positionAttribute', positionAttribute);
-
-//     //     for (let i = 0; i < positionAttribute.count; i++) {
-//     //         const color = new Color();
-//     //         const uvX = uvAttribute.getX(i);
-//     //         const uvY = uvAttribute.getY(i);
-//     //         color.setRGB(uvX, uvY, 0);
-//     //         colorsArray.push(color.r, color.g, color.b);
-//     //     }
-
-//     //     return colorsArray;
-//     // }, [geometry]);
-
-//     // const colorAttribute = useMemo(
-//     //     () => new Float32BufferAttribute(colors, 3),
-//     //     [colors],
-//     // );
-
-//     const material = useMemo(
-//         () =>
-//             new PointsMaterial({
-//                 map: texture,
-//                 size: 0.01,
-//                 vertexColors: true,
-//             }),
-//         [texture],
-//     );
-
-//     // geometry.setAttribute('color', colorAttribute);
-
-//     return <points geometry={geometry} material={material} />;
-// });
-
 import { useGLTF } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { memo, useMemo, useRef } from 'react';
-import { Intersection, PointsMaterial } from 'three';
+import {
+    Intersection,
+    NormalBlending,
+    ShaderMaterial,
+    TextureLoader,
+} from 'three';
 
 import { GLTFResult } from '../models/EthereumModel';
 
@@ -75,24 +15,52 @@ type Props = {
 };
 
 export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
-    const { nodes, gl } = useGLTF(glbPath) as GLTFResult;
+    const { nodes } = useGLTF(glbPath) as GLTFResult;
     console.log(nodes);
 
-    // const cloudPointsNode = 'Object_2';
     const geometry = useMemo(
-        // () => (nodes.Object_2 as THREE.Points).geometry,
         () => (nodes.model as THREE.Points).geometry,
         [nodes],
     );
 
-    const material = useMemo(
-        () =>
-            new PointsMaterial({
-                size: 5,
-                vertexColors: true,
-            }),
-        [],
-    );
+    const material = useMemo(() => {
+        return new ShaderMaterial({
+            uniforms: {
+                pointTexture: {
+                    value: new TextureLoader().load('/models/circle.png'),
+                },
+                pointSize: { value: 10.0 },
+                alphaTest: { value: 0.5 },
+            },
+            vertexShader: `
+                uniform float pointSize;
+
+                varying vec3 vColor;
+
+                void main() {
+                    vColor = color.rgb;
+                    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+                    gl_PointSize = pointSize * 300.0 / -mvPosition.z;
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D pointTexture;
+                uniform float alphaTest;
+
+                varying vec3 vColor;
+
+                void main() {
+                    vec4 textureColor = texture2D( pointTexture, gl_PointCoord );
+                    gl_FragColor = vec4( vColor, 1.0 ) * textureColor;
+                    if( gl_FragColor.a < alphaTest ) discard;
+                }
+            `,
+            blending: NormalBlending,
+            transparent: true,
+            vertexColors: true,
+        });
+    }, []);
 
     const pointsRef = useRef<Points>(null);
     const { raycaster, mouse } = useThree();
@@ -119,9 +87,6 @@ export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
     return (
         <points
             ref={pointsRef}
-            // position={[0, 0, 500]}
-            // rotation={[200 * (Math.PI / 180), 0, Math.PI / 2]}
-            // scale={[100, 100, 100]}
             scale={[100, 100, 100]}
             geometry={geometry}
             material={material}
