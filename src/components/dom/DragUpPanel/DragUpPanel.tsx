@@ -35,7 +35,7 @@ export default function DragUpPanel({
     const steps = useMemo(
         () => [
             -132,
-            -300,
+            -700,
             typeof window !== 'undefined' ? -window.innerHeight : -600,
         ],
         [],
@@ -79,7 +79,11 @@ export default function DragUpPanel({
     };
 
     useEffect(() => {
-        if (active.length > 0 || showFilterInterface === true) {
+        if (
+            active.length > 0 ||
+            showFilterInterface ||
+            newFilterInterface === true
+        ) {
             if (y.get() <= steps[1]) return;
             api.start({ y: steps[1] });
         } else {
@@ -136,7 +140,7 @@ export default function DragUpPanel({
                 <animated.div
                     className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"
                     style={{ y }}>
-                    <div className="flex flex-col w-full items-center bg-white max-h-full h-full border-t border-gray pt-5 pb-2">
+                    <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
                         <h2>Profils de filtres enregistrés</h2>
                         <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
                             <div className="flex w-fit mx-4 text-sm text-black">
@@ -157,69 +161,76 @@ export default function DragUpPanel({
                 </animated.div>
             )}
             {showFilterInterface && newFilterInterface && (
-                <div className="flex flex-col w-full items-center bg-white max-h-full h-full border-t border-gray pt-5 pb-2">
-                    <div className="w-full">
-                        <form
-                            onSubmit={handleNewFilterSubmit}
-                            onKeyPress={handleFormKeyPress}
-                            className="mx-4">
-                            <label>
-                                Titre du filtre:
-                                <input
-                                    type="text"
-                                    value={newFilterTitle}
-                                    placeholder="Nom..."
-                                    className="w-full whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 my-1 first:ml-0 last:mr-0 bg-white"
-                                    onChange={(e): void =>
-                                        setNewFilterTitle(e.target.value)
-                                    }
-                                />
-                            </label>
-                            <button
-                                type="submit"
-                                className="whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-4 first:ml-0 last:mr-0 bg-black text-white rounded-md">
-                                Créer le filtre
-                            </button>
-                        </form>
-                    </div>
+                <animated.div
+                    className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"
+                    style={{ y }}>
+                    <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
+                        <div className="w-full">
+                            <form
+                                onSubmit={handleNewFilterSubmit}
+                                onKeyPress={handleFormKeyPress}
+                                className="mx-4">
+                                <label>
+                                    Titre du filtre:
+                                    <input
+                                        type="text"
+                                        value={newFilterTitle}
+                                        placeholder="Nom..."
+                                        className="w-full whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 my-1 first:ml-0 last:mr-0 bg-white"
+                                        onChange={(e): void =>
+                                            setNewFilterTitle(e.target.value)
+                                        }
+                                    />
+                                </label>
+                                <button
+                                    type="submit"
+                                    className="whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-4 first:ml-0 last:mr-0 bg-black text-white rounded-md">
+                                    Créer le filtre
+                                </button>
+                            </form>
+                        </div>
 
-                    {/* TODO: create new components like FiltersList, use db instead of fake data and use reducer to wrap logic of filters */}
-                    <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
-                        <div className="flex w-fit mx-4 text-sm text-black">
-                            {list.fields.map(
-                                (
-                                    field: string,
-                                    index: number,
-                                ): ReactElement => (
-                                    <button
-                                        key={index}
-                                        className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0 ${
-                                            active.includes(field)
-                                                ? 'bg-green-300'
-                                                : 'bg-white'
-                                        }`}
-                                        onClick={(): void => {
-                                            if (active.includes(field)) {
-                                                setActive(
-                                                    active.filter(
-                                                        (
-                                                            item: string,
-                                                        ): boolean =>
-                                                            item !== field,
-                                                    ),
-                                                );
-                                            } else {
-                                                setActive([...active, field]);
-                                            }
-                                        }}>
-                                        <div className="bg-filters bg-no-repeat bg-center bg-contain h-4 w-3"></div>
-                                        {field}
-                                    </button>
-                                ),
-                            )}
+                        {/* TODO: create new components like FiltersList, use db instead of fake data and use reducer to wrap logic of filters */}
+                        <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
+                            <div className="flex w-fit mx-4 text-sm text-black">
+                                {list.fields.map(
+                                    (
+                                        field: string,
+                                        index: number,
+                                    ): ReactElement => (
+                                        <button
+                                            key={index}
+                                            className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0 ${
+                                                active.includes(field)
+                                                    ? 'bg-green-300'
+                                                    : 'bg-white'
+                                            }`}
+                                            onClick={(): void => {
+                                                if (active.includes(field)) {
+                                                    setActive(
+                                                        active.filter(
+                                                            (
+                                                                item: string,
+                                                            ): boolean =>
+                                                                item !== field,
+                                                        ),
+                                                    );
+                                                } else {
+                                                    setActive([
+                                                        ...active,
+                                                        field,
+                                                    ]);
+                                                }
+                                            }}>
+                                            <div className="bg-filters bg-no-repeat bg-center bg-contain h-4 w-3"></div>
+                                            {field}
+                                        </button>
+                                    ),
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </animated.div>
             )}
         </div>
     );

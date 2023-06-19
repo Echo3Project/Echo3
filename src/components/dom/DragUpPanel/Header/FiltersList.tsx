@@ -41,10 +41,10 @@ export default function FiltersList({ filtersContext }: Props): ReactElement {
                         (filter: string, index: number): ReactElement => (
                             <button
                                 key={index}
-                                className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0 ${
+                                className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full gap-2 mx-1 first:ml-0 last:mr-0 ${
                                     isFilterActive(filter)
                                         ? 'bg-green-300'
-                                        : 'bg-white'
+                                        : 'bg-gray-100'
                                 }`}
                                 onClick={(): void => {
                                     const customFilter = customFilters.find(
