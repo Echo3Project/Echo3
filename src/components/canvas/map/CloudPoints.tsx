@@ -80,15 +80,19 @@ export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
 
     // const cloudPointsNode = 'Object_2';
     const geometry = useMemo(
-        () => (nodes.Object_2 as THREE.Points).geometry,
+        // () => (nodes.Object_2 as THREE.Points).geometry,
+        () => (nodes.model as THREE.Points).geometry,
         [nodes],
     );
 
     const material = useMemo(
         () =>
             new PointsMaterial({
-                size: 0.5,
+                size: 5,
                 vertexColors: true,
+                transparent: false,
+                depthTest: false,
+                depthWrite: false,
             }),
         [],
     );
@@ -118,8 +122,9 @@ export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
     return (
         <points
             ref={pointsRef}
-            position={[0, 0, 500]}
-            rotation={[200 * (Math.PI / 180), 0, Math.PI / 2]}
+            // position={[0, 0, 500]}
+            // rotation={[200 * (Math.PI / 180), 0, Math.PI / 2]}
+            // scale={[100, 100, 100]}
             scale={[100, 100, 100]}
             geometry={geometry}
             material={material}
