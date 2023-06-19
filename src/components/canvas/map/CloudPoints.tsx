@@ -52,7 +52,7 @@ export const CloudPoints = memo(function CloudPoints({ glbPath }: Props) {
 
                 void main() {
                     vec4 textureColor = texture2D( pointTexture, gl_PointCoord );
-                    gl_FragColor = vec4( vColor, 1.0 ) * textureColor;
+                    gl_FragColor = vec4( vColor, textureColor.a );
                     if( gl_FragColor.a < alphaTest ) discard;
                 }
             `,
