@@ -43,7 +43,8 @@ export default function Page({ projects }: Props): ReactElement {
                 <MapControls />
                 <color attach="background" args={[243, 243, 243]} />
                 {/* <color attach="background" args={[0, 0, 0]} /> */}
-                <CloudPoints glbPath={'/models/test7.glb'} />
+                {/* <CloudPoints glbPath={'/models/test7.glb'} /> */}
+                <CloudPoints glbPath={'/models/peony_point_cloud.glb'} />
             </Three>
         </>
     );
