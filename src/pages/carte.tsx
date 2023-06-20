@@ -1,21 +1,28 @@
-import { PerspectiveCamera } from '@react-three/drei';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { ReactElement } from 'react';
+import { ReactElement, Suspense } from 'react';
 
-import MapControls from '@/components/canvas/controls/MapControls';
-import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
 import DragUpPanel from '@/components/dom/DragUpPanel';
-import { Three } from '@/components/helpers/R3f';
+import { dataFormat } from '@/utils/types';
 
-const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
-
-export type dataFormat = {
-    name?: string;
-    author?: string;
-    description?: string;
-    tags?: string[];
-    fields?: string[];
-};
+const MapControls = dynamic(
+    () => import('@/components/canvas/controls/MapControls'),
+    { ssr: false },
+);
+const ObjectChunk = dynamic(
+    () =>
+        import('@/components/canvas/map/ObjectChunk').then(
+            (mod) => mod.ObjectChunk,
+        ),
+    { ssr: false },
+);
+// const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
+const Three = dynamic(
+    () => import('@/components/helpers/R3f').then((mod) => mod.Three),
+    {
+        ssr: false,
+    },
+);
 
 type Props = {
     projects: dataFormat[];
@@ -32,17 +39,10 @@ export default function Page({ projects }: Props): ReactElement {
                 <DragUpPanel></DragUpPanel>
             </main>
             <Three>
-                <PerspectiveCamera
-                    rotation={[initialRotation, 0, 0]}
-                    position={[0, 100, 0]}
-                    fov={75}
-                    near={0.1}
-                    far={1000}
-                    makeDefault
-                />
-                <MapControls />
-                <color attach="background" args={[243, 243, 243]} />
-                <ObjectChunk projects={projects} />
+                <Suspense fallback={null}>
+                    <MapControls />
+                    <ObjectChunk projects={projects} />
+                </Suspense>
             </Three>
         </>
     );

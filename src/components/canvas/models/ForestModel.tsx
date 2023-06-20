@@ -64,7 +64,9 @@ type GLTFResult = GLTF & {
 export function ForestModel(
     props: JSX.IntrinsicElements['group'],
 ): ReactElement {
-    const { nodes, materials } = useGLTF('/models/forest.glb') as GLTFResult;
+    const { nodes, materials } = useGLTF(
+        '/models/forest.glb',
+    ) as unknown as GLTFResult;
     return (
         <group {...props} dispose={null}>
             <group rotation={[-Math.PI / 2, 0, 0]} scale={10}>
