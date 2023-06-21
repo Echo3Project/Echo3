@@ -20,10 +20,10 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
             <div className="w-full">
                 <header className="fixed w-full flex justify-between z-50"></header>
                 <FiltersProvider>
-                    <div className="z-10">
+                    <div className="absolute top-0 w-full z-10">
                         <Menu />
                         <div
-                            className={`absolute top-0 w-full h-screen ${
+                            className={`absolute top-0 w-full ${
                                 route === 'carte'
                                     ? 'pointer-events-none'
                                     : 'pointer-events-auto'
