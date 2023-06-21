@@ -10,7 +10,6 @@ import {
 } from 'react';
 
 import { User } from '@/components/helpers/context/UserContext';
-import { debounce } from '@/components/helpers/events/debounce';
 import { DiscordUser } from '@/utils/discord/types';
 
 import {
@@ -37,28 +36,41 @@ export default function Menu(): ReactElement {
         return route === router.asPath ? true : false;
     }
 
-    const handleNavigation = useCallback(
-        (e: Event) => {
-            function handleClose(): void {
-                setOpen(false);
-                if (timeout.current) clearTimeout(timeout.current);
-                timeout.current = setTimeout(() => {
-                    timeout.current = undefined;
-                    setOpen(true);
-                }, 3000);
-            }
-            const window = e.currentTarget as Window;
-            if (y > window.scrollY) {
-                if (timeout.current) clearTimeout(timeout.current);
-                debounce(setOpen(true), 1000);
-            } else if (y < window.scrollY) {
-                if (timeout.current) clearTimeout(timeout.current);
+    function debounce(fn: void, delay: number): void {
+        if (timeout.current) clearTimeout(timeout.current);
+        timeout.current = setTimeout(() => {
+            timeout.current = undefined;
+            fn;
+        }, delay);
+    }
+
+    function handleClose(): void {
+        setY(window.scrollY);
+        setOpen(false);
+        if (timeout.current) clearTimeout(timeout.current);
+        timeout.current = setTimeout(() => {
+            timeout.current = undefined;
+            setOpen(true);
+        }, 3000);
+    }
+
+    function handleOpen(): void {
+        setY(window.scrollY);
+        setOpen(true);
+        if (timeout.current) clearTimeout(timeout.current);
+    }
+
+    const handleNavigation = useCallback(() => {
+        if (y > window.scrollY) {
+            if (timeout.current) clearTimeout(timeout.current);
+            if (Math.abs(window.scrollY - y) > 75) debounce(handleOpen(), 1000);
+        } else if (y < window.scrollY) {
+            if (window.scrollY < 25) return;
+            if (timeout.current) clearTimeout(timeout.current);
+            if (Math.abs(window.scrollY - y) > 75)
                 debounce(handleClose(), 1000);
-            }
-            setY(window.scrollY);
-        },
-        [y],
-    );
+        }
+    }, [y]);
 
     useEffect(() => {
         if (!userContext) return;
