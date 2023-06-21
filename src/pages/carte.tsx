@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, Suspense } from 'react';
+import { useControls } from 'leva';
 
 import DragUpPanel from '@/components/dom/DragUpPanel';
-import { dataFormat } from '@/utils/types';
+import { dataFormat } from '@/utils/types'
 
 const MapControls = dynamic(
     () => import('@/components/canvas/controls/MapControls'),
@@ -29,6 +30,8 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
+    const { color } = useControls({ color: '#000000' });
+
     return (
         <>
             <Head>
@@ -42,6 +45,7 @@ export default function Page({ projects }: Props): ReactElement {
                 <Suspense fallback={null}>
                     <MapControls />
                     <ObjectChunk projects={projects} />
+                    <color attach="background" args={[color]} />
                 </Suspense>
             </Three>
         </>
