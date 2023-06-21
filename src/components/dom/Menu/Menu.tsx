@@ -91,7 +91,7 @@ export default function Menu(): ReactElement {
     );
 
     const navClsx = clsx(
-        'backdrop-blur-xl backdrop-brightness-90 bg-darker rounded-lg p-4 flex max-w-sm justify-between items-center text-white h-16',
+        'backdrop-blur-xl backdrop-brightness-90 bg-darker rounded-lg px-4 flex max-w-sm justify-between items-center text-white h-16',
         user ? 'w-full' : 'gap-6 w-fit',
     );
 

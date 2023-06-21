@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { PropsWithChildren, ReactElement } from 'react';
@@ -19,14 +20,17 @@ export default function Item({
     active,
     notifications,
 }: Props): ReactElement {
+    const itemClsx = clsx(
+        'flex flex-col justify-center items-center',
+        active ? 'opacity-100' : 'opacity-50',
+    );
+
     return (
         <Link
             href={route}
             className="flex flex-col items-center justify-center relative">
             <div
-                className={`flex flex-col justify-center items-center ${
-                    active ? 'opacity-100' : 'opacity-50'
-                }`}>
+                className={itemClsx}>
                 <div className="relative flex justify-center items-center mb-1 w-14">
                     {children}
                 </div>
