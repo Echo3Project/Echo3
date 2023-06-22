@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                     <Loader totalProjects={125} />
                 </FiltersProvider>
                 <modal.Out />
+                {/* <footer className="fixed w-full flex justify-between z-50"></footer> */}
             </div>
         </UserProvider>
     );

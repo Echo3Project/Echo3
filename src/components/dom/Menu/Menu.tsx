@@ -14,10 +14,9 @@ import { DiscordUser } from '@/utils/discord/types';
 
 import {
     BellIcon,
-    ConnexionIcon,
-    ContribIcon,
-    ListIcon,
-    MapIcon,
+    ConnectionIcon,
+    ContributionIcon,
+    ProjectIcon,
 } from '../Elements/Icons';
 import Account from './Account';
 import Item from './MenuItem';
@@ -99,7 +98,7 @@ export default function Menu(): ReactElement {
         <div className={menuClsx}>
             <nav className={navClsx}>
                 <Item route="/liste" title="Liste" active={isActive('/liste')}>
-                    <ListIcon color="#ffffff" className="w-8 h-8" />
+                    <ProjectIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {!user && (
                     <Item
@@ -107,40 +106,46 @@ export default function Menu(): ReactElement {
                         title="Login"
                         active={isActive('/api/auth')}>
                         <span className="mx-4">
-                            <ConnexionIcon
+                            <ConnectionIcon
                                 color="#ffffff"
                                 className="w-8 h-8"
                             />
                         </span>
                     </Item>
                 )}
-                <Item route="/carte" title="Carte" active={isActive('/carte')}>
-                    <MapIcon color="#ffffff" className="w-8 h-8" />
+                <Item route="/feed" title="Feed" active={isActive('/feed')}>
+                    <BellIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
-                {user && (
-                    <>
-                        <Account
-                            active={isActive('/profil')}
-                            avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-                        />
-                        <Item
-                            route="/feed"
-                            title="Feed"
-                            active={isActive('/feed')}
-                            notifications={
-                                notifications > 0 ? notifications : undefined
-                            }>
-                            <BellIcon color="#ffffff" className="w-8 h-8" />
-                        </Item>
-                        <Item
-                            route="/contribution"
-                            title="Contrib"
-                            active={isActive('/contribution')}>
-                            <ContribIcon color="#ffffff" className="w-8 h-8" />
-                        </Item>
-                    </>
-                )}
-            </nav>
+                    {user && (
+                        <>
+                            <Account
+                                active={isActive('/profil')}
+                                avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                            />
+                            <Item
+                                route="/feed"
+                                title="Feed"
+                                active={isActive('/feed')}
+                                notifications={
+                                    notifications > 0
+                                        ? notifications
+                                        : undefined
+                                }>
+                                <BellIcon color="#ffffff" className="w-8 h-8" />
+                            </Item>
+                            <Item
+                                route="/contribution"
+                                title="Contrib"
+                                active={isActive('/contribution')}>
+                                <ContributionIcon
+                                    color="#ffffff"
+                                    className="w-8 h-8"
+                                />
+                            </Item>
+                        </>
+                    )}
+                </nav>
+            </div>
         </div>
     );
 }
