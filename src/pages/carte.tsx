@@ -1,10 +1,10 @@
+import { useControls } from 'leva';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, Suspense } from 'react';
-import { useControls } from 'leva';
 
 import DragUpPanel from '@/components/dom/DragUpPanel';
-import { dataFormat } from '@/utils/types'
+import { dataFormat } from '@/utils/types';
 
 const MapControls = dynamic(
     () => import('@/components/canvas/controls/MapControls'),

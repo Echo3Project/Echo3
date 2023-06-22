@@ -29,8 +29,7 @@ export default function Item({
         <Link
             href={route}
             className="flex flex-col items-center justify-center relative">
-            <div
-                className={itemClsx}>
+            <div className={itemClsx}>
                 <div className="relative flex justify-center items-center mb-1 w-14">
                     {children}
                 </div>
