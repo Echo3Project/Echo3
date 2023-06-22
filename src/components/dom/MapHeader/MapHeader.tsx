@@ -35,7 +35,7 @@ export default function MapHeader({
     handleCloseInterface,
 }: Props): ReactElement {
     return (
-        <div className="fixed pt-4 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto bg-gradient-to-b from-black to-transparent via-[rgba(0,0,0,0.4)] ">
+        <div className="fixed pt-4 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto bg-gradient-to-b from-black to-transparent via-[rgba(0,0,0,0.4)] z-50">
             {!showFilterInterface &&
             !showNewFilterInterface &&
             !showSearchInterface ? (

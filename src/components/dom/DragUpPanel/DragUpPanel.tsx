@@ -151,7 +151,7 @@ export default function DragUpPanel({
     );
 
     return (
-        <div className="fixed inset-0 flex z-50">
+        <div className="fixed inset-0 flex z-40 pointer-events-none">
             {showSearchInterface &&
                 !showFilterInterface &&
                 !showNewFilterInterface && (

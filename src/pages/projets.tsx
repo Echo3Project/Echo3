@@ -2,12 +2,32 @@ import { PerspectiveCamera } from '@react-three/drei';
 import Head from 'next/head';
 import { ReactElement, useContext, useState } from 'react';
 
-import MapControls from '@/components/canvas/controls/MapControls';
-import { ObjectChunk } from '@/components/canvas/map/ObjectChunk';
+import dynamic from 'next/dynamic';
+
 import DragUpPanel from '@/components/dom/DragUpPanel';
 import MapHeader from '@/components/dom/MapHeader/MapHeader';
 import { Filters } from '@/components/helpers/context/FiltersContext';
-import { Three } from '@/components/helpers/R3f';
+
+import { dataFormat } from '@/utils/types';
+
+const MapControls = dynamic(
+    () => import('@/components/canvas/controls/MapControls'),
+    { ssr: false },
+);
+const ObjectChunk = dynamic(
+    () =>
+        import('@/components/canvas/map/ObjectChunk').then(
+            (mod) => mod.ObjectChunk,
+        ),
+    { ssr: false },
+);
+// const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
+const Three = dynamic(
+    () => import('@/components/helpers/R3f').then((mod) => mod.Three),
+    {
+        ssr: false,
+    },
+);
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
@@ -56,7 +76,7 @@ export default function Page({ projects }: Props): ReactElement {
                 <title>Echo 3 - Map</title>
                 <meta name="description" content="Echo 3 Map" />
             </Head>
-            <header className="h-screen w-full flex justify-center">
+            <header className="fixed h-screen w-full flex justify-center">
                 <MapHeader
                     filtersContext={filtersContext}
                     showFilterInterface={showFilterInterface}

@@ -97,7 +97,10 @@ export default function Menu(): ReactElement {
     return (
         <div className={menuClsx}>
             <nav className={navClsx}>
-                <Item route="/liste" title="Liste" active={isActive('/liste')}>
+                <Item
+                    route="/projets"
+                    title="Projets"
+                    active={isActive('/projets')}>
                     <ProjectIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {!user && (
@@ -116,36 +119,33 @@ export default function Menu(): ReactElement {
                 <Item route="/feed" title="Feed" active={isActive('/feed')}>
                     <BellIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
-                    {user && (
-                        <>
-                            <Account
-                                active={isActive('/profil')}
-                                avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                {user && (
+                    <>
+                        <Account
+                            active={isActive('/profil')}
+                            avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                        />
+                        <Item
+                            route="/feed"
+                            title="Feed"
+                            active={isActive('/feed')}
+                            notifications={
+                                notifications > 0 ? notifications : undefined
+                            }>
+                            <BellIcon color="#ffffff" className="w-8 h-8" />
+                        </Item>
+                        <Item
+                            route="/contribution"
+                            title="Contrib"
+                            active={isActive('/contribution')}>
+                            <ContributionIcon
+                                color="#ffffff"
+                                className="w-8 h-8"
                             />
-                            <Item
-                                route="/feed"
-                                title="Feed"
-                                active={isActive('/feed')}
-                                notifications={
-                                    notifications > 0
-                                        ? notifications
-                                        : undefined
-                                }>
-                                <BellIcon color="#ffffff" className="w-8 h-8" />
-                            </Item>
-                            <Item
-                                route="/contribution"
-                                title="Contrib"
-                                active={isActive('/contribution')}>
-                                <ContributionIcon
-                                    color="#ffffff"
-                                    className="w-8 h-8"
-                                />
-                            </Item>
-                        </>
-                    )}
-                </nav>
-            </div>
+                        </Item>
+                    </>
+                )}
+            </nav>
         </div>
     );
 }
