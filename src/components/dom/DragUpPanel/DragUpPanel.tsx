@@ -17,13 +17,12 @@ type Props = {
         };
         active: string[];
         setActive: (value: string[]) => void;
+        addFilter: (title: string, fields: string[]) => void;
     };
     showFilterInterface: boolean;
     showNewFilterInterface: boolean;
     showSearchInterface: boolean;
-    toggleShowFilterInterface: () => void;
     toggleShowNewFilterInterface: () => void;
-    toggleSearchInterface: () => void;
 };
 
 export default function DragUpPanel({
@@ -31,9 +30,7 @@ export default function DragUpPanel({
     showFilterInterface,
     showNewFilterInterface,
     showSearchInterface,
-    toggleShowFilterInterface,
     toggleShowNewFilterInterface,
-    toggleSearchInterface,
 }: Props): ReactElement {
     const [newFilterTitle, setNewFilterTitle] = useState(() => '');
 

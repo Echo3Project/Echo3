@@ -30,7 +30,6 @@ export default function MapHeader({
     showNewFilterInterface,
     showSearchInterface,
     toggleShowFilterInterface,
-    toggleShowNewFilterInterface,
     toggleShowSearchInterface,
     handleCloseInterface,
 }: Props): ReactElement {

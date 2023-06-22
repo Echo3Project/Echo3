@@ -1,13 +1,11 @@
 import { PerspectiveCamera } from '@react-three/drei';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, useContext, useState } from 'react';
-
-import dynamic from 'next/dynamic';
 
 import DragUpPanel from '@/components/dom/DragUpPanel';
 import MapHeader from '@/components/dom/MapHeader/MapHeader';
 import { Filters } from '@/components/helpers/context/FiltersContext';
-
 import { dataFormat } from '@/utils/types';
 
 const MapControls = dynamic(
@@ -44,11 +42,15 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
-    const [showFilterInterface, setShowFilterInterface] = useState(() => false);
-    const [showNewFilterInterface, setShowNewFilterInterface] = useState(
-        () => false,
+    const [showFilterInterface, setShowFilterInterface] = useState(
+        (): boolean => false,
     );
-    const [showSearchInterface, setShowSearchInterface] = useState(() => false);
+    const [showNewFilterInterface, setShowNewFilterInterface] = useState(
+        (): boolean => false,
+    );
+    const [showSearchInterface, setShowSearchInterface] = useState(
+        (): boolean => false,
+    );
 
     const filtersContext = useContext(Filters);
 
@@ -83,7 +85,6 @@ export default function Page({ projects }: Props): ReactElement {
                     showNewFilterInterface={showNewFilterInterface}
                     showSearchInterface={showSearchInterface}
                     toggleShowFilterInterface={toggleShowFilterInterface}
-                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
                     toggleShowSearchInterface={toggleShowSearchInterface}
                     handleCloseInterface={handleCloseInterface}
                 />
@@ -94,9 +95,7 @@ export default function Page({ projects }: Props): ReactElement {
                     showFilterInterface={showFilterInterface}
                     showNewFilterInterface={showNewFilterInterface}
                     showSearchInterface={showSearchInterface}
-                    toggleShowFilterInterface={toggleShowFilterInterface}
                     toggleShowNewFilterInterface={toggleShowNewFilterInterface}
-                    toggleShowSearchInterface={toggleShowSearchInterface}
                 />
             </main>
             <Three>
