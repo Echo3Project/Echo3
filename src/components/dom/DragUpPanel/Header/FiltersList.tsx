@@ -44,7 +44,7 @@ export default function FiltersList({ filtersContext }: Props): ReactElement {
                                 className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full gap-2 mx-1 first:ml-0 last:mr-0 ${
                                     isFilterActive(filter)
                                         ? 'bg-green-300'
-                                        : 'bg-gray-100'
+                                        : 'bg-white'
                                 }`}
                                 onClick={(): void => {
                                     const customFilter = customFilters.find(

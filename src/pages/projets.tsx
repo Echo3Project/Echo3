@@ -25,7 +25,10 @@ type Props = {
 
 export default function Page({ projects }: Props): ReactElement {
     const [showFilterInterface, setShowFilterInterface] = useState(() => false);
-    const [newFilterInterface, setNewFilterInterface] = useState(() => false);
+    const [showNewFilterInterface, setShowNewFilterInterface] = useState(
+        () => false,
+    );
+    const [showSearchInterface, setShowSearchInterface] = useState(() => false);
 
     const filtersContext = useContext(Filters);
 
@@ -33,16 +36,18 @@ export default function Page({ projects }: Props): ReactElement {
         setShowFilterInterface((prev) => !prev);
     };
 
-    const toggleNewFilterInterface = (): void => {
-        setNewFilterInterface((prev) => !prev);
+    const toggleShowNewFilterInterface = (): void => {
+        setShowNewFilterInterface((prev) => !prev);
     };
 
-    const handleGoBack = (): void => {
-        if (newFilterInterface) {
-            toggleNewFilterInterface(); // Fermer l'interface de création de nouveau filtre
-        } else {
-            toggleShowFilterInterface(); // Fermer l'interface de filtres
-        }
+    const toggleShowSearchInterface = (): void => {
+        setShowSearchInterface((prev) => !prev);
+    };
+
+    const handleCloseInterface = (): void => {
+        showSearchInterface && toggleShowSearchInterface(); // Close search interface
+        showFilterInterface && toggleShowFilterInterface(); // Close filter interface
+        showNewFilterInterface && toggleShowNewFilterInterface(); // Close creation new filter interface
     };
 
     return (
@@ -55,19 +60,23 @@ export default function Page({ projects }: Props): ReactElement {
                 <MapHeader
                     filtersContext={filtersContext}
                     showFilterInterface={showFilterInterface}
-                    newFilterInterface={newFilterInterface}
+                    showNewFilterInterface={showNewFilterInterface}
+                    showSearchInterface={showSearchInterface}
                     toggleShowFilterInterface={toggleShowFilterInterface}
-                    toggleNewFilterInterface={toggleNewFilterInterface}
-                    handleGoBack={handleGoBack}
+                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
+                    toggleShowSearchInterface={toggleShowSearchInterface}
+                    handleCloseInterface={handleCloseInterface}
                 />
             </header>
             <main className="h-screen w-full flex justify-center">
                 <DragUpPanel
                     filtersContext={filtersContext}
                     showFilterInterface={showFilterInterface}
-                    newFilterInterface={newFilterInterface}
+                    showNewFilterInterface={showNewFilterInterface}
+                    showSearchInterface={showSearchInterface}
                     toggleShowFilterInterface={toggleShowFilterInterface}
-                    toggleNewFilterInterface={toggleNewFilterInterface}
+                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
+                    toggleShowSearchInterface={toggleShowSearchInterface}
                 />
             </main>
             <Three>

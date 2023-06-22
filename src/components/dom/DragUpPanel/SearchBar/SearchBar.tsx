@@ -58,21 +58,25 @@ export default function SearchBar(): ReactElement {
     }
 
     return (
-        <div className="flex flex-col w-full items-center bg-white max-h-full h-full">
+        <div className="flex flex-col w-full items-center bg-gray max-h-full h-full">
             <form className="w-full max-w-sm my-4 px-4" onSubmit={handleSubmit}>
-                <div className="bg-white border border-gray-400 rounded-full px-4">
-                    <div className="flex items-center py-2">
-                        <input
-                            className="appearance-none bg-transparent border-none w-full text-black-800 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                            type="text"
-                            placeholder="Echo 3"
-                            aria-label="Search"
-                            value={searchData}
-                            onKeyUp={handleEnter}
-                            onChange={handleChange}
-                        />
-                        <input type="submit" hidden />
-                    </div>
+                <div className="flex items-center py-2">
+                    <input
+                        className="appearance-none bg-transparent border-none w-full text-black-800 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                        style={{
+                            backgroundImage: 'url(/inputs/search_bar.svg)',
+                            backgroundRepeat: 'no-repeat',
+                            width: '336px',
+                            height: '46px',
+                        }}
+                        type="text"
+                        placeholder={'Mot clef ou nom du projet'.toUpperCase()}
+                        aria-label="Search"
+                        value={searchData}
+                        onKeyUp={handleEnter}
+                        onChange={handleChange}
+                    />
+                    <input type="submit" hidden />
                 </div>
             </form>
             {searchResults.length > 0 && (

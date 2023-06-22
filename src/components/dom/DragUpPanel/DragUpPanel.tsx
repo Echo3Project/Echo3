@@ -6,6 +6,7 @@ import { Filter } from '@/components/helpers/context/FiltersContext';
 import { Clamp } from '@/components/helpers/maths';
 
 import FiltersList from './Header/FiltersList';
+import SearchBar from './SearchBar/SearchBar';
 
 type Props = {
     filtersContext: {
@@ -18,17 +19,21 @@ type Props = {
         setActive: (value: string[]) => void;
     };
     showFilterInterface: boolean;
-    newFilterInterface: boolean;
+    showNewFilterInterface: boolean;
+    showSearchInterface: boolean;
     toggleShowFilterInterface: () => void;
-    toggleNewFilterInterface: () => void;
+    toggleShowNewFilterInterface: () => void;
+    toggleSearchInterface: () => void;
 };
 
 export default function DragUpPanel({
     filtersContext,
     showFilterInterface,
-    newFilterInterface,
+    showNewFilterInterface,
+    showSearchInterface,
     toggleShowFilterInterface,
-    toggleNewFilterInterface,
+    toggleShowNewFilterInterface,
+    toggleSearchInterface,
 }: Props): ReactElement {
     const [newFilterTitle, setNewFilterTitle] = useState(() => '');
 
@@ -82,14 +87,23 @@ export default function DragUpPanel({
         if (
             active.length > 0 ||
             showFilterInterface ||
-            newFilterInterface === true
+            showNewFilterInterface ||
+            showSearchInterface === true
         ) {
             if (y.get() <= steps[1]) return;
             api.start({ y: steps[1] });
         } else {
             api.start({ y: steps[0] });
         }
-    }, [active, showFilterInterface, api, y, steps]);
+    }, [
+        active,
+        api,
+        y,
+        steps,
+        showFilterInterface,
+        showNewFilterInterface,
+        showSearchInterface,
+    ]);
 
     useEffect(() => {
         const handler = (e: Event): void => e.preventDefault();
@@ -107,7 +121,10 @@ export default function DragUpPanel({
         {
             onDrag: ({ tap, down, last, offset: [, y], direction: [, dy] }) => {
                 if (
-                    (active.length > 0 || showFilterInterface === true) &&
+                    (active.length > 0 ||
+                        showFilterInterface ||
+                        showNewFilterInterface ||
+                        showSearchInterface === true) &&
                     y &&
                     !tap
                 ) {
@@ -135,19 +152,41 @@ export default function DragUpPanel({
 
     return (
         <div className="fixed inset-0 flex">
+            {showSearchInterface &&
+                !showFilterInterface &&
+                !showNewFilterInterface && (
+                    <animated.div
+                        ref={panelHeader}
+                        className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"
+                        style={{ y }}>
+                        <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
+                            <div className="h-0.5 w-9 bg-gray-500 self-center mb-4" />
+                            <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
+                                <div className="flex w-fit mx-4 text-sm text-black">
+                                    <SearchBar />
+                                </div>
+                            </div>
+                            {/* <button className="whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0">
+                                Supprimer le filtre
+                            </button> */}
+                        </div>
+                    </animated.div>
+                )}
             {/* If newFilterInterface is true, show form to add new filter title */}
-            {showFilterInterface && !newFilterInterface && (
+            {showFilterInterface && !showNewFilterInterface && (
                 <animated.div
+                    ref={panelHeader}
                     className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"
                     style={{ y }}>
                     <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
+                        <div className="h-0.5 w-9 bg-gray-500 self-center mb-4" />
                         <h2>Profils de filtres enregistrés</h2>
                         <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
                             <div className="flex w-fit mx-4 text-sm text-black">
                                 <div className='class="w-full my-2 scrollbar-hidden select-none"'>
                                     <button
                                         className="whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0"
-                                        onClick={toggleNewFilterInterface}>
+                                        onClick={toggleShowNewFilterInterface}>
                                         + Nouveau filtre
                                     </button>
                                 </div>
@@ -160,11 +199,13 @@ export default function DragUpPanel({
                     </div>
                 </animated.div>
             )}
-            {showFilterInterface && newFilterInterface && (
+            {showFilterInterface && showNewFilterInterface && (
                 <animated.div
+                    ref={panelHeader}
                     className="fixed -bottom-full w-full h-screen max-h-screen pointer-events-auto flex flex-col"
                     style={{ y }}>
                     <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
+                        <div className="h-0.5 w-9 bg-gray-500 self-center mb-4" />
                         <div className="w-full">
                             <form
                                 onSubmit={handleNewFilterSubmit}

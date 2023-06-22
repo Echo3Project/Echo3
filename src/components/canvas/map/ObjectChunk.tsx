@@ -17,7 +17,7 @@ import {
 } from 'three';
 
 import { Filters } from '@/components/helpers/context/FiltersContext';
-import type { dataFormat } from '@/pages/projets';
+import type { dataFormat } from '@/pages/project';
 
 type Props = {
     projects: dataFormat[];
