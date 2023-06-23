@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                         <Menu />
                         <div
                             className={`absolute top-0 w-full ${
-                                route === 'carte'
+                                route === 'projets'
                                     ? 'pointer-events-none'
                                     : 'pointer-events-auto'
                             }`}>

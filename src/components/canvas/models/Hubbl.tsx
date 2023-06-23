@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
     };
 };
 
-export function Model(props: JSX.IntrinsicElements['group']): ReactElement {
+export function Hubbl(props: JSX.IntrinsicElements['group']): ReactElement {
     const { nodes, materials } = useGLTF(
         '/models/hubbl-transformed.glb',
     ) as unknown as GLTFResult;

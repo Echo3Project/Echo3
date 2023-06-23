@@ -30,6 +30,7 @@ export default function Scene({
                 {/* <Perf position="top-right" /> */}
                 <r3f.Out />
                 <Preload all />
+                <color attach="background" args={[243, 243, 243]} />
             </Canvas>
         </div>
     );

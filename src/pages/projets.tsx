@@ -1,8 +1,8 @@
-import { PerspectiveCamera } from '@react-three/drei';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, useContext, useState } from 'react';
 
+import { Hubbl } from '@/components/canvas/models/Hubbl';
 import DragUpPanel from '@/components/dom/DragUpPanel';
 import MapHeader from '@/components/dom/MapHeader/MapHeader';
 import { Filters } from '@/components/helpers/context/FiltersContext';
@@ -26,8 +26,6 @@ const Three = dynamic(
         ssr: false,
     },
 );
-
-const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
 type Props = {
     projects: dataFormat[];
@@ -70,7 +68,7 @@ export default function Page({ projects }: Props): ReactElement {
                 <title>Echo 3 - Map</title>
                 <meta name="description" content="Echo 3 Map" />
             </Head>
-            <header className="fixed h-screen w-full flex justify-center">
+            <header className="fixed w-full flex justify-center pointer-events-none">
                 <MapHeader
                     filtersContext={filtersContext}
                     showFilterInterface={showFilterInterface}
@@ -82,7 +80,7 @@ export default function Page({ projects }: Props): ReactElement {
                     handleCloseInterface={handleCloseInterface}
                 />
             </header>
-            <main className="h-screen w-full flex justify-center">
+            <main className="h-screen w-full flex justify-center pointer-events-none">
                 <DragUpPanel
                     filtersContext={filtersContext}
                     showFilterInterface={showFilterInterface}
@@ -92,16 +90,8 @@ export default function Page({ projects }: Props): ReactElement {
                 />
             </main>
             <Three>
-                <PerspectiveCamera
-                    rotation={[initialRotation, 0, 0]}
-                    position={[0, 100, 0]}
-                    fov={75}
-                    near={0.1}
-                    far={1000}
-                    makeDefault
-                />
                 <MapControls />
-                <color attach="background" args={[243, 243, 243]} />
+                <Hubbl />
                 <ObjectChunk projects={projects} />
             </Three>
         </>

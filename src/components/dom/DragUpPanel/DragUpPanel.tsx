@@ -44,7 +44,7 @@ export default function DragUpPanel({
     const steps = useMemo(
         () => [
             -132,
-            -700,
+            typeof window !== 'undefined' ? -window.innerHeight * 0.7 : -450,
             typeof window !== 'undefined' ? -window.innerHeight : -600,
         ],
         [],
