@@ -14,10 +14,9 @@ import { DiscordUser } from '@/utils/discord/types';
 
 import {
     BellIcon,
-    ConnexionIcon,
-    ContribIcon,
-    ListIcon,
-    MapIcon,
+    ConnectionIcon,
+    ContributionIcon,
+    ProjectIcon,
 } from '../Elements/Icons';
 import Account from './Account';
 import Item from './MenuItem';
@@ -98,8 +97,11 @@ export default function Menu(): ReactElement {
     return (
         <div className={menuClsx}>
             <nav className={navClsx}>
-                <Item route="/liste" title="Liste" active={isActive('/liste')}>
-                    <ListIcon color="#ffffff" className="w-8 h-8" />
+                <Item
+                    route="/projets"
+                    title="Projets"
+                    active={isActive('/projets')}>
+                    <ProjectIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {!user && (
                     <Item
@@ -107,15 +109,15 @@ export default function Menu(): ReactElement {
                         title="Login"
                         active={isActive('/api/auth')}>
                         <span className="mx-4">
-                            <ConnexionIcon
+                            <ConnectionIcon
                                 color="#ffffff"
                                 className="w-8 h-8"
                             />
                         </span>
                     </Item>
                 )}
-                <Item route="/carte" title="Carte" active={isActive('/carte')}>
-                    <MapIcon color="#ffffff" className="w-8 h-8" />
+                <Item route="/feed" title="Feed" active={isActive('/feed')}>
+                    <BellIcon color="#ffffff" className="w-8 h-8" />
                 </Item>
                 {user && (
                     <>
@@ -136,7 +138,10 @@ export default function Menu(): ReactElement {
                             route="/contribution"
                             title="Contrib"
                             active={isActive('/contribution')}>
-                            <ContribIcon color="#ffffff" className="w-8 h-8" />
+                            <ContributionIcon
+                                color="#ffffff"
+                                className="w-8 h-8"
+                            />
                         </Item>
                     </>
                 )}
