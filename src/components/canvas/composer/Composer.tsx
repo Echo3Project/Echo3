@@ -1,17 +1,10 @@
-import {
-    EffectComposer,
-    HueSaturation,
-    SMAA,
-    Vignette,
-} from '@react-three/postprocessing';
+import { Bloom, EffectComposer, SMAA } from '@react-three/postprocessing';
 import { ReactElement } from 'react';
-
-import AutoFocusDOF from './Effects/AutoFocusDOF';
 
 export function Composer(): ReactElement {
     return (
         <EffectComposer disableNormalPass multisampling={0}>
-            <AutoFocusDOF
+            {/* <AutoFocusDOF
                 bokehScale={5}
                 resolution={1024}
                 mouseFocus={true}
@@ -19,7 +12,8 @@ export function Composer(): ReactElement {
                 focalLength={0.1}
             />
             <Vignette offset={0.4} darkness={0.55} eskil={false} />
-            <HueSaturation hue={0.1} saturation={0.2} />
+            <HueSaturation hue={0.1} saturation={0.2} /> */}
+            <Bloom mipmapBlur luminanceThreshold={1} />
             <SMAA />
         </EffectComposer>
     );

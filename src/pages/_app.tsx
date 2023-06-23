@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, Suspense } from 'react';
 
 import { modal } from '@/components/dom/Elements/Modal';
 import Menu from '@/components/dom/Menu';
@@ -31,8 +31,10 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                             <Component {...pageProps} />
                         </div>
                     </div>
-                    <Scene eventPrefix="client" />
-                    <Loader totalProjects={125} />
+                    <Suspense fallback={null}>
+                        <Scene eventPrefix="client" />
+                        <Loader totalProjects={125} />
+                    </Suspense>
                 </FiltersProvider>
                 <modal.Out />
                 {/* <footer className="fixed w-full flex justify-between z-50"></footer> */}

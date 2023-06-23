@@ -1,8 +1,10 @@
 import { Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+// import { Perf } from 'r3f-perf';
 import { ReactElement } from 'react';
 
 import { r3f } from '@/components/helpers/R3f';
+// import { Composer } from './composer';
 
 type Props = {
     // eventSource: MutableRefObject<HTMLDivElement>;
@@ -16,21 +18,30 @@ export default function Scene({
     return (
         <div className={'absolute top-0 w-full h-screen'}>
             <Canvas
-                className="touch-none"
                 eventPrefix={eventPrefix}
+                className="touch-none"
+                raycaster={{
+                    params: { Points: { threshold: 7 } },
+                    far: 1500,
+                }}
+                camera={{
+                    fov: 75,
+                    near: 10,
+                    far: 8000,
+                }}
                 gl={{
                     powerPreference: 'high-performance',
                     alpha: true,
-                    antialias: false,
+                    antialias: true,
                     stencil: false,
                     depth: true,
                     autoClear: true,
                 }}
                 shadows>
-                {/* <Perf position="top-right" /> */}
+                {/* <Perf position="top-left" /> */}
                 <r3f.Out />
                 <Preload all />
-                <color attach="background" args={[243, 243, 243]} />
+                {/* <Composer /> */}
             </Canvas>
         </div>
     );

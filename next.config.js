@@ -1,14 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: true,
+})
+
+const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
   transpilePackages: ['@react-three/postprocessing'],
   images: {
     domains: ['cdn.discordapp.com'],
     unoptimized: true,
   },
-  // server: {
-  //   port: 8080,
-  // }
-}
+})
 
 module.exports = nextConfig
