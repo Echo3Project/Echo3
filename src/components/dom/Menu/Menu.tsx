@@ -9,14 +9,16 @@ import {
     useState,
 } from 'react';
 
+import { useFollow } from '@/components/helpers/context/FollowContext';
 import { User } from '@/components/helpers/context/UserContext';
 import { DiscordUser } from '@/utils/discord/types';
 
 import {
-    BellIcon,
     ConnectionIcon,
     ContributionIcon,
+    FollowIcon,
     ProjectIcon,
+    ShareIcon,
 } from '../Elements/Icons';
 import Account from './Account';
 import Item from './MenuItem';
@@ -24,12 +26,16 @@ import Item from './MenuItem';
 export default function Menu(): ReactElement {
     const notifications = 0;
     const router = useRouter();
+    const isWhitepaperPage = router.pathname.includes('whitepaper');
     const timeout = useRef<NodeJS.Timeout | undefined>();
     const [user, setUser] = useState<DiscordUser | null>(null);
     const [open, setOpen] = useState<boolean>(true);
     const [y, setY] = useState<number>(0);
 
     const userContext = useContext(User);
+    const { followedProjects, setFollowedProjects } = useFollow();
+    const { id: idProjectsToFollow } = router.query;
+    const isFollowed = followedProjects.includes(idProjectsToFollow as string);
 
     function isActive(route: string): boolean {
         return route === router.asPath ? true : false;
@@ -71,6 +77,15 @@ export default function Menu(): ReactElement {
         }
     }, [y]);
 
+    const handleFollow = (): void => {
+        if (!isFollowed) {
+            setFollowedProjects((prev) => [
+                ...prev,
+                idProjectsToFollow as string,
+            ]);
+        }
+    };
+
     useEffect(() => {
         if (!userContext) return;
         setUser(userContext);
@@ -90,57 +105,100 @@ export default function Menu(): ReactElement {
     );
 
     const navClsx = clsx(
-        'backdrop-blur-xl backdrop-brightness-90 bg-darker rounded-lg px-4 flex max-w-sm justify-between items-center text-white h-16',
+        'backdrop-blur-xl backdrop-brightness-90 bg-darker rounded-lg px-4 flex max-w-sm justify-between items-center text-black h-16',
         user ? 'w-full' : 'gap-6 w-fit',
     );
 
     return (
         <div className={menuClsx}>
             <nav className={navClsx}>
-                <Item
-                    route="/projets"
-                    title="Projets"
-                    active={isActive('/projets')}>
-                    <ProjectIcon color="#ffffff" className="w-8 h-8" />
-                </Item>
-                {!user && (
-                    <Item
-                        route="/api/auth"
-                        title="Login"
-                        active={isActive('/api/auth')}>
-                        <span className="mx-4">
-                            <ConnectionIcon
-                                color="#ffffff"
-                                className="w-8 h-8"
-                            />
-                        </span>
-                    </Item>
-                )}
-                <Item route="/feed" title="Feed" active={isActive('/feed')}>
-                    <BellIcon color="#ffffff" className="w-8 h-8" />
-                </Item>
-                {user && (
+                {!isWhitepaperPage ? (
                     <>
-                        <Account
-                            active={isActive('/profil')}
-                            avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-                        />
                         <Item
-                            route="/feed"
-                            title="Feed"
-                            active={isActive('/feed')}
-                            notifications={
-                                notifications > 0 ? notifications : undefined
-                            }>
-                            <BellIcon color="#ffffff" className="w-8 h-8" />
+                            route="/projets"
+                            title="Projets"
+                            active={isActive('/projets')}>
+                            <ProjectIcon color="#ffffff" className="w-8 h-8" />
                         </Item>
+                        {!user && (
+                            <Item
+                                route="/api/auth"
+                                title="Login"
+                                active={isActive('/api/auth')}>
+                                <span className="mx-4">
+                                    <ConnectionIcon
+                                        color="#ffffff"
+                                        className="w-8 h-8"
+                                    />
+                                </span>
+                            </Item>
+                        )}
                         <Item
-                            route="/contribution"
+                            route="/actus"
+                            title="actus"
+                            active={isActive('/actus')}>
+                            <FollowIcon color="#ffffff" className="w-8 h-8" />
+                        </Item>
+                        {user && (
+                            <>
+                                <Account
+                                    active={isActive('/profil')}
+                                    avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                                />
+                                <Item
+                                    route="/actus"
+                                    title="Actus"
+                                    active={isActive('/actus')}
+                                    notifications={
+                                        notifications > 0
+                                            ? notifications
+                                            : undefined
+                                    }>
+                                    <FollowIcon
+                                        color="#ffffff"
+                                        className="w-6 h-6"
+                                    />
+                                </Item>
+                                <Item
+                                    route="/contribution"
+                                    title="Contrib"
+                                    active={isActive('/contribution')}>
+                                    <ContributionIcon
+                                        color="#ffffff"
+                                        className="w-8 h-8"
+                                    />
+                                </Item>
+                            </>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <Item
+                            route="/projets"
+                            title="Partager"
+                            active={isActive('/projets')}>
+                            <ShareIcon color="#000000" className="w-6 h-6" />
+                        </Item>
+                        <button onClick={handleFollow} disabled={isFollowed}>
+                            <div className="flex flex-col items-center justify-center relative">
+                                <div className="relative flex justify-center items-center mb-1 w-14">
+                                    <FollowIcon
+                                        color="#000000"
+                                        className="w-6 h-6"
+                                    />
+                                </div>
+                                <span className="text-xs text-center uppercase">
+                                    {isFollowed ? 'Suivi' : 'Suivre'}
+                                </span>
+                            </div>
+                        </button>
+                        <Item
+                            route="/projets"
                             title="Contrib"
-                            active={isActive('/contribution')}>
+                            active={isActive('/projets')}>
                             <ContributionIcon
-                                color="#ffffff"
-                                className="w-8 h-8"
+                                color="#000000"
+                                className="w-6 h-6"
                             />
                         </Item>
                     </>

@@ -45,7 +45,9 @@ export default function SearchResultsItem({ result }: Props): ReactElement {
                 </div>
             </div>
             <div className="flex border-t border-gray-400 text-center divide-x divide-gray-400 cursor-pointer">
-                <Link href={'https://google.com/'} className="w-1/2 py-4">
+                <Link
+                    href={`/projets/${result.item.id as string}/whitepaper`}
+                    className="w-1/2 py-4">
                     Whitepaper
                 </Link>
                 <Link href={'https://discord.com/'} className="w-1/2 py-4">

@@ -3,37 +3,71 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'offbit';
-  font-style: bold;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/OffBit-DotBold.ttf') format('truetype');
+    font-family: 'offbit';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/OffBit-DotBold.ttf') format('truetype');
 }
 
-html, body {
-   @apply overflow-x-hidden bg-light;
+@font-face {
+    font-family: 'jw sans';
+    font-style: normal;
+    font-weight: 400; /* This is usually the weight for Regular style */
+    font-display: swap;
+    src: url('/fonts/jw-sans/JWSans-Regular.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'jw sans';
+    font-style: normal;
+    font-weight: 500; /* This is usually the weight for Medium style */
+    font-display: swap;
+    src: url('/fonts/jw-sans/JWSans-Medium.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'jw sans';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/jw-sans/JWSans-Bold.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'jw sans';
+    font-style: normal;
+    font-weight: 300; /* Light style usually has a font weight of 300 */
+    font-display: swap;
+    src: url('/fonts/jw-sans/JWSans-Light.otf') format('truetype');
+}
+
+html,
+body {
+    @apply overflow-x-hidden bg-light;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .scrollbar-hidden {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .scrollable {
-  @apply pb-20 overflow-y-auto pointer-events-auto;
+    @apply pb-20 overflow-y-auto pointer-events-auto;
 }
 
 .mask-project {
-  mask: url('/masks/mask1.svg');
-  mask-size: cover;
+    mask: url('/masks/mask1.svg');
+    mask-size: cover;
 }
 
 @keyframes loading {
-  75%, 100% {
-    transform: rotate(-90deg);
-  }
+    75%,
+    100% {
+        transform: rotate(-90deg);
+    }
 }
