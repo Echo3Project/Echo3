@@ -1,8 +1,15 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { ReactElement, useEffect, useMemo, useRef, useState } from 'react';
+import {
+    Dispatch,
+    ReactElement,
+    SetStateAction,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 
-import { Filter } from '@/components/helpers/context/FiltersContext';
 import { Clamp } from '@/components/helpers/maths';
 
 import FiltersList from './Header/FiltersList';
@@ -13,11 +20,11 @@ type Props = {
         list: {
             fields: string[];
             tags: string[];
-            customFilters: Filter[];
+            customFilters: { title: string; fields: string[] }[];
         };
         active: string[];
-        setActive: (value: string[]) => void;
-        addFilter: (title: string, fields: string[]) => void;
+        setActive: Dispatch<SetStateAction<string[]>>;
+        addFilter: (filter: { title: string; fields: string[] }) => void;
     };
     showFilterInterface: boolean;
     showNewFilterInterface: boolean;

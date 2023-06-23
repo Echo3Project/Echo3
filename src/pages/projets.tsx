@@ -29,14 +29,6 @@ const Three = dynamic(
 
 const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
-export type dataFormat = {
-    name?: string;
-    author?: string;
-    description?: string;
-    tags?: string[];
-    fields?: string[];
-};
-
 type Props = {
     projects: dataFormat[];
 };
@@ -85,6 +77,7 @@ export default function Page({ projects }: Props): ReactElement {
                     showNewFilterInterface={showNewFilterInterface}
                     showSearchInterface={showSearchInterface}
                     toggleShowFilterInterface={toggleShowFilterInterface}
+                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
                     toggleShowSearchInterface={toggleShowSearchInterface}
                     handleCloseInterface={handleCloseInterface}
                 />
