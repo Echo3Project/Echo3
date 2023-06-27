@@ -1,25 +1,25 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement, Suspense, useContext, useState } from 'react';
 
-import { Hubbl } from '@/components/canvas/models/Hubbl';
-import DragUpPanel from '@/components/dom/DragUpPanel';
-import MapHeader from '@/components/dom/MapHeader/MapHeader';
 import { Filters } from '@/components/helpers/context/FiltersContext';
 import { dataFormat } from '@/utils/types';
 
-const MapControls = dynamic(
-    () => import('@/components/canvas/controls/MapControls'),
-    { ssr: false },
+const DragUpPanel = dynamic(() => import('@/components/dom/DragUpPanel'), {
+    ssr: false,
+});
+const MapHeader = dynamic(
+    () => import('@/components/dom/MapHeader/MapHeader'),
+    {
+        ssr: false,
+    },
 );
-const ObjectChunk = dynamic(
-    () =>
-        import('@/components/canvas/map/ObjectChunk').then(
-            (mod) => mod.ObjectChunk,
-        ),
-    { ssr: false },
+const ProjectScene = dynamic(
+    () => import('@/components/canvas/scenes/ProjectScene'),
+    {
+        ssr: false,
+    },
 );
-// const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
 const Three = dynamic(
     () => import('@/components/helpers/R3f').then((mod) => mod.Three),
     {
@@ -69,30 +69,38 @@ export default function Page({ projects }: Props): ReactElement {
                 <meta name="description" content="Echo 3 Map" />
             </Head>
             <header className="fixed w-full flex justify-center pointer-events-none">
-                <MapHeader
-                    filtersContext={filtersContext}
-                    showFilterInterface={showFilterInterface}
-                    showNewFilterInterface={showNewFilterInterface}
-                    showSearchInterface={showSearchInterface}
-                    toggleShowFilterInterface={toggleShowFilterInterface}
-                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
-                    toggleShowSearchInterface={toggleShowSearchInterface}
-                    handleCloseInterface={handleCloseInterface}
-                />
+                <Suspense fallback={null}>
+                    <MapHeader
+                        filtersContext={filtersContext}
+                        showFilterInterface={showFilterInterface}
+                        showNewFilterInterface={showNewFilterInterface}
+                        showSearchInterface={showSearchInterface}
+                        toggleShowFilterInterface={toggleShowFilterInterface}
+                        toggleShowNewFilterInterface={
+                            toggleShowNewFilterInterface
+                        }
+                        toggleShowSearchInterface={toggleShowSearchInterface}
+                        handleCloseInterface={handleCloseInterface}
+                    />
+                </Suspense>
             </header>
             <main className="h-screen w-full flex justify-center pointer-events-none">
-                <DragUpPanel
-                    filtersContext={filtersContext}
-                    showFilterInterface={showFilterInterface}
-                    showNewFilterInterface={showNewFilterInterface}
-                    showSearchInterface={showSearchInterface}
-                    toggleShowNewFilterInterface={toggleShowNewFilterInterface}
-                />
+                <Suspense fallback={null}>
+                    <DragUpPanel
+                        filtersContext={filtersContext}
+                        showFilterInterface={showFilterInterface}
+                        showNewFilterInterface={showNewFilterInterface}
+                        showSearchInterface={showSearchInterface}
+                        toggleShowNewFilterInterface={
+                            toggleShowNewFilterInterface
+                        }
+                    />
+                </Suspense>
             </main>
             <Three>
-                <MapControls />
-                <Hubbl />
-                <ObjectChunk projects={projects} />
+                <Suspense fallback={null}>
+                    <ProjectScene projects={projects} />
+                </Suspense>
             </Three>
         </>
     );

@@ -10,7 +10,7 @@ const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
 
 export default function MapControls(): null {
     const { camera, events } = useThree();
-    const position = useRef<Vector3>(new Vector3(0, 100, 0));
+    const position = useRef<Vector3>(new Vector3(0, 300, 0));
     const rotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
     const tempRotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
     const isTouchDevice = useIsTouchDevice();
@@ -19,22 +19,26 @@ export default function MapControls(): null {
     const handleMove = (offset: [number, number]): void => {
         position.current.x = clamp(
             position.current.x -
-                offset[0] * (position.current.y / 500) * strength,
-            -500,
-            500,
+                offset[0] *
+                    (position.current.y / 200) *
+                    (strength / (position.current.y * 0.006)),
+            -3050,
+            2050,
         );
         position.current.z = clamp(
             position.current.z -
-                offset[1] * (position.current.y / 500) * strength,
-            -500,
-            500,
+                offset[1] *
+                    (position.current.y / 200) *
+                    (strength / (position.current.y * 0.006)),
+            -1300,
+            3800,
         );
     };
 
     const handleZoom = (y: number): void => {
-        position.current.y = clamp(position.current.y + y / 10, 100, 1000);
+        position.current.y = clamp(position.current.y + y / 10, 300, 2000);
         rotation.current.x =
-            -Math.PI / 2 + (Math.PI / 4) * (1 - position.current.y / 1000);
+            -Math.PI / 2 + (Math.PI / 4) * (1 - position.current.y / 2000);
     };
 
     useZoom();

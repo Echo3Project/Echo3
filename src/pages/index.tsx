@@ -1,23 +1,7 @@
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, useState } from 'react';
 
 import { Modal } from '@/components/dom/Elements';
-const Three = dynamic(
-    () => import('@/components/helpers/R3f').then((mod) => mod.Three),
-    {
-        ssr: false,
-    },
-);
-const ForestModel = dynamic(
-    () =>
-        import('@/components/canvas/models/ForestModel').then(
-            (mod) => mod.ForestModel,
-        ),
-    {
-        ssr: false,
-    },
-);
 
 export default function Page(): ReactElement {
     const [active, setActive] = useState(false);
@@ -65,9 +49,6 @@ export default function Page(): ReactElement {
                     </div>
                 </Modal>
             </main>
-            <Three>
-                <ForestModel />
-            </Three>
         </>
     );
 }

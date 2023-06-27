@@ -8,6 +8,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
+        "analyze": "ANALYZE=true next build",
         "start": "next start",
         "lint": "next lint --fix",
         "generateFakeData": "node generateFakeData.js"
@@ -18,7 +19,7 @@
         "@firebase/firestore": "^3.10.1",
         "@react-spring/web": "^9.7.2",
         "@react-three/drei": "^9.66.1",
-        "@react-three/fiber": "^8.13.0",
+        "@react-three/fiber": "^8.13.3",
         "@react-three/postprocessing": "^2.14.11",
         "@studio-freight/lenis": "^1.0.1",
         "@use-gesture/react": "^10.2.26",
@@ -36,12 +37,13 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "three": "^0.153.0",
-        "three-stdlib": "^2.21.8",
+        "three-stdlib": "^2.23.10",
         "tunnel-rat": "^0.1.2",
         "urlcat": "^3.1.0"
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
+        "@next/bundle-analyzer": "^13.4.7",
         "@types/cookie": "^0.5.1",
         "@types/debounce": "^1.2.1",
         "@types/jsonwebtoken": "^9.0.2",
