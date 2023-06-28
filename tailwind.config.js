@@ -11,9 +11,16 @@ module.exports = {
             'loading': '1.3s cubic-bezier(.55,0,.45,1) infinite loading',
         },
         backgroundImage: {
+            'dot': "url('/backgrounds/dot.svg')",
+            'searchbar': "url('/backgrounds/searchbar.svg')",
+            'searchborder': "url('/backgrounds/searchborder.svg')",
             'contributions': "url('/backgrounds/contribution.png')",
             'filters': "url('/backgrounds/filters.png')",
             'loader': "linear-gradient(to bottom, rgba(242, 242, 242, 0.50) 25%, rgba(242, 242, 242, 0.95) 85%), url('/backgrounds/points.svg')",
+        },
+        backgroundSize: {
+            'searchDot': 'auto calc(100% / 11)',
+            'searchBorder': 'auto calc((100% / 11) * 9)',
         },
         colors: {
             'darker': 'rgba(45, 45, 45, 0.15)',
@@ -26,13 +33,16 @@ module.exports = {
             'green-app': 'rgba(193, 144, 19, 1)',
             'background-app': 'linear-gradient(167.81deg, rgba(242, 242, 242, 0.95) 31.05 %, rgba(242, 242, 242, 0.95) 80.87 %)'
         },
-
+        content : {
+            'searchborder': "url('/backgrounds/searchborder.svg')",
+        },
         fontFamily: {
             'dot': ['offbit', 'sans-serif'],
             'jwsans': ['jw sans', 'sans-serif'],
         },
         height: {
             18: '4.25rem',
+            '7/9': '77.7777778%',
             'screen': '100dvh',
         },
         lineHeight: {
@@ -40,7 +50,7 @@ module.exports = {
         },
         maxHeight: {
             'screen': '100dvh',
-        }
+        },
     }
   },
   plugins: [],

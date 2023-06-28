@@ -166,13 +166,10 @@ export default function DragUpPanel({
                         <div className="flex flex-col w-full items-center bg-gray-100 max-h-full h-full border-t border-gray pt-5 pb-2 rounded-t-3xl">
                             <div className="h-0.5 w-9 bg-gray-500 self-center mb-4" />
                             <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
-                                <div className="flex w-fit mx-4 text-sm text-black">
+                                <div className="flex w-full px-4 text-sm text-black">
                                     <SearchBar />
                                 </div>
                             </div>
-                            {/* <button className="whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full border border-gray-400 gap-2 mx-1 first:ml-0 last:mr-0">
-                                Supprimer le filtre
-                            </button> */}
                         </div>
                     </animated.div>
                 )}
