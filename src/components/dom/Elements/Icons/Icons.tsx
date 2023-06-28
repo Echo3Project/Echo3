@@ -604,31 +604,25 @@ export function ShareIcon({ color, ...props }: Props): ReactElement {
 
 export function FollowIcon({ color, ...props }: Props): ReactElement {
     return (
-        <SVG
-            color={color}
-            {...props}
-            width="15"
-            height="25"
-            viewBox="0 0 15 25"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10.3333" cy="13.3333" r="1.33333" fill="currentColor" />
-            <circle cx="10.3333" cy="17.8333" r="1.33333" fill="currentColor" />
-            <circle cx="4.33333" cy="13.3333" r="1.33333" fill="currentColor" />
-            <circle cx="4.33333" cy="17.8333" r="1.33333" fill="currentColor" />
-            <circle cx="7.33333" cy="13.3333" r="1.33333" fill="currentColor" />
-            <circle cx="7.33333" cy="17.8333" r="1.33333" fill="currentColor" />
-            <circle cx="1.33333" cy="13.3333" r="1.33333" fill="currentColor" />
-            <circle cx="13.3333" cy="13.3333" r="1.33333" fill="currentColor" />
-            <circle cx="1.33333" cy="10.3333" r="1.33333" fill="currentColor" />
-            <circle cx="1.33333" cy="7.33333" r="1.33333" fill="currentColor" />
-            <circle cx="4.33333" cy="4.33333" r="1.33333" fill="currentColor" />
-            <circle cx="7.33333" cy="4.33333" r="1.33333" fill="currentColor" />
-            <circle cx="7.33333" cy="1.33333" r="1.33333" fill="currentColor" />
-            <circle cx="13.3333" cy="10.3333" r="1.33333" fill="currentColor" />
-            <circle cx="13.3333" cy="7.33333" r="1.33333" fill="currentColor" />
-            <circle cx="10.3333" cy="4.33333" r="1.33333" fill="currentColor" />
-            <circle cx="15.3333" cy="1.33333" r="1.33333" fill="currentColor" />
-            <circle cx="17.3333" cy="3.33333" r="1.33333" fill="currentColor" />
+        <SVG color={color} {...props}>
+            <circle cx="21.8385" cy="22.8053" r="1.78573" fill="currentColor" />
+            <circle cx="21.8385" cy="28.8307" r="1.78573" fill="currentColor" />
+            <circle cx="13.8033" cy="22.8053" r="1.78573" fill="currentColor" />
+            <circle cx="13.8033" cy="28.8307" r="1.78573" fill="currentColor" />
+            <circle cx="17.8209" cy="22.8053" r="1.78573" fill="currentColor" />
+            <circle cx="17.8209" cy="28.8307" r="1.78573" fill="currentColor" />
+            <circle cx="9.78573" cy="22.8053" r="1.78573" fill="currentColor" />
+            <circle cx="25.858" cy="22.8053" r="1.78573" fill="currentColor" />
+            <circle cx="9.78573" cy="18.7857" r="1.78573" fill="currentColor" />
+            <circle cx="9.78573" cy="14.7681" r="1.78573" fill="currentColor" />
+            <circle cx="13.8033" cy="10.7506" r="1.78573" fill="currentColor" />
+            <circle cx="17.8209" cy="10.7506" r="1.78573" fill="currentColor" />
+            <circle cx="17.8209" cy="6.73299" r="1.78573" fill="currentColor" />
+            <circle cx="25.858" cy="18.7857" r="1.78573" fill="currentColor" />
+            <circle cx="25.858" cy="14.7681" r="1.78573" fill="currentColor" />
+            <circle cx="21.8385" cy="10.7506" r="1.78573" fill="currentColor" />
+            <circle cx="28.5357" cy="6.73299" r="1.78573" fill="currentColor" />
+            <circle cx="31.2154" cy="9.41073" r="1.78573" fill="currentColor" />
         </SVG>
     );
 }

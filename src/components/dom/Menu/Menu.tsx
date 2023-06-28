@@ -156,7 +156,7 @@ export default function Menu(): ReactElement {
                                     }>
                                     <FollowIcon
                                         color="#ffffff"
-                                        className="w-6 h-6"
+                                        className="w-8 h-8"
                                     />
                                 </Item>
                                 <Item

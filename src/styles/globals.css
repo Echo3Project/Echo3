@@ -65,6 +65,11 @@ body {
     mask-size: cover;
 }
 
+.searchbar {
+    background-size: auto 100%;
+    @apply relative bg-searchbar bg-repeat-space after:bg-searchborder after:bg-searchBorder after:absolute after:top-0 after:right-0 after:h-full after:w-4 after:translate-x-full after:rotate-180 after:bg-no-repeat after:bg-right before:bg-searchborder before:bg-searchBorder before:absolute before:top-0 before:left-0 before:h-full before:w-4 before:-translate-x-full before:bg-no-repeat before:bg-right;
+}
+
 @keyframes loading {
     75%,
     100% {
