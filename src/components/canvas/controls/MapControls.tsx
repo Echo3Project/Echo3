@@ -36,9 +36,9 @@ export default function MapControls(): null {
     };
 
     const handleZoom = (y: number): void => {
-        position.current.y = clamp(position.current.y + y / 10, 300, 2000);
+        position.current.y = clamp(position.current.y + y / 10, 300, 2300);
         rotation.current.x =
-            -Math.PI / 2 + (Math.PI / 4) * (1 - position.current.y / 2000);
+            -Math.PI / 2 + (Math.PI / 4) * (1 - position.current.y / 2300);
     };
 
     useZoom();

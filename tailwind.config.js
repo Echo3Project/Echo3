@@ -17,6 +17,8 @@ module.exports = {
             'contributions': "url('/backgrounds/contribution.png')",
             'filters': "url('/backgrounds/filters.png')",
             'loader': "linear-gradient(to bottom, rgba(242, 242, 242, 0.50) 25%, rgba(242, 242, 242, 0.95) 85%), url('/backgrounds/points.svg')",
+            'soundOn': "url('/buttons/volume_on_button.svg')",
+            'soundOff': "url('/buttons/volume_off_button.svg')",
         },
         backgroundSize: {
             'searchDot': 'auto calc(100% / 11)',
@@ -40,7 +42,11 @@ module.exports = {
             'dot': ['offbit', 'sans-serif'],
             'jwsans': ['jw sans', 'sans-serif'],
         },
+        width: {
+            10: '2.25rem',
+        },
         height: {
+            10: '2.25rem',
             18: '4.25rem',
             '7/9': '77.7777778%',
             'screen': '100dvh',

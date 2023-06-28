@@ -35,7 +35,7 @@ export default function Load({
     }
 
     useEffect((): void => {
-        if (progressState === progress) return;
+        if (progressState === progress || progressState === 100) return;
         animateProgress(progress);
         // setProgressState(progress);
     }, [progress, progressState]);
@@ -44,9 +44,10 @@ export default function Load({
         let timeout: NodeJS.Timeout;
         if (active !== shown && shown === true)
             timeout = setTimeout((): void => setShown(active), 2000);
-        else if (active !== shown && shown === false) setShown(active);
+        else if (active !== shown && shown === false && progressState !== 100)
+            setShown(active);
         return (): void => clearTimeout(timeout);
-    }, [shown, active]);
+    }, [shown, active, progressState]);
 
     const loaderClsx = clsx(
         'fixed h-screen w-full top-0 p-4 z-50 bg-white flex items-end bg-loader bg-center bg-repeat-space',

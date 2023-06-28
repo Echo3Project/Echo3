@@ -1,8 +1,16 @@
-import { ReactElement } from 'react';
+import dynamic from 'next/dynamic';
+import { ReactElement, useContext } from 'react';
 
+import { Audio as AudioContext } from '@/components/helpers/context/AudioContext';
 import { Filter } from '@/components/helpers/context/FiltersContext';
 
 import FiltersList from '../DragUpPanel/Header/FiltersList';
+const SoundButton = dynamic(
+    () => import('@/components/dom/Elements/SoundButton/SoundButton'),
+    {
+        ssr: false,
+    },
+);
 
 type Props = {
     viewState: {
@@ -37,6 +45,15 @@ export default function MapHeader({
     toggleShowSearchInterface,
     handleCloseInterface,
 }: Props): ReactElement {
+    const audio = new Audio('/sounds/button.mp3');
+    const { playing } = useContext(AudioContext);
+
+    function playSound(): void {
+        if (!playing) return;
+        audio.currentTime = 0;
+        void audio.play();
+    }
+
     return (
         <div className="fixed pt-4 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto bg-gradient-to-b from-black to-transparent via-[rgba(0,0,0,0.4)] z-50">
             {!showFilterInterface &&
@@ -52,6 +69,7 @@ export default function MapHeader({
                             height: '36px',
                         }}
                         onClick={(): void => {
+                            playSound();
                             viewState.view === 'map'
                                 ? viewState.setView('list')
                                 : viewState.setView('map');
@@ -97,6 +115,9 @@ export default function MapHeader({
                 </div>
             )}
             <FiltersList filtersContext={filtersContext} />
+            <div className="px-2 flex justify-end">
+                <SoundButton />
+            </div>
         </div>
     );
 }
