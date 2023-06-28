@@ -105,7 +105,7 @@ export default function Menu(): ReactElement {
     );
 
     const navClsx = clsx(
-        'backdrop-blur-xl backdrop-brightness-90 bg-darker rounded-lg px-4 flex max-w-sm justify-between items-center text-black h-16',
+        'max-w-sm h-16 flex justify-between items-center px-4 bg-black-app/10 backdrop-blur-xl rounded-lg text-black-app ',
         user ? 'w-full' : 'gap-6 w-fit',
     );
 
@@ -118,26 +118,21 @@ export default function Menu(): ReactElement {
                             route="/projets"
                             title="Projets"
                             active={isActive('/projets')}>
-                            <ProjectIcon color="#ffffff" className="w-8 h-8" />
+                            <ProjectIcon className="w-8 h-8 text-black-app" />
                         </Item>
                         {!user && (
                             <Item
                                 route="/api/auth"
                                 title="Login"
                                 active={isActive('/api/auth')}>
-                                <span className="mx-4">
-                                    <ConnectionIcon
-                                        color="#ffffff"
-                                        className="w-8 h-8"
-                                    />
-                                </span>
+                                <ConnectionIcon className="w-8 h-8 text-black-app" />
                             </Item>
                         )}
                         <Item
                             route="/actus"
                             title="actus"
                             active={isActive('/actus')}>
-                            <FollowIcon color="#ffffff" className="w-8 h-8" />
+                            <FollowIcon className="w-8 h-8 text-black-app" />
                         </Item>
                         {user && (
                             <>

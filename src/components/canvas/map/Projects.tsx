@@ -6,9 +6,17 @@ import Chunk from './Chunk';
 
 type Props = {
     projects: dataFormat[];
+    showProjectPanel: boolean;
+    toggleShowProjectPanel: () => void;
+    setClickedProjectData: (data: dataFormat) => void;
 };
 
-export default function Projects({ projects }: Props): ReactElement {
+export default function Projects({
+    projects,
+    showProjectPanel,
+    toggleShowProjectPanel,
+    setClickedProjectData,
+}: Props): ReactElement {
     const rows = 5;
     const columns = 5;
 
@@ -39,6 +47,9 @@ export default function Projects({ projects }: Props): ReactElement {
                                 row={rowIndex}
                                 column={columnIndex}
                                 projects={projects}
+                                showProjectPanel={showProjectPanel}
+                                toggleShowProjectPanel={toggleShowProjectPanel}
+                                setClickedProjectData={setClickedProjectData}
                                 context={context}
                                 count={
                                     /* eslint-disable @typescript-eslint/no-var-requires */
