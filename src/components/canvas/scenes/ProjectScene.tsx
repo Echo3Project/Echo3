@@ -1,10 +1,12 @@
-import { Environment, Sphere } from '@react-three/drei';
-import { useControls } from 'leva';
+import { Environment, Sphere, useKTX2 } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import { ReactElement, Suspense } from 'react';
-import { Shader } from 'three';
+import { ReactElement, Suspense, useRef } from 'react';
+import { Mesh, RepeatWrapping } from 'three';
 
 import { dataFormat } from '@/utils/types';
+
+import { Composer } from '../composer';
 
 const Hubble = dynamic(
     () => import('@/components/canvas/models/Hubble').then((mod) => mod.Hubble),
@@ -30,21 +32,15 @@ type Props = {
 };
 
 export default function ProjectScene({ projects }: Props): ReactElement {
-    const { color } = useControls({
-        color: '#00ff00',
-    });
+    const sphereRef = useRef<Mesh>(null);
+    const bloom = useKTX2('/models/textures/bloom.ktx2');
+    bloom.wrapS = bloom.wrapT = RepeatWrapping;
+    bloom.repeat.set(2, 2);
 
-    function Obc(shader: Shader): void {
-        shader.fragmentShader = `
-        ${shader.fragmentShader}
-      `.replace(
-            `vec4 diffuseColor = vec4( diffuse, opacity );`,
-            `
-        vec3 col = mix(diffuse, diffuse + vec3(0.75), smoothstep(0.5, 0.7, vUv.y));
-        vec4 diffuseColor = vec4( col, opacity );
-        `,
-        );
-    }
+    useFrame(({ clock }) => {
+        if (!sphereRef.current) return;
+        sphereRef.current.rotation.y = clock.getElapsedTime() / 5;
+    });
 
     return (
         <Suspense fallback={null}>
@@ -53,15 +49,23 @@ export default function ProjectScene({ projects }: Props): ReactElement {
             <Projects projects={projects} />
             <MemoizedSparkles />
             <Environment preset={'forest'} />
-            <Sphere args={[5000, 32, 32]} position-x={-500} position-z={200}>
+            <color args={['transparent']} attach={'background'}></color>
+            <Sphere
+                args={[4500, 32, 32]}
+                position-x={-500}
+                position-z={1000}
+                ref={sphereRef}>
                 <meshStandardMaterial
+                    emissiveMap={bloom}
+                    emissiveIntensity={20}
+                    emissive={0xdddddd}
+                    toneMapped={false}
+                    transparent
                     attach="material"
-                    color={color}
                     side={2}
-                    onBeforeCompile={(shader): void => Obc(shader)}
-                    defines={{ USE_UV: '' }}
                 />
             </Sphere>
+            <Composer />
             <fogExp2 attach="fog" args={[0xffffff, 0.0003]} />
             {/* <Plane args={[10000, 10000, 1, 1]} position-y={-1000} rotation-x={-Math.PI/2} material-color={'red'}></Plane> */}
         </Suspense>
