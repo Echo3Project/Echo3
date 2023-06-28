@@ -16,7 +16,7 @@ const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
 const Scene = dynamic(() => import('@canvas/Scene'), { ssr: false });
 
 export default function App({ Component, pageProps }: AppProps): ReactElement {
-    const route = useRouter().pathname.split('/')[1];
+    const route = useRouter().pathname;
     return (
         <UserProvider>
             <div className="w-full">
@@ -26,8 +26,8 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                         <div className="absolute top-0 w-full z-10">
                             <Menu />
                             <div
-                                className={`flex justify-center w-full ${
-                                    route === 'carte'
+                                className={`absolute top-0 flex justify-center w-full ${
+                                    route === '/projets'
                                         ? 'pointer-events-none'
                                         : 'pointer-events-auto'
                                 }`}>
