@@ -10,6 +10,8 @@ import Menu from '@/components/dom/Menu';
 import FiltersProvider from '@/components/helpers/context/FiltersContext';
 import UserProvider from '@/components/helpers/context/UserContext';
 
+import { FollowProvider } from '../components/helpers/context/FollowContext';
+
 const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
 const Scene = dynamic(() => import('@canvas/Scene'), { ssr: false });
 
@@ -19,23 +21,26 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
         <UserProvider>
             <div className="w-full">
                 <header className="fixed w-full flex justify-between z-50"></header>
-                <FiltersProvider>
-                    <div className="absolute top-0 w-full z-10">
-                        <Menu />
-                        <div
-                            className={`absolute top-0 w-full ${
-                                route === 'projets'
-                                    ? 'pointer-events-none'
-                                    : 'pointer-events-auto'
-                            }`}>
-                            <Component {...pageProps} />
+                <FollowProvider>
+                    <FiltersProvider>
+                        <div className="absolute top-0 w-full z-10">
+                            <Menu />
+                            <div
+                                className={`flex justify-center w-full ${
+                                    route === 'carte'
+                                        ? 'pointer-events-none'
+                                        : 'pointer-events-auto'
+                                }`}>
+                                <Component {...pageProps} />
+                            </div>
                         </div>
-                    </div>
-                    <Suspense fallback={null}>
-                        <Scene eventPrefix="client" />
-                        <Loader totalProjects={125} />
-                    </Suspense>
-                </FiltersProvider>
+                        <Suspense fallback={null}>
+                            <Scene eventPrefix="client" />
+                            <Loader totalProjects={125} />
+                        </Suspense>
+                    </FiltersProvider>
+                </FollowProvider>
+
                 <modal.Out />
                 {/* <footer className="fixed w-full flex justify-between z-50"></footer> */}
             </div>
