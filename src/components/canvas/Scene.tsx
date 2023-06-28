@@ -27,7 +27,7 @@ export default function Scene({
                 camera={{
                     fov: 75,
                     near: 10,
-                    far: 15000,
+                    far: 8000,
                 }}
                 gl={{
                     powerPreference: 'high-performance',

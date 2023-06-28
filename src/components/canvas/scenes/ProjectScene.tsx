@@ -54,6 +54,7 @@ export default function ProjectScene({ projects }: Props): ReactElement {
                 args={[4500, 32, 32]}
                 position-x={-500}
                 position-z={1000}
+                renderOrder={3000}
                 ref={sphereRef}>
                 <meshStandardMaterial
                     emissiveMap={bloom}
@@ -66,7 +67,7 @@ export default function ProjectScene({ projects }: Props): ReactElement {
                 />
             </Sphere>
             <Composer />
-            <fogExp2 attach="fog" args={[0xffffff, 0.0003]} />
+            <fogExp2 attach="fog" args={[0xffffff, 0.0002]} />
             {/* <Plane args={[10000, 10000, 1, 1]} position-y={-1000} rotation-x={-Math.PI/2} material-color={'red'}></Plane> */}
         </Suspense>
     );

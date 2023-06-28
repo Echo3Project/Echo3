@@ -6,11 +6,11 @@ import { clamp } from 'three/src/math/MathUtils';
 
 import { useIsTouchDevice, useZoom } from '@/hooks';
 
-const initialRotation = -Math.PI / 2 + (Math.PI / 4) * (1 - 100 / 1000);
+const initialRotation = -Math.PI / 2;
 
 export default function MapControls(): null {
     const { camera, events } = useThree();
-    const position = useRef<Vector3>(new Vector3(0, 300, 0));
+    const position = useRef<Vector3>(new Vector3(-800, 3000, 900));
     const rotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
     const tempRotation = useRef<Vector3>(new Vector3(initialRotation, 0, 0));
     const isTouchDevice = useIsTouchDevice();
