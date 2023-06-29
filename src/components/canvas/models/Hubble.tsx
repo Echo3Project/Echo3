@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.4 -t hubble.gltf
 
 import { useGLTF, useKTX2 } from '@react-three/drei';
 import React, { ReactElement } from 'react';
-import { Mesh } from 'three';
+import { Mesh, RepeatWrapping } from 'three';
 import { GLTF } from 'three-stdlib';
 
 type GLTFResult = GLTF & {
@@ -24,14 +24,25 @@ type GLTFResult = GLTF & {
 
 export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
     const { nodes } = useGLTF('/models/hubble.glb') as GLTFResult;
-    const [arbres, matcap, sol, sol_alpha, trefles, trefles_alpha] = useKTX2([
+    const [arbres, matcap, sol, sol_alpha, trefles, trefles_alpha, trefles_color, trefles_normal, trefles_occlusion, trefles_specular, trefles_light] = useKTX2([
         '/models/textures/arbres.ktx2',
         '/models/textures/matcap.ktx2',
         '/models/textures/sol.ktx2',
         '/models/textures/sol_alpha.ktx2',
         '/models/textures/trefles.ktx2',
         '/models/textures/trefles_alpha.ktx2',
+        '/models/textures/trefles_color.ktx2',
+        '/models/textures/trefles_normal.ktx2',
+        '/models/textures/trefles_occlusion.ktx2',
+        '/models/textures/trefles_specular.ktx2',
+        '/models/textures/trefles_light.ktx2',
     ]);
+
+    [trefles_color, trefles_normal, trefles_occlusion, trefles_specular].forEach((texture) => {
+        // repaet texture
+        texture.wrapS = texture.wrapT = RepeatWrapping;
+        texture.repeat.set(10, 10);
+    });
 
     return (
         <group
@@ -89,9 +100,13 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 rotation={[-Math.PI, 0, -Math.PI]}
                 scale={[37.415, 25.752, 32.205]}
                 renderOrder={500}>
-                <meshStandardMaterial
+                <meshPhongMaterial
                     attach="material"
-                    map={trefles}
+                    map={trefles_color}
+                    normalMap={trefles_normal}
+                    aoMap={trefles_occlusion}
+                    specularMap={trefles_specular}
+                    lightMap={trefles_light}
                     alphaMap={trefles_alpha}
                     transparent
                 />
