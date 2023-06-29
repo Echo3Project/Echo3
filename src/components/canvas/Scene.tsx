@@ -1,6 +1,5 @@
 import { Preload } from '@react-three/drei';
-// import { Canvas } from '@react-three/fiber';
-import { Canvas } from '@react-three/offscreen';
+import { Canvas } from '@react-three/fiber';
 // import { Perf } from 'r3f-perf';
 import { ReactElement } from 'react';
 
@@ -11,10 +10,6 @@ type Props = {
     // eventSource: MutableRefObject<HTMLDivElement>;
     eventPrefix: 'offset' | 'client' | 'page' | 'layer' | 'screen' | undefined;
 };
-
-const worker = new Worker(new URL('./worker.tsx', import.meta.url), {
-    type: 'module',
-});
 
 export default function Scene({
     // eventSource,
@@ -44,15 +39,10 @@ export default function Scene({
                     depth: true,
                     autoClear: true,
                 }}
-                worker={worker}
-                fallback={
-                    <>
-                        <r3f.Out />
-                        <Preload all />
-                    </>
-                }
                 shadows>
                 {/* <Perf position="top-left" /> */}
+                <r3f.Out />
+                <Preload all />
                 {/* <Composer /> */}
             </Canvas>
         </div>
