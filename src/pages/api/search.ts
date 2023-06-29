@@ -30,7 +30,7 @@ const options = {
         },
     ],
 };
-const fuse = new Fuse(fakeData, options);
+const fuse = new Fuse(fakeData as [], options);
 
 export default function handler(
     req: NextApiRequest,
