@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ReactElement } from 'react';
 
 import { Filter } from '@/components/helpers/context/FiltersContext';
@@ -6,6 +5,10 @@ import { Filter } from '@/components/helpers/context/FiltersContext';
 import FiltersList from '../DragUpPanel/Header/FiltersList';
 
 type Props = {
+    viewState: {
+        view: 'map' | 'list';
+        setView: (value: 'map' | 'list') => void;
+    };
     filtersContext: {
         list: {
             fields: string[];
@@ -25,6 +28,7 @@ type Props = {
 };
 
 export default function MapHeader({
+    viewState,
     filtersContext,
     showFilterInterface,
     showNewFilterInterface,
@@ -40,20 +44,22 @@ export default function MapHeader({
             !showSearchInterface ? (
                 <div className="relative flex justify-end gap-2 px-2">
                     <button
-                        className="absolute left-1/2 transform -translate-x-1/2"
+                        className={`absolute left-1/2 transform -translate-x-1/2 before:bg-[url(/buttons/switch_menu_button.svg)] before:absolute before:top-0 before:left-0 before:h-full before:w-full ${
+                            viewState.view === 'list' ? 'before:rotate-180' : ''
+                        }`}
                         style={{
-                            backgroundImage:
-                                'url(/buttons/switch_menu_button.svg)',
                             width: '140px',
                             height: '36px',
                         }}
-                        onClick={(): void => console.log('Switch')}>
-                        <Link href="/liste">
-                            <div className="absolute inset-0 flex items-center justify-between px-4 text-white text-xs uppercase">
-                                <span>Carte</span>
-                                <span className="text-white/40">Liste</span>
-                            </div>
-                        </Link>
+                        onClick={(): void => {
+                            viewState.view === 'map'
+                                ? viewState.setView('list')
+                                : viewState.setView('map');
+                        }}>
+                        <div className="absolute inset-0 flex items-center justify-between px-4 text-white text-xs uppercase">
+                            <span>Carte</span>
+                            <span className="text-white/40">Liste</span>
+                        </div>
                     </button>
                     <button
                         className="relative"

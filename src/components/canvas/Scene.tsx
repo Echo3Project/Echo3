@@ -28,6 +28,8 @@ export default function Scene({
                     fov: 75,
                     near: 10,
                     far: 8000,
+                    position: [-800, -1000, 900],
+                    rotation: [-Math.PI / 2, 0, 0],
                 }}
                 gl={{
                     powerPreference: 'high-performance',

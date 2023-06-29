@@ -80,7 +80,7 @@ export default function MapControls(): null {
 
     useEffect(() => {
         camera.rotation.x = initialRotation;
-        camera.position.set(0, 100, 0);
+        camera.position.set(-800, 2500, 900);
         const handler = (e: Event): void => e.preventDefault();
         document.addEventListener('gesturestart', handler);
         document.addEventListener('gesturechange', handler);
