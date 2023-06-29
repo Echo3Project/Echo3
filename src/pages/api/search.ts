@@ -41,7 +41,7 @@ export default function handler(
     let result = null;
     switch (requestMethod) {
         case 'POST':
-            result = fuse.search(body.search, { limit: 5 });
+            result = fuse.search(body.search, { limit: 20 });
             res.status(200).json({ data: result });
             break;
         default:

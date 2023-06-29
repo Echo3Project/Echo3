@@ -129,12 +129,11 @@ export default function Page({ project }: Props): ReactElement {
         );
     } else {
         return (
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center pb-8">
                 <div className="relative w-full flex flex-col items-center">
                     <div
                         className="relative w-full flex justify-center items-center"
                         style={{
-                            width: '390px',
                             height: '215px',
                         }}>
                         <div
@@ -531,11 +530,11 @@ export default function Page({ project }: Props): ReactElement {
                                                         </div>
                                                         {item.type ===
                                                         'Video' ? (
-                                                            <div>
+                                                            <div className="rounded-xl overflow-hidden w-full h-fit">
                                                                 {/* {item.content} */}
                                                                 <iframe
-                                                                    width="300"
-                                                                    height="125"
+                                                                    width="100%"
+                                                                    height="100%"
                                                                     src={
                                                                         item.content
                                                                     }

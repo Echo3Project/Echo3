@@ -54,8 +54,8 @@ export default function SearchBar(): ReactElement {
     }
 
     return (
-        <div className="flex flex-col w-full items-center bg-gray max-h-full h-full">
-            <form className="w-full max-w-sm my-4 px-4" onSubmit={handleSubmit}>
+        <div className="flex flex-col w-full items-center bg-gray max-h-full">
+            <form className="w-full max-w-sm px-4" onSubmit={handleSubmit}>
                 <div className="flex items-center py-2 w-full">
                     <div className="searchbar w-full">
                         <input

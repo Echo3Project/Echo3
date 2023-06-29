@@ -480,122 +480,122 @@ export function ShareIcon({ color, ...props }: Props): ReactElement {
     return (
         <SVG color={color} {...props}>
             <ellipse
-                cx="7.75156"
-                cy="1.86178"
-                rx="1.34531"
-                ry="1.37545"
+                cx="17.8853"
+                cy="6.48034"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="7.75156"
-                cy="8.04342"
-                rx="1.34531"
-                ry="1.37545"
+                cx="17.8853"
+                cy="14.7479"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="7.75156"
-                cy="11.1333"
-                rx="1.34531"
-                ry="1.37545"
+                cx="17.8853"
+                cy="18.8827"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="7.92343"
-                cy="14.4028"
-                rx="1.34531"
-                ry="1.37545"
+                cx="18.1158"
+                cy="23.2557"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="13.9703"
-                cy="13.1938"
-                rx="1.34531"
-                ry="1.37545"
+                cx="26.1998"
+                cy="21.6385"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="13.9703"
-                cy="16.2856"
-                rx="1.34531"
-                ry="1.37545"
+                cx="26.1998"
+                cy="25.7733"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="10.9469"
-                cy="19.3774"
-                rx="1.34531"
-                ry="1.37545"
+                cx="22.1588"
+                cy="29.9081"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="13.9703"
-                cy="19.3774"
-                rx="1.34531"
-                ry="1.37545"
+                cx="26.1998"
+                cy="29.9081"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="7.92343"
-                cy="19.3774"
-                rx="1.34531"
-                ry="1.37545"
+                cx="18.1158"
+                cy="29.9081"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="4.9"
-                cy="19.3774"
-                rx="1.34531"
-                ry="1.37545"
+                cx="14.0689"
+                cy="29.9081"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="1.87656"
-                cy="19.3774"
-                rx="1.34531"
-                ry="1.37545"
+                cx="10.026"
+                cy="29.9081"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="1.70468"
-                cy="16.1079"
-                rx="1.34531"
-                ry="1.37545"
+                cx="9.79549"
+                cy="25.535"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="1.87656"
-                cy="13.1938"
-                rx="1.34531"
-                ry="1.37545"
+                cx="10.026"
+                cy="21.6385"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="5.73593"
-                cy="3.92233"
-                rx="1.34531"
-                ry="1.37545"
+                cx="15.1861"
+                cy="9.2362"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="9.76718"
-                cy="3.92233"
-                rx="1.34531"
-                ry="1.37545"
+                cx="20.5787"
+                cy="9.2362"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="3.72031"
-                cy="5.98288"
-                rx="1.34531"
-                ry="1.37545"
+                cx="12.4928"
+                cy="11.9921"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
             <ellipse
-                cx="11.7828"
-                cy="5.98288"
-                rx="1.34531"
-                ry="1.37545"
+                cx="23.276"
+                cy="11.9921"
+                rx="1.79939"
+                ry="1.83971"
                 fill="currentColor"
             />
         </SVG>

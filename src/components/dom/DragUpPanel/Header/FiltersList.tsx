@@ -34,14 +34,14 @@ export default function FiltersList({ filtersContext }: Props): ReactElement {
 
     return (
         <div className="w-full my-2 overflow-x-auto scrollbar-hidden select-none">
-            <div className="flex w-fit mx-4 text-sm text-black">
+            <div className="flex w-fit px-2 text-sm text-black">
                 {list.tags
                     .concat(customFilters.map((filter) => filter.title))
                     .map(
                         (filter: string, index: number): ReactElement => (
                             <button
                                 key={index}
-                                className={`whitespace-nowrap flex justify-center items-center rounded-full gap-2 mx-1 first:ml-0 last:mr-0 ${
+                                className={`whitespace-nowrap flex justify-center items-center rounded-full gap-2 ${
                                     isFilterActive(filter) ||
                                     active.length === 0
                                         ? 'opacity-100'

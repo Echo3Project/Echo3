@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { ReactElement, useContext } from 'react';
 
 import { Audio as AudioContext } from '@/components/helpers/context/AudioContext';
@@ -56,7 +57,7 @@ export default function MapHeader({
 
     return (
         <div
-            className={`fixed pt-4 pb-1 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto z-50 ${
+            className={`select-none fixed pt-4 pb-1 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto z-50 ${
                 viewState.view === 'map'
                     ? 'bg-gradient-to-b from-[rgba(255,255,255,0.8)] to-transparent'
                     : 'bg-white'
@@ -64,7 +65,14 @@ export default function MapHeader({
             {!showFilterInterface &&
             !showNewFilterInterface &&
             !showSearchInterface ? (
-                <div className="relative flex justify-end gap-2 px-2">
+                <div className="relative w-full flex items-center justify-between gap-2 px-2">
+                    <Image
+                        className=""
+                        src="/images/hubble.svg"
+                        alt="HUBBLE Logo"
+                        width={82}
+                        height={23}
+                    />
                     <button
                         className={`absolute left-1/2 transform -translate-x-1/2 before:bg-[url(/buttons/switch_menu_button.svg)] before:absolute before:top-0 before:left-0 before:h-full before:w-full ${
                             viewState.view === 'list' ? 'before:rotate-180' : ''
@@ -98,27 +106,29 @@ export default function MapHeader({
                             </span>
                         </div>
                     </button>
-                    <button
-                        className="relative"
-                        style={{
-                            backgroundImage:
-                                'url(/buttons/filter_menu_button.svg)',
-                            width: '36px',
-                            height: '36px',
-                        }}
-                        onClick={(): void =>
-                            toggleShowFilterInterface()
-                        }></button>
-                    <button
-                        className="relative"
-                        style={{
-                            backgroundImage:
-                                'url(/buttons/search_menu_button.svg)',
-                            width: '36px',
-                            height: '36px',
-                        }}
-                        onClick={(): void => toggleShowSearchInterface()}
-                    />
+                    <div className="flex gap-2">
+                        <button
+                            className="relative"
+                            style={{
+                                backgroundImage:
+                                    'url(/buttons/filter_menu_button.svg)',
+                                width: '36px',
+                                height: '36px',
+                            }}
+                            onClick={(): void =>
+                                toggleShowFilterInterface()
+                            }></button>
+                        <button
+                            className="relative"
+                            style={{
+                                backgroundImage:
+                                    'url(/buttons/search_menu_button.svg)',
+                                width: '36px',
+                                height: '36px',
+                            }}
+                            onClick={(): void => toggleShowSearchInterface()}
+                        />
+                    </div>
                 </div>
             ) : (
                 <div className="flex gap-20 justify-center">

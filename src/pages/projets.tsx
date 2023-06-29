@@ -90,11 +90,11 @@ export default function Page({ projects }: Props): ReactElement {
     };
 
     const animation = useSpring({
-        width: showProjectPanel ? '287px' : '0px',
-        boxShadow: `0 0 ${showProjectPanel ? '100px' : '0px'} ${
-            showProjectPanel ? '30px' : '0px'
-        } rgba(255, 255, 255, ${showProjectPanel ? '0.4' : '0'})`,
-        height: '120px',
+        scaleX: showProjectPanel ? 1 : 0,
+        // boxShadow: `0 0 ${showProjectPanel ? '100px' : '0px'} ${
+        //     showProjectPanel ? '30px' : '0px'
+        // } rgba(255, 255, 255, ${showProjectPanel ? '0.4' : '0'})`,
+        // height: '120px',
         config: { tension: 1000, friction: 60 },
     });
 
@@ -141,7 +141,7 @@ export default function Page({ projects }: Props): ReactElement {
                                         setShowProjectPanel(false)
                                     }>
                                     <animated.div
-                                        className="flex justify-center items-center bg-black-app/10 backdrop-blur-xl rounded-lg px-8 py-4"
+                                        className="flex w-[287px] justify-center items-center bg-black-app/10 backdrop-blur-xl rounded-lg px-8 py-4 relative"
                                         style={animation}>
                                         <div className="flex flex-col justify-center items-center font-jwsans text-black-app">
                                             <div

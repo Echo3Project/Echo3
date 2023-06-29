@@ -20,6 +20,7 @@
         "@react-spring/web": "^9.7.2",
         "@react-three/drei": "^9.66.1",
         "@react-three/fiber": "^8.13.3",
+        "@react-three/offscreen": "^0.0.8",
         "@react-three/postprocessing": "^2.14.11",
         "@studio-freight/lenis": "^1.0.1",
         "@use-gesture/react": "^10.2.26",

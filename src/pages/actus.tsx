@@ -106,16 +106,15 @@ export default function Page({ projects }: Props): ReactElement {
     }
 
     return (
-        <div className="flex justify-center p-6" style={{ width: '390px' }}>
+        <div className="flex justify-center p-6 pt-0 w-full">
             <div className="relative w-full flex flex-col items-center">
                 <div
-                    className="absolute top-0 w-full h-full justify-center items-center"
+                    className="absolute top-0 w-full h-full justify-center items-center w-screen"
                     style={{
                         zIndex: -1,
                         backgroundImage: `url(/backgrounds/feed.svg)`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
-                        width: '390px',
                         height: '350px',
                     }}
                 />
@@ -133,11 +132,7 @@ export default function Page({ projects }: Props): ReactElement {
                 </h1>
                 {followedProjectObjects.map((project, index) => (
                     <Fragment key={index}>
-                        <div
-                            className="flex flex-col text-xs gap-2 pr-4 pl-4"
-                            style={{
-                                width: '390px',
-                            }}>
+                        <div className="flex flex-col text-xs gap-2 pr-4 pl-4 w-screen max-w-sm">
                             <div className="w-full flex">
                                 <div className="w-full flex gap-2">
                                     <div className="w-full flex flex-row items-center gap-2">

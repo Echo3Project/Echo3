@@ -130,7 +130,7 @@ export default function Chunk({
             (
                 pointsRef.current.geometry.attributes
                     .color as Float32BufferAttribute
-            ).getX(e.index) < 0.9
+            ).getX(e.index) < 0.5
         )
             return;
         toggleShowProjectPanel();

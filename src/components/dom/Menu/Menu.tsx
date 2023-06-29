@@ -100,12 +100,12 @@ export default function Menu(): ReactElement {
     }, [handleNavigation]);
 
     const menuClsx = clsx(
-        'fixed bottom-0 w-full flex justify-center p-2 transition-transform duration-500 ease-in-out z-20',
+        'select-none fixed bottom-0 w-full flex justify-center p-2 transition-transform duration-500 ease-in-out z-20 pointer-events-none',
         open ? 'translate-y-0' : 'translate-y-full',
     );
 
     const navClsx = clsx(
-        'max-w-sm h-16 flex justify-between items-center px-4 bg-black-app/10 backdrop-blur-xl rounded-lg text-black-app ',
+        'max-w-sm h-16 flex justify-between items-center px-4 bg-black-app/10 backdrop-blur-xl rounded-lg text-black-app pointer-events-auto',
         user ? 'w-full' : 'gap-6 w-fit',
     );
 
@@ -118,21 +118,30 @@ export default function Menu(): ReactElement {
                             route="/projets"
                             title="Projets"
                             active={isActive('/projets')}>
-                            <ProjectIcon className="w-8 h-8 text-black-app" />
+                            <ProjectIcon
+                                className="w-8 h-8 text-black-app"
+                                color="#000000"
+                            />
                         </Item>
                         {!user && (
                             <Item
                                 route="/api/auth"
                                 title="Login"
                                 active={isActive('/api/auth')}>
-                                <ConnectionIcon className="w-8 h-8 text-black-app" />
+                                <ConnectionIcon
+                                    className="w-8 h-8 text-black-app"
+                                    color="#000000"
+                                />
                             </Item>
                         )}
                         <Item
                             route="/actus"
                             title="actus"
                             active={isActive('/actus')}>
-                            <FollowIcon className="w-8 h-8 text-black-app" />
+                            <FollowIcon
+                                className="w-8 h-8 text-black-app"
+                                color="#000000"
+                            />
                         </Item>
                         {user && (
                             <>
@@ -150,7 +159,7 @@ export default function Menu(): ReactElement {
                                             : undefined
                                     }>
                                     <FollowIcon
-                                        color="#ffffff"
+                                        color="#000000"
                                         className="w-8 h-8"
                                     />
                                 </Item>
@@ -159,7 +168,7 @@ export default function Menu(): ReactElement {
                                     title="Contrib"
                                     active={isActive('/contribution')}>
                                     <ContributionIcon
-                                        color="#ffffff"
+                                        color="#000000"
                                         className="w-8 h-8"
                                     />
                                 </Item>
@@ -172,14 +181,14 @@ export default function Menu(): ReactElement {
                             route="/projets"
                             title="Partager"
                             active={isActive('/projets')}>
-                            <ShareIcon color="#000000" className="w-6 h-6" />
+                            <ShareIcon color="#000000" className="w-8 h-8" />
                         </Item>
                         <button onClick={handleFollow} disabled={isFollowed}>
                             <div className="flex flex-col items-center justify-center relative">
                                 <div className="relative flex justify-center items-center mb-1 w-14">
                                     <FollowIcon
                                         color="#000000"
-                                        className="w-6 h-6"
+                                        className="w-8 h-8"
                                     />
                                 </div>
                                 <span className="text-xs text-center uppercase">
@@ -193,7 +202,7 @@ export default function Menu(): ReactElement {
                             active={isActive('/projets')}>
                             <ContributionIcon
                                 color="#000000"
-                                className="w-6 h-6"
+                                className="w-8 h-8"
                             />
                         </Item>
                     </>
