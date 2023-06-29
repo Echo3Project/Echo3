@@ -126,7 +126,7 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 position={[0.561, 1.222, -1.115]}
                 rotation={[-Math.PI, 0, -Math.PI]}
                 scale={[37.415, 25.752, 32.205]}
-                renderOrder={500}>
+                renderOrder={-5}>
                 <meshPhongMaterial
                     attach="material"
                     map={trefles_color}
@@ -143,7 +143,8 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 geometry={nodes.Sol.geometry}
                 position={[0, 0.4, 0]}
                 rotation={[-Math.PI, 0, -Math.PI]}
-                scale={[72.96, 35, 62.801]}>
+                scale={[72.96, 35, 62.801]}
+                renderOrder={-10}>
                 <meshStandardMaterial
                     attach="material"
                     map={sol_color}

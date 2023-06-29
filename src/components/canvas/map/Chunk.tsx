@@ -94,12 +94,12 @@ export default function Chunk({
     }, [count, tiles]);
 
     const colors = useMemo(() => {
-        const colors = new Float32Array(count * 4).fill(1);
+        const colors = new Float32Array(count * 4).fill(0.9);
         let i = 0;
         for (let ix = 1; ix <= tiles.length - 1; ix++) {
-            colors[i] = 1;
-            colors[i + 1] = 1;
-            colors[i + 2] = 1;
+            colors[i] = 0.9;
+            colors[i + 1] = 0.9;
+            colors[i + 2] = 0.9;
             colors[i + 3] =
                 active.length === 0 ||
                 (projects[i % projects.length]?.tags as string[]).some((r) =>
@@ -130,7 +130,7 @@ export default function Chunk({
             (
                 pointsRef.current.geometry.attributes
                     .color as Float32BufferAttribute
-            ).getW(e.index) < 0.4
+            ).getX(e.index) > 0.9
         )
             return;
         toggleShowProjectPanel();
@@ -144,11 +144,12 @@ export default function Chunk({
                 .color as Float32BufferAttribute
         ).getW(e.index);
         if (alpha < 0.4) return;
+        const value = isOver ? 3 : 0.9;
         setIsHover(active.length !== 0 ? isOver : false);
         (
             pointsRef.current.geometry.attributes
                 .color as Float32BufferAttribute
-        ).setXYZW(e.index, 1, 1, 1, isOver ? 0.4 : 1);
+        ).setXYZW(e.index, value, value, value, 1);
         pointsRef.current.geometry.attributes.color.needsUpdate = true;
     }
 
@@ -168,7 +169,7 @@ export default function Chunk({
                     size={14}
                     sizeAttenuation={true}
                     depthWrite={true}
-                    toneMapped={true}
+                    toneMapped={false}
                 />
             </Points>
         </Fragment>
