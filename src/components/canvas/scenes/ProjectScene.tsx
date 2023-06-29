@@ -1,4 +1,4 @@
-import { Environment, Sphere, useKTX2 } from '@react-three/drei';
+import { Environment, useKTX2 } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 import { ReactElement, Suspense, useRef } from 'react';
@@ -66,7 +66,7 @@ export default function ProjectScene({
             />
             <Environment files={'env.exr'} path="/models/textures/" />
             <MemoizedClouds />
-            <Sphere
+            {/* <Sphere
                 args={[4800, 32, 32]}
                 position-x={-500}
                 position-z={1000}
@@ -80,7 +80,7 @@ export default function ProjectScene({
                     attach="material"
                     side={2}
                 />
-            </Sphere>
+            </Sphere> */}
             <Composer />
             <fogExp2 attach="fog" args={[0xffffff, 0.0002]} />
             {/* <Plane args={[10000, 10000, 1, 1]} position-y={-1000} rotation-x={-Math.PI/2} material-color={'red'}></Plane> */}
