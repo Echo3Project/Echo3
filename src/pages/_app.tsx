@@ -7,6 +7,7 @@ import { ReactElement, Suspense } from 'react';
 
 import { modal } from '@/components/dom/Elements/Modal';
 import Menu from '@/components/dom/Menu';
+import AudioProvider from '@/components/helpers/context/AudioContext';
 import FiltersProvider from '@/components/helpers/context/FiltersContext';
 import UserProvider from '@/components/helpers/context/UserContext';
 
@@ -23,21 +24,23 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                 <header className="fixed w-full flex justify-between z-50"></header>
                 <FollowProvider>
                     <FiltersProvider>
-                        <div className="absolute top-0 w-full z-10">
-                            <Menu />
-                            <div
-                                className={`absolute top-0 flex justify-center w-full ${
-                                    route === '/projets'
-                                        ? 'pointer-events-none'
-                                        : 'pointer-events-auto'
-                                }`}>
-                                <Component {...pageProps} />
+                        <AudioProvider>
+                            <div className="absolute top-0 w-full z-10">
+                                <Menu />
+                                <div
+                                    className={`absolute top-0 flex justify-center w-full ${
+                                        route === '/projets'
+                                            ? 'pointer-events-none'
+                                            : 'pointer-events-auto'
+                                    }`}>
+                                    <Component {...pageProps} />
+                                </div>
                             </div>
-                        </div>
-                        <Suspense fallback={null}>
-                            <Scene eventPrefix="client" />
-                            <Loader totalProjects={125} />
-                        </Suspense>
+                            <Suspense fallback={null}>
+                                <Scene eventPrefix="client" />
+                                <Loader totalProjects={125} />
+                            </Suspense>
+                        </AudioProvider>
                     </FiltersProvider>
                 </FollowProvider>
 
