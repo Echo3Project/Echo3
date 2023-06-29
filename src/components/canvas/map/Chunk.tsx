@@ -135,10 +135,8 @@ export default function Chunk({
             ).getW(e.index) < 0.4
         )
             return;
-        console.log(projects[e.index % projects.length]);
         toggleShowProjectPanel();
         setClickedProjectData(projects[e.index % projects.length]);
-        console.log('showProjectPanel', showProjectPanel);
     }
 
     function hovered(e: ThreeEvent<MouseEvent>, isOver: boolean): void {

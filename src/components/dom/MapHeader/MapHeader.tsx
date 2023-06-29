@@ -134,9 +134,11 @@ export default function MapHeader({
                 </div>
             )}
             <FiltersList filtersContext={filtersContext} />
-            <div className="px-2 flex justify-end">
-                <SoundButton />
-            </div>
+            {viewState.view === 'map' && (
+                <div className="px-2 flex justify-end">
+                    <SoundButton />
+                </div>
+            )}
         </div>
     );
 }

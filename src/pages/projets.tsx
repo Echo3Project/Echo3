@@ -98,10 +98,6 @@ export default function Page({ projects }: Props): ReactElement {
         config: { tension: 1000, friction: 60 },
     });
 
-    useEffect(() => {
-        console.log('clickedProjectData', clickedProjectData);
-    }, [clickedProjectData]);
-
     return (
         <>
             <Head>
