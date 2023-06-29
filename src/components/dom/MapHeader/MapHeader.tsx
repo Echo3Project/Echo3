@@ -55,7 +55,12 @@ export default function MapHeader({
     }
 
     return (
-        <div className="fixed pt-4 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto bg-gradient-to-b from-black to-transparent via-[rgba(0,0,0,0.4)] z-50">
+        <div
+            className={`fixed pt-4 pb-1 top-0 left-0 right-0 w-full flex flex-col pointer-events-auto z-50 ${
+                viewState.view === 'map'
+                    ? 'bg-gradient-to-b from-[rgba(255,255,255,0.8)] to-transparent'
+                    : 'bg-white'
+            }`}>
             {!showFilterInterface &&
             !showNewFilterInterface &&
             !showSearchInterface ? (
@@ -74,9 +79,23 @@ export default function MapHeader({
                                 ? viewState.setView('list')
                                 : viewState.setView('map');
                         }}>
-                        <div className="absolute inset-0 flex items-center justify-between px-4 text-white text-xs uppercase">
-                            <span>Carte</span>
-                            <span className="text-white/40">Liste</span>
+                        <div className="absolute inset-0 flex items-center justify-between px-4 text-black text-xs uppercase">
+                            <span
+                                className={
+                                    viewState.view === 'map'
+                                        ? 'text-black'
+                                        : 'text-black/40'
+                                }>
+                                Carte
+                            </span>
+                            <span
+                                className={
+                                    viewState.view === 'list'
+                                        ? 'text-black'
+                                        : 'text-black/40'
+                                }>
+                                Liste
+                            </span>
                         </div>
                     </button>
                     <button
@@ -104,7 +123,7 @@ export default function MapHeader({
             ) : (
                 <div className="flex gap-20 justify-center">
                     <button
-                        className="relative text-white text-xs text-center uppercase"
+                        className="relative text-black text-xs text-center uppercase"
                         onClick={(): void => handleCloseInterface()}>
                         <div className="absolute top-0 left-0 w-1 h-1 bg-white rounded-full" />
                         <div className="absolute top-0 right-0 w-1 h-1 bg-white rounded-full" />

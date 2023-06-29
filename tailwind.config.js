@@ -15,7 +15,7 @@ module.exports = {
             'searchbar': "url('/backgrounds/searchbar.svg')",
             'searchborder': "url('/backgrounds/searchborder.svg')",
             'contributions': "url('/backgrounds/contribution.png')",
-            'filters': "url('/backgrounds/filters.png')",
+            'filters': "url('/backgrounds/filters.svg')",
             'loader': "linear-gradient(to bottom, rgba(242, 242, 242, 0.50) 25%, rgba(242, 242, 242, 0.95) 85%), url('/backgrounds/points.svg')",
             'soundOn': "url('/buttons/volume_on_button.svg')",
             'soundOff': "url('/buttons/volume_off_button.svg')",
