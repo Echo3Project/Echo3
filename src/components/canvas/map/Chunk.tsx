@@ -25,6 +25,9 @@ type Props = {
     projects: dataFormat[];
     count: number;
     context: CanvasRenderingContext2D;
+    showProjectPanel: boolean;
+    toggleShowProjectPanel: () => void;
+    setClickedProjectData: (data: dataFormat) => void;
 };
 
 export default function Chunk({
@@ -33,6 +36,9 @@ export default function Chunk({
     projects,
     context,
     count,
+    showProjectPanel,
+    toggleShowProjectPanel,
+    setClickedProjectData,
 }: Props): ReactElement {
     const pointsRef = useRef<TPoints>(null);
     const { active } = useContext(Filters);
@@ -130,6 +136,9 @@ export default function Chunk({
         )
             return;
         console.log(projects[e.index % projects.length]);
+        toggleShowProjectPanel();
+        setClickedProjectData(projects[e.index % projects.length]);
+        console.log('showProjectPanel', showProjectPanel);
     }
 
     function hovered(e: ThreeEvent<MouseEvent>, isOver: boolean): void {

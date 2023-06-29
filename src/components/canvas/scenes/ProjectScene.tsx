@@ -29,9 +29,17 @@ const Projects = dynamic(() => import('@/components/canvas/map/Projects'), {
 
 type Props = {
     projects: dataFormat[];
+    showProjectPanel: boolean;
+    toggleShowProjectPanel: () => void;
+    setClickedProjectData: (data: dataFormat) => void;
 };
 
-export default function ProjectScene({ projects }: Props): ReactElement {
+export default function ProjectScene({
+    projects,
+    showProjectPanel,
+    toggleShowProjectPanel,
+    setClickedProjectData,
+}: Props): ReactElement {
     const sphereRef = useRef<Mesh>(null);
     const bloom = useKTX2('/models/textures/bloom.ktx2');
     bloom.wrapS = bloom.wrapT = RepeatWrapping;
@@ -46,7 +54,12 @@ export default function ProjectScene({ projects }: Props): ReactElement {
         <Suspense fallback={null}>
             <MapControls />
             <Hubble />
-            <Projects projects={projects} />
+            <Projects
+                projects={projects}
+                showProjectPanel={showProjectPanel}
+                toggleShowProjectPanel={toggleShowProjectPanel}
+                setClickedProjectData={setClickedProjectData}
+            />
             <MemoizedSparkles />
             <Environment preset={'forest'} />
             <color args={['transparent']} attach={'background'}></color>
