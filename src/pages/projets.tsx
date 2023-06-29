@@ -245,7 +245,7 @@ export function getServerSideProps(): ServerProps {
         require('@/pages/api/data/fake.json') as dataFormat[];
     const projects: dataFormat[] = [];
     fakeData.forEach((item: dataFormat): void => {
-        const project: dataFormat = {};
+        const project: dataFormat = Object() as dataFormat;
         [
             'id',
             'name',
