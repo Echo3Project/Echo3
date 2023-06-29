@@ -2,7 +2,7 @@ import { animated, useSpring } from '@react-spring/web';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
-import { ReactElement, Suspense, useContext, useEffect, useState } from 'react';
+import { ReactElement, Suspense, useContext, useState } from 'react';
 
 import { Filters } from '@/components/helpers/context/FiltersContext';
 import { dataFormat } from '@/utils/types';
@@ -209,7 +209,6 @@ export default function Page({ projects }: Props): ReactElement {
                         <Suspense fallback={null}>
                             <ProjectScene
                                 projects={projects}
-                                showProjectPanel={showProjectPanel}
                                 toggleShowProjectPanel={toggleShowProjectPanel}
                                 setClickedProjectData={setClickedProjectData}
                             />

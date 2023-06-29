@@ -25,7 +25,6 @@ type Props = {
     projects: dataFormat[];
     count: number;
     context: CanvasRenderingContext2D;
-    showProjectPanel: boolean;
     toggleShowProjectPanel: () => void;
     setClickedProjectData: (data: dataFormat) => void;
 };
@@ -36,7 +35,6 @@ export default function Chunk({
     projects,
     context,
     count,
-    showProjectPanel,
     toggleShowProjectPanel,
     setClickedProjectData,
 }: Props): ReactElement {

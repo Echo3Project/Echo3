@@ -6,14 +6,12 @@ import Chunk from './Chunk';
 
 type Props = {
     projects: dataFormat[];
-    showProjectPanel: boolean;
     toggleShowProjectPanel: () => void;
     setClickedProjectData: (data: dataFormat) => void;
 };
 
 export default function Projects({
     projects,
-    showProjectPanel,
     toggleShowProjectPanel,
     setClickedProjectData,
 }: Props): ReactElement {
@@ -44,19 +42,20 @@ export default function Projects({
                                 (rowIndex - rows / 2) * 1024 - 2048,
                             ]}>
                             <Chunk
-                                row={rowIndex}
-                                column={columnIndex}
+                                row={4 - rowIndex}
+                                column={4 - columnIndex}
                                 projects={projects}
-                                showProjectPanel={showProjectPanel}
                                 toggleShowProjectPanel={toggleShowProjectPanel}
                                 setClickedProjectData={setClickedProjectData}
                                 context={context}
                                 count={
                                     /* eslint-disable @typescript-eslint/no-var-requires */
                                     (
-                                        require(`./data/${columnIndex + 1}_${
-                                            rowIndex + 1
-                                        }.json`) as { l: number }
+                                        require(`./data/${
+                                            4 - columnIndex + 1
+                                        }_${4 - rowIndex + 1}.json`) as {
+                                            l: number;
+                                        }
                                     ).l
                                     /* eslint-enable @typescript-eslint/no-var-requires */
                                 }

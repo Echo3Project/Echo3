@@ -29,14 +29,12 @@ const Projects = dynamic(() => import('@/components/canvas/map/Projects'), {
 
 type Props = {
     projects: dataFormat[];
-    showProjectPanel: boolean;
     toggleShowProjectPanel: () => void;
     setClickedProjectData: (data: dataFormat) => void;
 };
 
 export default function ProjectScene({
     projects,
-    showProjectPanel,
     toggleShowProjectPanel,
     setClickedProjectData,
 }: Props): ReactElement {
@@ -56,23 +54,20 @@ export default function ProjectScene({
             <Hubble />
             <Projects
                 projects={projects}
-                showProjectPanel={showProjectPanel}
                 toggleShowProjectPanel={toggleShowProjectPanel}
                 setClickedProjectData={setClickedProjectData}
             />
             <MemoizedSparkles />
-            <Environment preset={'forest'} />
-            <color args={['transparent']} attach={'background'}></color>
+            <Environment files={'env.exr'} path="/models/textures/" />
             <Sphere
                 args={[4500, 32, 32]}
                 position-x={-500}
                 position-z={1000}
-                renderOrder={3000}
                 ref={sphereRef}>
                 <meshStandardMaterial
                     emissiveMap={bloom}
-                    emissiveIntensity={20}
-                    emissive={0xdddddd}
+                    emissiveIntensity={10}
+                    emissive={0xc8c18b}
                     toneMapped={false}
                     transparent
                     attach="material"

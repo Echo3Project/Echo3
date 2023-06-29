@@ -30,9 +30,11 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
     const [
         arbres,
         matcap,
-        sol,
+        sol_rough,
+        sol_normal,
+        sol_light,
+        sol_color,
         sol_alpha,
-        // trefles,
         trefles_alpha,
         trefles_color,
         trefles_normal,
@@ -42,9 +44,11 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
     ] = useKTX2([
         '/models/textures/arbres.ktx2',
         '/models/textures/matcap.ktx2',
-        '/models/textures/sol.ktx2',
+        '/models/textures/sol_rough.ktx2',
+        '/models/textures/sol_normal.ktx2',
+        '/models/textures/sol_light.ktx2',
+        '/models/textures/sol_color.ktx2',
         '/models/textures/sol_alpha.ktx2',
-        // '/models/textures/trefles.ktx2',
         '/models/textures/trefles_alpha.ktx2',
         '/models/textures/trefles_color.ktx2',
         '/models/textures/trefles_normal.ktx2',
@@ -54,6 +58,9 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
     ]);
 
     [
+        sol_color,
+        sol_rough,
+        sol_normal,
         trefles_color,
         trefles_normal,
         trefles_occlusion,
@@ -128,6 +135,7 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                     specularMap={trefles_specular}
                     lightMap={trefles_light}
                     alphaMap={trefles_alpha}
+                    lightMapIntensity={0.5}
                     transparent
                 />
             </mesh>
@@ -138,7 +146,11 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 scale={[72.96, 35, 62.801]}>
                 <meshStandardMaterial
                     attach="material"
-                    map={sol}
+                    map={sol_color}
+                    roughnessMap={sol_rough}
+                    normalMap={sol_normal}
+                    lightMap={sol_light}
+                    lightMapIntensity={0.25}
                     alphaMap={sol_alpha}
                     transparent
                 />
@@ -148,7 +160,13 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 rotation={[-Math.PI / 2, 0, -1.909]}
                 scale={3.138}>
                 <mesh geometry={nodes.arbre001.geometry}>
-                    <meshStandardMaterial attach="material" map={arbres} />
+                    <meshStandardMaterial
+                        attach="material"
+                        map={arbres}
+                        toneMapped={false}
+                        emissive={'white'}
+                        emissiveIntensity={0.1}
+                    />
                 </mesh>
                 <Audio />
             </group>
@@ -157,7 +175,13 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 rotation={[-Math.PI / 2, 0, -1.909]}
                 scale={3.138}>
                 <mesh geometry={nodes.arbre002.geometry}>
-                    <meshStandardMaterial attach="material" map={arbres} />
+                    <meshStandardMaterial
+                        attach="material"
+                        map={arbres}
+                        toneMapped={false}
+                        emissive={'white'}
+                        emissiveIntensity={0.1}
+                    />
                 </mesh>
                 <Audio />
             </group>
@@ -166,7 +190,13 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 rotation={[-Math.PI / 2, 0, -1.909]}
                 scale={3.138}>
                 <mesh geometry={nodes.arbre003.geometry}>
-                    <meshStandardMaterial attach="material" map={arbres} />
+                    <meshStandardMaterial
+                        attach="material"
+                        map={arbres}
+                        toneMapped={false}
+                        emissive={'white'}
+                        emissiveIntensity={0.1}
+                    />
                 </mesh>
                 <Audio />
             </group>
