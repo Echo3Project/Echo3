@@ -41,10 +41,11 @@ export default function FiltersList({ filtersContext }: Props): ReactElement {
                         (filter: string, index: number): ReactElement => (
                             <button
                                 key={index}
-                                className={`whitespace-nowrap flex justify-center items-center px-6 py-3 rounded-full gap-2 mx-1 first:ml-0 last:mr-0 ${
-                                    isFilterActive(filter)
-                                        ? 'bg-green-300'
-                                        : 'bg-white'
+                                className={`whitespace-nowrap flex justify-center items-center rounded-full gap-2 mx-1 first:ml-0 last:mr-0 ${
+                                    isFilterActive(filter) ||
+                                    active.length === 0
+                                        ? 'opacity-100'
+                                        : 'opacity-50'
                                 }`}
                                 onClick={(): void => {
                                     const customFilter = customFilters.find(
@@ -88,8 +89,11 @@ export default function FiltersList({ filtersContext }: Props): ReactElement {
                                         }
                                     }
                                 }}>
-                                <div className="bg-filters bg-no-repeat bg-center bg-contain h-4 w-3"></div>
-                                {filter}
+                                <div className="h-10 w-24 bg-filters bg-center bg-contain bg-no-repeat flex items-center justify-center">
+                                    <span className="pl-4 font-medium overflow-hidden text-clip w-14">
+                                        {filter}
+                                    </span>
+                                </div>
                             </button>
                         ),
                     )}
