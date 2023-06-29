@@ -1,6 +1,6 @@
 import { Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-// import { Perf } from 'r3f-perf';
+import { Perf } from 'r3f-perf';
 import { ReactElement } from 'react';
 
 import { r3f } from '@/components/helpers/R3f';
@@ -34,13 +34,13 @@ export default function Scene({
                 gl={{
                     powerPreference: 'high-performance',
                     alpha: true,
-                    antialias: true,
+                    antialias: false,
                     stencil: false,
                     depth: true,
                     autoClear: true,
                 }}
                 shadows>
-                {/* <Perf position="top-left" /> */}
+                <Perf position="top-left" />
                 <r3f.Out />
                 <Preload all />
                 {/* <Composer /> */}

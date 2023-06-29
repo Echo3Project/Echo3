@@ -26,7 +26,7 @@ const MapControls = dynamic(
 const MemoizedClouds = dynamic(
     () =>
         import('@/components/canvas/map/Clouds').then(
-            (mod) => mod.MemoizedClouds,
+            (mod) => mod.Memoizedclouds,
         ),
     { ssr: false },
 );
@@ -66,8 +66,6 @@ export default function ProjectScene({
             />
             <Environment files={'env.exr'} path="/models/textures/" />
             <MemoizedClouds />
-            <Environment preset={'forest'} />
-            <color args={['transparent']} attach={'background'}></color>
             <Sphere
                 args={[4800, 32, 32]}
                 position-x={-500}
@@ -75,7 +73,7 @@ export default function ProjectScene({
                 ref={sphereRef}>
                 <meshStandardMaterial
                     emissiveMap={bloom}
-                    emissiveIntensity={10}
+                    emissiveIntensity={7}
                     emissive={0xc8c18b}
                     toneMapped={false}
                     transparent

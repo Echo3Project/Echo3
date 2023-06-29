@@ -2,7 +2,7 @@ import { Cloud } from '@react-three/drei';
 import { memo, ReactElement, Suspense, useCallback, useMemo } from 'react';
 import { SimplexNoise } from 'three-stdlib';
 
-export const MemoizedClouds = memo(function MemoizedClouds(): ReactElement {
+export const Memoizedclouds = memo(function MemoizedClouds(): ReactElement {
     const simplex = useMemo(() => new SimplexNoise(), []);
 
     function mapNoiseToRange(
@@ -38,10 +38,6 @@ export const MemoizedClouds = memo(function MemoizedClouds(): ReactElement {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-    function getRandomFloat(min: number, max: number): number {
-        return Math.random() * (max - min) + min + 0.0001;
     }
 
     const randomPosition = useCallback(
@@ -99,43 +95,23 @@ export const MemoizedClouds = memo(function MemoizedClouds(): ReactElement {
         [simplex],
     );
 
-    const randomScale = useCallback(
-        function randomScale(): number {
-            const noiseRange = getRandomInt(10, 100);
-            const scaleNoise = simplex.noise(
-                Math.random() * noiseRange,
-                Math.random() * noiseRange,
-            );
-            const scale = mapNoiseToRange(scaleNoise, 50, 80);
-            return scale;
-        },
-        [simplex],
-    );
-
-    const randomOpacity = useCallback(function randomOpacity(): number {
-        return getRandomFloat(0.2, 0.7);
-    }, []);
-
-    const randomSpeed = useCallback(function randomSpeed(): number {
-        return getRandomFloat(0.3, 0.45);
-    }, []);
-
     const clouds = useMemo(() => {
-        const cloudsNumber = 20;
+        const cloudsNumber = 7;
         return new Array(cloudsNumber)
             .fill(null)
             .map((_, i) => (
                 <Cloud
                     key={i}
-                    scale={randomScale()}
+                    scale={[200, 30, 200]}
                     position={randomPosition()}
-                    opacity={randomOpacity()}
-                    speed={randomSpeed()}
-                    segments={100}
+                    opacity={0.8}
+                    speed={0.4}
+                    segments={5}
+                    color={'#ffffff'}
                     texture={'/models/textures/cloud.png'}
                 />
             ));
-    }, [randomOpacity, randomPosition, randomScale, randomSpeed]);
+    }, [randomPosition]);
 
     return (
         <Suspense fallback={null}>
