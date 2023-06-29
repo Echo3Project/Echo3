@@ -1,5 +1,6 @@
 import { Cloud } from '@react-three/drei';
 import { memo, ReactElement, Suspense, useCallback, useMemo } from 'react';
+import { SubtractiveBlending, Vector3 } from 'three';
 import { SimplexNoise } from 'three-stdlib';
 
 export const Memoizedclouds = memo(function MemoizedClouds(): ReactElement {
@@ -41,7 +42,7 @@ export const Memoizedclouds = memo(function MemoizedClouds(): ReactElement {
     }
 
     const randomPosition = useCallback(
-        function randomPosition(): number[] {
+        function randomPosition(): Vector3 {
             const noiseRange = getRandomInt(10, 100);
             const generationPlageX = {
                 min: -3000,
@@ -89,27 +90,28 @@ export const Memoizedclouds = memo(function MemoizedClouds(): ReactElement {
                 squareProtection.z,
             );
 
-            return [x, y, z];
+            return new Vector3(x, y, z);
         },
         [simplex],
     );
 
     const clouds = useMemo(() => {
         const cloudsNumber = 7;
-        return new Array(cloudsNumber)
-            .fill(null)
-            .map((_, i) => (
+        return new Array(cloudsNumber).fill(null).map((_, i) => (
+            <group scale={[200, 30, 200]} position={randomPosition()} key={i}>
                 <Cloud
-                    key={i}
-                    scale={[200, 30, 200]}
-                    position={randomPosition()}
-                    opacity={0.8}
+                    scale={1}
+                    opacity={window.innerWidth > 900 ? 0.8 : 0.25}
                     speed={0.4}
                     segments={5}
-                    color={'#ffffff'}
+                    color={window.innerWidth > 900 ? '#ffffff' : '#333333'}
+                    emissive={'#ffffff'}
+                    emissiveIntensity={window.innerWidth > 900 ? 0.2 : 1}
                     texture={'/models/textures/cloud.png'}
+                    blendingMode={SubtractiveBlending}
                 />
-            ));
+            </group>
+        ));
     }, [randomPosition]);
 
     return (
