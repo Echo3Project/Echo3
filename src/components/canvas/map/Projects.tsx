@@ -34,7 +34,6 @@ export default function Projects({
                     {/* eslint-disable-next-line prefer-spread */}
                     {Array.apply(null, Array(columns)).map((_, columnIndex) => (
                         <group
-                            renderOrder={1000}
                             key={columnIndex}
                             position={[
                                 ((columns - 1) / 2 - columnIndex) * 1024 + 1200,

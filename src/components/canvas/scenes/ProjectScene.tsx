@@ -16,10 +16,17 @@ const MapControls = dynamic(
     () => import('@/components/canvas/controls/MapControls'),
     { ssr: false },
 );
-const MemoizedSparkles = dynamic(
+// const MemoizedSparkles = dynamic(
+//     () =>
+//         import('@/components/canvas/map/Sparkles').then(
+//             (mod) => mod.MemoizedSparkles,
+//         ),
+//     { ssr: false },
+// );
+const MemoizedClouds = dynamic(
     () =>
-        import('@/components/canvas/map/Sparkles').then(
-            (mod) => mod.MemoizedSparkles,
+        import('@/components/canvas/map/Clouds').then(
+            (mod) => mod.MemoizedClouds,
         ),
     { ssr: false },
 );
@@ -57,10 +64,12 @@ export default function ProjectScene({
                 toggleShowProjectPanel={toggleShowProjectPanel}
                 setClickedProjectData={setClickedProjectData}
             />
-            <MemoizedSparkles />
             <Environment files={'env.exr'} path="/models/textures/" />
+            <MemoizedClouds />
+            <Environment preset={'forest'} />
+            <color args={['transparent']} attach={'background'}></color>
             <Sphere
-                args={[4500, 32, 32]}
+                args={[4800, 32, 32]}
                 position-x={-500}
                 position-z={1000}
                 ref={sphereRef}>
