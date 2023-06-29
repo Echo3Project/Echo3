@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactElement, Suspense, useContext, useState } from 'react';
 
+import { ProjectList, ProjectSwimlane } from '@/components/dom/Projects';
 import { Filters } from '@/components/helpers/context/FiltersContext';
 import { dataFormat } from '@/utils/types';
 
@@ -32,6 +33,8 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
+    const projectsCount = 125;
+    const [view, setView] = useState<'map' | 'list'>('map');
     const [showFilterInterface, setShowFilterInterface] = useState(
         (): boolean => false,
     );
@@ -68,9 +71,10 @@ export default function Page({ projects }: Props): ReactElement {
                 <title>Echo 3 - Map</title>
                 <meta name="description" content="Echo 3 Map" />
             </Head>
-            <header className="fixed w-full flex justify-center pointer-events-none">
+            <header className="fixed w-full flex justify-center pointer-events-none z-50">
                 <Suspense fallback={null}>
                     <MapHeader
+                        viewState={{ view, setView }}
                         filtersContext={filtersContext}
                         showFilterInterface={showFilterInterface}
                         showNewFilterInterface={showNewFilterInterface}
@@ -84,24 +88,43 @@ export default function Page({ projects }: Props): ReactElement {
                     />
                 </Suspense>
             </header>
-            <main className="h-screen w-full flex justify-center pointer-events-none">
-                <Suspense fallback={null}>
-                    <DragUpPanel
-                        filtersContext={filtersContext}
-                        showFilterInterface={showFilterInterface}
-                        showNewFilterInterface={showNewFilterInterface}
-                        showSearchInterface={showSearchInterface}
-                        toggleShowNewFilterInterface={
-                            toggleShowNewFilterInterface
-                        }
-                    />
-                </Suspense>
-            </main>
-            <Three>
-                <Suspense fallback={null}>
-                    <ProjectScene projects={projects} />
-                </Suspense>
-            </Three>
+            {view === 'map' && (
+                <>
+                    <main className="h-screen w-full flex justify-center pointer-events-none">
+                        <Suspense fallback={null}>
+                            <DragUpPanel
+                                filtersContext={filtersContext}
+                                showFilterInterface={showFilterInterface}
+                                showNewFilterInterface={showNewFilterInterface}
+                                showSearchInterface={showSearchInterface}
+                                toggleShowNewFilterInterface={
+                                    toggleShowNewFilterInterface
+                                }
+                            />
+                        </Suspense>
+                    </main>
+                    <Three>
+                        <Suspense fallback={null}>
+                            <ProjectScene projects={projects} />
+                        </Suspense>
+                    </Three>
+                </>
+            )}
+            {view === 'list' && (
+                <main className="overflow-x-hidden pt-32 pointer-events-auto bg-white">
+                    <div className="w-full">
+                        <h1 className="text-3xl uppercase w-3/4 px-4 mb-12">
+                            <span className="font-dot">No</span>s{' '}
+                            <span className="font-dot">
+                                {projectsCount} pr✴j
+                            </span>
+                            ets <span className="font-dot">référ</span>encés:
+                        </h1>
+                        <ProjectSwimlane projects={projects.slice(0, 10)} />
+                        <ProjectList projects={projects.slice(11, 70)} />
+                    </div>
+                </main>
+            )}
         </>
     );
 }
@@ -116,7 +139,7 @@ export function getServerSideProps(): ServerProps {
         require('@/pages/api/data/fake.json') as dataFormat[];
     const projects: dataFormat[] = [];
     fakeData.forEach((item: dataFormat): void => {
-        const project: dataFormat = {};
+        const project: dataFormat = Object() as dataFormat;
         ['name', 'tags', 'fields'].forEach((key: string): void => {
             // eslint-disable-next-line no-prototype-builtins
             item.hasOwnProperty(key) &&

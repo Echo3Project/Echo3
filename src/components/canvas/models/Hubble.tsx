@@ -24,12 +24,24 @@ type GLTFResult = GLTF & {
 
 export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
     const { nodes } = useGLTF('/models/hubble.glb') as GLTFResult;
-    const [arbres, matcap, sol, sol_alpha, trefles, trefles_alpha, trefles_color, trefles_normal, trefles_occlusion, trefles_specular, trefles_light] = useKTX2([
+    const [
+        arbres,
+        matcap,
+        sol,
+        sol_alpha,
+        // trefles,
+        trefles_alpha,
+        trefles_color,
+        trefles_normal,
+        trefles_occlusion,
+        trefles_specular,
+        trefles_light,
+    ] = useKTX2([
         '/models/textures/arbres.ktx2',
         '/models/textures/matcap.ktx2',
         '/models/textures/sol.ktx2',
         '/models/textures/sol_alpha.ktx2',
-        '/models/textures/trefles.ktx2',
+        // '/models/textures/trefles.ktx2',
         '/models/textures/trefles_alpha.ktx2',
         '/models/textures/trefles_color.ktx2',
         '/models/textures/trefles_normal.ktx2',
@@ -38,7 +50,12 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
         '/models/textures/trefles_light.ktx2',
     ]);
 
-    [trefles_color, trefles_normal, trefles_occlusion, trefles_specular].forEach((texture) => {
+    [
+        trefles_color,
+        trefles_normal,
+        trefles_occlusion,
+        trefles_specular,
+    ].forEach((texture) => {
         // repaet texture
         texture.wrapS = texture.wrapT = RepeatWrapping;
         texture.repeat.set(10, 10);
