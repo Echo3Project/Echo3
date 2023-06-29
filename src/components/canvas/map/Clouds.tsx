@@ -88,7 +88,6 @@ export const Memoizedclouds = memo(function MemoizedClouds(): ReactElement {
                 hubblePosition.z,
                 squareProtection.z,
             );
-            console.log(`Generated value: ${z}`);
 
             return [x, y, z];
         },
