@@ -59,7 +59,7 @@ export default function SearchBar(): ReactElement {
                 <div className="flex items-center py-2 w-full">
                     <div className="searchbar w-full">
                         <input
-                            className="w-full p-4 bg-transparent border-none text-black-800 leading-tight focus:outline-none"
+                            className="w-full p-4 bg-transparent border-none text-black-800 leading-tight focus:outline-none text-base"
                             type="text"
                             placeholder={'Mot clef ou nom du projet'.toUpperCase()}
                             aria-label="Search"
