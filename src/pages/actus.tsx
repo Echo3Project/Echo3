@@ -4,7 +4,7 @@ import { Fragment, ReactElement, useMemo } from 'react';
 
 import { authorFormat, dataFormat } from '@/utils/types';
 
-import { Footer } from '../components/dom/Footer/Footer';
+import Footer from '../components/dom/Footer/Footer';
 import { useFollow } from '../components/helpers/context/FollowContext';
 
 type Props = {

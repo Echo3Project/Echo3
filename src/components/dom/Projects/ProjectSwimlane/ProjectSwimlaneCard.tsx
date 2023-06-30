@@ -18,7 +18,12 @@ export default function ProjectSwimlaneCard({ project }: Props): ReactElement {
                 height={216}
                 className="absolute top-0 left-0 w-full"></Image>
             <Image
-                src={project.avatarPicture}
+                src={
+                    project.avatarPicture ||
+                    `https://picsum.photos/seed/${
+                        project.name as string
+                    }/280/216.webp`
+                }
                 alt={`Image ${project.name as string}`}
                 width={280}
                 height={216}

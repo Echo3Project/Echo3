@@ -7,7 +7,7 @@ import { ReactElement, Suspense, useContext, useState } from 'react';
 import { Filters } from '@/components/helpers/context/FiltersContext';
 import { dataFormat } from '@/utils/types';
 
-import { Footer } from '../components/dom/Footer/Footer';
+import Footer from '../components/dom/Footer/Footer';
 
 const ProjectList = dynamic(
     () => import('@/components/dom/Projects').then((mod) => mod.ProjectList),

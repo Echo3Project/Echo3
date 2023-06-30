@@ -12,7 +12,6 @@ import FiltersProvider from '@/components/helpers/context/FiltersContext';
 import UserProvider from '@/components/helpers/context/UserContext';
 
 import { FollowProvider } from '../components/helpers/context/FollowContext';
-import { Suspense } from 'react';
 
 const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
 const Scene = dynamic(() => import('@canvas/Scene'), { ssr: false });
