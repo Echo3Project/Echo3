@@ -45,6 +45,7 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
+        "@netlify/plugin-nextjs": "^4.36.1",
         "@next/bundle-analyzer": "^13.4.7",
         "@types/cookie": "^0.5.1",
         "@types/debounce": "^1.2.1",
