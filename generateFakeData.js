@@ -35,7 +35,7 @@ const generateContributionContent = (type) => {
 };
 
 
-const projects = Array.from({ length: 1000 }, (_, index) => {
+const projects = Array.from({ length: 463 }, (_, index) => {
     const projectName = faker.name.firstName();
     const baseContributions = Array.from({ length: faker.datatype.number({ min: 1, max: 5 }) }, (_, index) => {
         const contributionType = typesContributionList[Math.floor(Math.random() * typesContributionList.length)];

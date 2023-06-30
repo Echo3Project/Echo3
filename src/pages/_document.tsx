@@ -5,7 +5,7 @@ export default function Document(): ReactElement {
     return (
         <Html lang="en">
             <Head>
-                <meta name="description" content="Echo 3" />
+                <meta name="description" content="Hubble" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"

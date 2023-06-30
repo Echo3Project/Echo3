@@ -48,8 +48,8 @@ export default function Page(): ReactElement {
     return (
         <>
             <Head>
-                <title>Echo 3 - Suivis</title>
-                <meta name="description" content="Echo 3 Projets Suivis" />
+                <title>Hubble - Suivis</title>
+                <meta name="description" content="Hubble - Projets Suivis" />
             </Head>
             <main className="h-screen bg-neutral-800 text-white scrollable">
                 <NoSSR>

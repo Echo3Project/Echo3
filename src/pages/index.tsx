@@ -9,8 +9,8 @@ export default function Page(): ReactElement {
     return (
         <>
             <Head>
-                <title>Echo 3 - Home</title>
-                <meta name="description" content="Echo 3 Home" />
+                <title>Hubble - Home</title>
+                <meta name="description" content="Hubble - Home" />
             </Head>
             <main className="h-screen w-full">
                 <button
