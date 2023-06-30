@@ -12,6 +12,7 @@ import FiltersProvider from '@/components/helpers/context/FiltersContext';
 import UserProvider from '@/components/helpers/context/UserContext';
 
 import { FollowProvider } from '../components/helpers/context/FollowContext';
+import { Suspense } from 'react';
 
 const Loader = dynamic(() => import('@/components/dom/Loader'), { ssr: false });
 const Scene = dynamic(() => import('@canvas/Scene'), { ssr: false });
@@ -35,10 +36,8 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                                     <Component {...pageProps} />
                                 </div>
                             </div>
-                            <Suspense fallback={null}>
-                                <Scene eventPrefix="client" />
-                                <Loader totalProjects={463} />
-                            </Suspense>
+                            <Scene eventPrefix="client" />
+                            <Loader totalProjects={463} />
                         </AudioProvider>
                     </FiltersProvider>
                 </FollowProvider>

@@ -220,11 +220,8 @@ export default function Page({ projects }: Props): ReactElement {
             {view === 'list' && (
                 <>
                     <Head>
-                        <title>Hubble - Liste</title>
-                        <meta
-                            name="description"
-                            content="Hubble - Whitepaper"
-                        />
+                        <title>Hubble - List</title>
+                        <meta name="description" content="Hubble - List" />
                     </Head>
                     <main className="overflow-x-hidden pt-32 pointer-events-auto bg-white">
                         <div className="w-full">
