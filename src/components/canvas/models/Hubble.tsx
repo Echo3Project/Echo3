@@ -156,11 +156,11 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
                 />
             </mesh>
             <group position-y={-3}>
-                <Plane args={[5000, 5000]} rotation-x={-Math.PI/2} position-y={1}>
-                    <meshStandardMaterial
-                        attach="material"
-                        color="white"
-                    />
+                <Plane
+                    args={[5000, 5000]}
+                    rotation-x={-Math.PI / 2}
+                    position-y={1}>
+                    <meshStandardMaterial attach="material" color="white" />
                 </Plane>
                 <group
                     position={[41.548, 10.184, -21.488]}
