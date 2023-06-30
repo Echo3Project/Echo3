@@ -78,7 +78,7 @@ const handler: NextApiHandler = async (req, res) => {
     const token = sign(user, JWT_SECRET, { expiresIn: '24h' });
     const cookie = getCookieHeader(token);
     res.setHeader('Set-Cookie', cookie);
-    res.redirect('/');
+    res.redirect('/projets');
 };
 
 export default handler;
