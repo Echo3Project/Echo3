@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
     return (
         <UserProvider>
             <div className="w-full">
-                <header className="fixed w-full flex justify-between z-50"></header>
                 <FollowProvider>
                     <FiltersProvider>
                         <AudioProvider>
@@ -38,14 +37,12 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
                             </div>
                             <Suspense fallback={null}>
                                 <Scene eventPrefix="client" />
-                                <Loader totalProjects={125} />
+                                <Loader totalProjects={463} />
                             </Suspense>
                         </AudioProvider>
                     </FiltersProvider>
                 </FollowProvider>
-
                 <modal.Out />
-                {/* <footer className="fixed w-full flex justify-between z-50"></footer> */}
             </div>
         </UserProvider>
     );

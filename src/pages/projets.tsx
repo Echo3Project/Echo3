@@ -7,6 +7,8 @@ import { ReactElement, Suspense, useContext, useState } from 'react';
 import { Filters } from '@/components/helpers/context/FiltersContext';
 import { dataFormat } from '@/utils/types';
 
+import { Footer } from '../components/dom/Footer/Footer';
+
 const ProjectList = dynamic(
     () => import('@/components/dom/Projects').then((mod) => mod.ProjectList),
     {
@@ -48,7 +50,6 @@ type Props = {
 };
 
 export default function Page({ projects }: Props): ReactElement {
-    const projectsCount = 125;
     const [view, setView] = useState<'map' | 'list'>('map');
     const [showFilterInterface, setShowFilterInterface] = useState(
         (): boolean => false,
@@ -100,10 +101,6 @@ export default function Page({ projects }: Props): ReactElement {
 
     return (
         <>
-            <Head>
-                <title>Echo 3 - Map</title>
-                <meta name="description" content="Echo 3 Map" />
-            </Head>
             <header className="fixed w-full flex justify-center pointer-events-none z-50">
                 <Suspense fallback={null}>
                     <MapHeader
@@ -123,6 +120,10 @@ export default function Page({ projects }: Props): ReactElement {
             </header>
             {view === 'map' && (
                 <>
+                    <Head>
+                        <title>Hubble - Map</title>
+                        <meta name="description" content="Hubble - Map" />
+                    </Head>
                     <main className="h-screen w-full flex justify-center pointer-events-none">
                         <Suspense fallback={null}>
                             <DragUpPanel
@@ -217,19 +218,30 @@ export default function Page({ projects }: Props): ReactElement {
                 </>
             )}
             {view === 'list' && (
-                <main className="overflow-x-hidden pt-32 pointer-events-auto bg-white">
-                    <div className="w-full">
-                        <h1 className="text-3xl uppercase w-3/4 px-4 mb-12">
-                            <span className="font-dot">No</span>s{' '}
-                            <span className="font-dot">
-                                {projectsCount} pr✴j
-                            </span>
-                            ets <span className="font-dot">référ</span>encés:
-                        </h1>
-                        <ProjectSwimlane projects={projects.slice(0, 10)} />
-                        <ProjectList projects={projects.slice(11, 70)} />
-                    </div>
-                </main>
+                <>
+                    <Head>
+                        <title>Hubble - Liste</title>
+                        <meta
+                            name="description"
+                            content="Hubble - Whitepaper"
+                        />
+                    </Head>
+                    <main className="overflow-x-hidden pt-32 pointer-events-auto bg-white">
+                        <div className="w-full">
+                            <h1 className="w-fit text-3xl uppercase w-3/4 px-4 mb-12 font-jwsans text-black-app">
+                                <span className="font-dot">No</span>s{' '}
+                                <span className="font-dot">
+                                    {projects.length} pr✴j
+                                </span>
+                                ets <span className="font-dot">référ</span>
+                                encés:
+                            </h1>
+                            <ProjectSwimlane projects={projects.slice(0, 10)} />
+                            <ProjectList projects={projects.slice(11, 70)} />
+                        </div>
+                        <Footer />
+                    </main>
+                </>
             )}
         </>
     );

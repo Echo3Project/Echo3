@@ -109,17 +109,18 @@ export default function MapHeader({
                     <div className="flex gap-2">
                         <button
                             className="relative"
+                            disabled={viewState.view === 'list'}
                             style={{
                                 backgroundImage:
                                     'url(/buttons/filter_menu_button.svg)',
                                 width: '36px',
                                 height: '36px',
                             }}
-                            onClick={(): void =>
-                                toggleShowFilterInterface()
-                            }></button>
+                            onClick={(): void => toggleShowFilterInterface()}
+                        />
                         <button
                             className="relative"
+                            disabled={viewState.view === 'list'}
                             style={{
                                 backgroundImage:
                                     'url(/buttons/search_menu_button.svg)',
@@ -133,12 +134,12 @@ export default function MapHeader({
             ) : (
                 <div className="flex gap-20 justify-center">
                     <button
-                        className="relative text-black text-xs text-center uppercase"
+                        className="relative text-black-app text-xs text-center uppercase font-jwsans font-bold"
                         onClick={(): void => handleCloseInterface()}>
-                        <div className="absolute top-0 left-0 w-1 h-1 bg-white rounded-full" />
-                        <div className="absolute top-0 right-0 w-1 h-1 bg-white rounded-full" />
-                        <div className="absolute bottom-0 left-0 w-1 h-1 bg-white rounded-full" />
-                        <div className="absolute bottom-0 right-0 w-1 h-1 bg-white rounded-full" />
+                        <div className="absolute top-0 left-0 w-1 h-1 bg-black-app rounded-full" />
+                        <div className="absolute top-0 right-0 w-1 h-1 bg-black-app rounded-full" />
+                        <div className="absolute bottom-0 left-0 w-1 h-1 bg-black-app rounded-full" />
+                        <div className="absolute bottom-0 right-0 w-1 h-1 bg-black-app rounded-full" />
                         <div className="px-4 py-2">Fermer</div>
                     </button>
                 </div>

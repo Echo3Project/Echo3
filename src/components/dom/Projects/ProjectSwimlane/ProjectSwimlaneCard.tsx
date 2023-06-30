@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProjectSwimlaneCard({ project }: Props): ReactElement {
     return (
-        <div className="relative w-72 h-auto">
+        <div className="relative" style={{ width: '280px', height: '216px' }}>
             <Image
                 src="/masks/mask2.svg"
                 alt={`Mask`}
@@ -18,13 +18,11 @@ export default function ProjectSwimlaneCard({ project }: Props): ReactElement {
                 height={216}
                 className="absolute top-0 left-0 w-full"></Image>
             <Image
-                src={`https://picsum.photos/seed/${
-                    project.name as string
-                }/280/216.webp`}
+                src={project.avatarPicture}
                 alt={`Image ${project.name as string}`}
                 width={280}
                 height={216}
-                className="mask-project w-full"></Image>
+                className="mask-project-contain w-full"></Image>
         </div>
     );
 }

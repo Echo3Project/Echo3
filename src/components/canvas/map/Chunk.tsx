@@ -6,7 +6,6 @@ import {
 } from '@react-three/drei';
 import { ThreeEvent } from '@react-three/fiber';
 import {
-    Fragment,
     ReactElement,
     useContext,
     useEffect,
@@ -154,7 +153,7 @@ export default function Chunk({
     }
 
     return (
-        <Fragment>
+        <>
             <Points
                 positions={positions}
                 rotation-y={Math.PI / 2}
@@ -172,6 +171,6 @@ export default function Chunk({
                     toneMapped={false}
                 />
             </Points>
-        </Fragment>
+        </>
     );
 }

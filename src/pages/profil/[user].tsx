@@ -12,8 +12,8 @@ export default function Page(): ReactElement {
     return (
         <>
             <Head>
-                <title>Echo 3 - Profil</title>
-                <meta name="description" content="Echo 3 Profil" />
+                <title>Hubble - Profil</title>
+                <meta name="description" content="Hubble - Profil" />
             </Head>
             <main className="h-screen bg-neutral-800 text-white scrollable">
                 <NoSSR>

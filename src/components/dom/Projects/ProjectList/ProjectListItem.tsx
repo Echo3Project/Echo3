@@ -21,9 +21,7 @@ export default function ProjectListItem({ project }: Props): ReactElement {
     return (
         <div className="max-w-full flex gap-4 mb-4">
             <Image
-                src={`https://picsum.photos/seed/${
-                    project.name as string
-                }/60/60.webp`}
+                src={project.avatarPicture as string}
                 alt={`Image ${project.name as string}`}
                 width={60}
                 height={60}
