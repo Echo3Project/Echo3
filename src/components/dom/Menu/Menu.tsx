@@ -106,7 +106,7 @@ export default function Menu(): ReactElement {
 
     const navClsx = clsx(
         'max-w-sm h-16 flex justify-between items-center px-4 bg-black-app/10 backdrop-blur-xl rounded-lg text-black-app pointer-events-auto',
-        user ? 'w-full' : 'gap-6 w-fit',
+        'gap-6 w-fit',
     );
 
     return (
@@ -134,7 +134,16 @@ export default function Menu(): ReactElement {
                                 />
                             </Item>
                         )}
+                        {user && (
+                            <Account
+                                active={isActive('/profil')}
+                                avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                            />
+                        )}
                         <Item
+                            notifications={
+                                notifications > 0 ? notifications : undefined
+                            }
                             route="/actus"
                             title="actus"
                             active={isActive('/actus')}>
@@ -143,37 +152,6 @@ export default function Menu(): ReactElement {
                                 color="#000000"
                             />
                         </Item>
-                        {user && (
-                            <>
-                                <Account
-                                    active={isActive('/profil')}
-                                    avatar={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-                                />
-                                <Item
-                                    route="/actus"
-                                    title="Actus"
-                                    active={isActive('/actus')}
-                                    notifications={
-                                        notifications > 0
-                                            ? notifications
-                                            : undefined
-                                    }>
-                                    <FollowIcon
-                                        color="#000000"
-                                        className="w-8 h-8"
-                                    />
-                                </Item>
-                                <Item
-                                    route="/contribution"
-                                    title="Contrib"
-                                    active={isActive('/contribution')}>
-                                    <ContributionIcon
-                                        color="#000000"
-                                        className="w-8 h-8"
-                                    />
-                                </Item>
-                            </>
-                        )}
                     </>
                 ) : (
                     <>
