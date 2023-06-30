@@ -66,7 +66,6 @@ export function Hubble(props: JSX.IntrinsicElements['group']): ReactElement {
         trefles_occlusion,
         trefles_specular,
     ].forEach((texture) => {
-        // repaet texture
         texture.wrapS = texture.wrapT = RepeatWrapping;
         texture.repeat.set(10, 10);
     });
